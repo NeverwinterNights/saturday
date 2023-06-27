@@ -8,29 +8,33 @@
 
   color: var(--color-light-100);
 
-  background: var(--primary-500, #8c61ff);
-  border: none;
+  background: var(--color-accent-500);
+  border: 2px solid transparent;
   border-radius: 4px;
   box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
 }
 
 .primary:active {
-  background: var(--primary-700, #704ecc);
+  background: var(--color-accent-700);
 }
 
 .primary:hover {
-  background: var(--primary-300, #a280ff);
+  background: var(--color-accent-300);
 }
 
 .primary:focus {
-  background: var(--primary-500, #8c61ff);
+  background: var(--color-accent-500);
 
-  //border: 2px solid var(--info-700, #2f68cc);
+  //box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%), inset 0 0 3px var(--color-info-700);
+
+  //box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+
+  border: 2px solid var(--color-info-700);
 }
 
 .primary:disabled {
   color: var(--color-light-900);
-  background: var(--primary-900, #382766);
+  background: var(--color-accent-900);
 }
 
 .secondary {
@@ -44,13 +48,13 @@
 
   color: var(--color-light-100);
 
-  background: var(--dark-300, #4c4c4c);
+  background: var(--color-dark-300);
   border-radius: 4px;
   box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
 }
 
 .secondary:hover {
-  background: var(--dark-100, #808080);
+  background: var(--color-dark-100);
   border-radius: 4px;
   box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
 }
@@ -63,15 +67,15 @@
 }
 
 .secondary:focus {
-  background: var(--dark-300, #4c4c4c);
-  border: 2px solid var(--info-700, #2f68cc);
+  background: var(--color-dark-300);
+  border: 2px solid var(--color-info-700);
   border-radius: 4px;
   box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
 }
 
 .secondary:disabled {
   color: var(--color-light-900);
-  background: var(--dark-300, #4c4c4c);
+  background: var(--color-dark-300);
   border-radius: 4px;
   box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
 }
@@ -89,30 +93,30 @@
   color: var(--color-accent-500);
 
   background: none;
-  border: 1px solid var(--primary-500, #8c61ff);
+  border: 1px solid var(--color-accent-500);
   border-radius: 4px;
 }
 
 .tertiary:hover {
-  background: var(--dark-500, #333);
-  border: 1px solid var(--primary-700, #704ecc);
+  background: var(--color-dark-300);
+  border: 1px solid var(--color-accent-700);
   border-radius: 4px;
 }
 
 .tertiary:active {
-  background: var(--primary-900, #382766);
-  border: 1px solid var(--primary-700, #704ecc);
+  background: var(--color-accent-900);
+  border: 1px solid var(--color-accent-700);
   border-radius: 4px;
 }
 
 .tertiary:focus {
-  border: 2px solid var(--info-700, #2f68cc);
+  border: 2px solid var(--color-info-700);
   border-radius: 4px;
 }
 
 .tertiary:disabled {
   color: var(--color-accent-900);
-  border: 1px solid var(--primary-900, #382766);
+  border: 1px solid var(--color-accent-900);
   border-radius: 4px;
 }
 
@@ -127,7 +131,7 @@
 }
 
 .link:focus {
-  border: 2px solid var(--info-700, #2f68cc);
+  border: 2px solid var(--color-info-700);
   border-radius: 130px;
 }
 
