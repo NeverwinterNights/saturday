@@ -1,0 +1,112 @@
+.h1 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-l);
+  color: var(--color-dark-900);
+}
+
+.h2 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+  color: var(--color-dark-900);
+}
+
+.h3 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+  color: var(--color-dark-900);
+}
+
+.large {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-l);
+  color: var(--color-dark-900);
+}
+
+.body1 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  color: var(--color-dark-900);
+}
+
+.body2 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var(--color-dark-900);
+}
+
+.subtitle1 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+  color: var(--color-dark-900);
+}
+
+.subtitle2 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+  color: var(--color-dark-900);
+}
+
+.caption {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-s);
+  color: var(--color-dark-900);
+}
+
+.overline {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-s);
+  color: var(--color-dark-900);
+}
+
+.link1 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var(--color-info-500);
+  text-decoration-line: underline;
+}
+
+.link2 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-s);
+  color: var(--color-info-500);
+  text-decoration-line: underline;
+}
+
+.inherit {
+  color: inherit;
+}
+
+//.white {
+//  color: var(--color-light-100);
+//}
+//
+//.disabledWhite {
+//  color: var(--color-light-900);
+//}
+//
+//.secondary {
+//  color: var(--color-accent-500);
+//}
+//
+//.disabledSecondary {
+//  color: var(--color-accent-900);
+//}
