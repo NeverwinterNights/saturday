@@ -1,0 +1,63 @@
+.CheckboxRoot {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+
+  background-color: inherit;
+  border: 2px solid var(--color-light-900);
+  border-radius: 2px;
+
+  &:hover {
+    border: 2px solid var(--color-light-900);
+  }
+
+  &:focus {
+    background-color: var(--color-bg-focus);
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: initial;
+    border-color: var(--color-dark-100);
+  }
+}
+
+.container:has(.CheckboxRoot:disabled) {
+  &:hover,
+  &:focus-within,
+  &:active {
+    background: none;
+  }
+}
+
+.indicator {
+  width: 24px;
+  height: 24px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  transition: all 0.3s ease 0s;
+
+  &:active,
+  &:focus-within {
+    background-color: var(--color-dark-500);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-100);
+  }
+}

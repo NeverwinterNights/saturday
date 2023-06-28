@@ -40,7 +40,12 @@ body {
   background-color: var(--color-dark-900);
 }
 
-p {
+button {
+  background: none;
+}
+
+p,
+button {
   margin: 0;
   padding: 0;
 }

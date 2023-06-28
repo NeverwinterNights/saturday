@@ -26,14 +26,12 @@ export function App() {
         style={{
           width: 100,
           height: 100,
-          background: 'yellow',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}
       >
-        {' '}
-        <CheckboxItem />
+        <CheckboxItem disabled={false} />
       </div>
     </>
   )
