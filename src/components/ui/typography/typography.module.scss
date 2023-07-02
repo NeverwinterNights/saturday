@@ -95,18 +95,11 @@
   color: inherit;
 }
 
-//.white {
-//  color: var(--color-light-100);
-//}
-//
-//.disabledWhite {
-//  color: var(--color-light-900);
-//}
-//
-//.secondary {
-//  color: var(--color-accent-500);
-//}
-//
-//.disabledSecondary {
-//  color: var(--color-accent-900);
-//}
+.error {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+  color: var(--color-danger-300);
+}
+

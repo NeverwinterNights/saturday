@@ -1,7 +1,9 @@
-import { memo } from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import styles from './card.module.scss'
 
-export const Card = memo(() => {
-  return <div className={styles.container}></div>
+type CardProp = {} & ComponentPropsWithoutRef<'div'>
+
+export const Card = forwardRef<HTMLDivElement, CardProp>(({ className, ...restProps }, ref) => {
+  return <div ref={ref} className={styles.container} {...restProps}></div>
 })

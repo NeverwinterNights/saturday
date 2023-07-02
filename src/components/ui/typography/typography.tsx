@@ -19,12 +19,13 @@ export type TypographyProps<T extends ElementType = 'p'> = {
     | 'caption'
     | 'link1'
     | 'link2'
+    | 'error'
   className?: string
 } & ComponentPropsWithoutRef<T>
 export const Typography = <T extends ElementType = 'p'>(
   props: TypographyProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TypographyProps<T>>
 ) => {
-  const { className = '', style, variant, color, as: Component = 'p', ...rest } = props
+  const { className = '', style, variant, as: Component = 'p', ...rest } = props
 
   const styles = { ...style }
 

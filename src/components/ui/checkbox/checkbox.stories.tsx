@@ -7,10 +7,7 @@ const meta = {
   component: CheckboxItem,
   tags: ['autodocs'],
   argTypes: {
-    variant: {
-      options: ['large', 'body1', 'body2', 'subtitle1', 'subtitle2', 'overline', 'link1', 'link2'],
-      control: { type: 'radio' },
-    },
+    label: [''],
   },
 } satisfies Meta<typeof CheckboxItem>
 
@@ -18,8 +15,5 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Main: Story = {
-  args: {
-    variant: 'large',
-    children: 'Large Checkbox',
-  },
+  args: { label: 'Click me' },
 }

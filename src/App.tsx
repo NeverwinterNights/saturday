@@ -32,13 +32,19 @@ export function App() {
           justifyContent: 'center',
         }}
       >
-        <CheckboxItem disabled={false} />
+        <CheckboxItem label={'Click Me'} disabled={false} />
       </div>
       <div style={{ padding: 30 }}>
-        <Input label="Mail" placeholder={'Test input'} type="password"></Input>
+        <Input
+          onChange={() => {}}
+          value={''}
+          label="Mail"
+          placeholder={'Test input'}
+          type="password"
+        ></Input>
       </div>
       <div style={{ padding: 30 }}>
-        <Input searchInput placeholder={'Test input'}></Input>
+        <Input onChange={() => {}} value={''} searchInput placeholder={'Test input'}></Input>
       </div>
     </div>
   )
