@@ -1,0 +1,137 @@
+.root {
+  width: 100%;
+}
+
+.trigger {
+  all: unset;
+
+  cursor: pointer;
+
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+  width: 210px;
+  height: 36px;
+  padding: 6px 12px;
+
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+
+  background-color: transparent;
+  border: 1px solid var(--color-dark-300);
+  border-radius: 0.125rem;
+
+  &[data-state='open'] {
+    border-bottom: transparent;
+    border-radius: 0.125rem 0.125rem 0 0;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+
+  &.pagination {
+    gap: 2px;
+
+    width: 50px;
+    height: 24px;
+    padding: 0 2px 0 6px;
+
+    font-size: var(--font-size-s);
+  }
+}
+
+.trigger:hover {
+  background: var(--color-dark-500);
+  border: 1px solid var(--color-dark-100);
+}
+
+.trigger:focus {
+  background: transparent;
+  border: 1px solid var(--color-info-700);
+}
+
+.trigger[data-placeholder] {
+  color: var(--color-light-100);
+}
+
+.trigger[data-disabled] {
+  pointer-events: none;
+  color: var(--color-dark-300);
+}
+
+.content {
+  display: flex;
+
+  width: 210px;
+
+  background-color: transparent;
+  border: 1px solid var(--color-dark-300);
+  border-radius: 0 0 0.125rem 0.125rem;
+
+  &.pagination {
+    width: 50px;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: var(--transtition-duration-basic) transform;
+
+  &.pagination {
+    display: flex;
+    width: 16px;
+    height: 16px;
+  }
+
+  [data-state='open'] > & {
+    transform: rotate(180deg);
+  }
+}
+
+.item {
+  display: flex;
+
+  width: 208px;
+  padding: 6px 12px;
+
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+
+  background: transparent;
+
+  &.pagination {
+    width: 48px;
+    padding: 0 0 0 6px;
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-m);
+  }
+}
+
+.item[data-disabled] {
+  pointer-events: none;
+  color: var(--color-dark-300);
+}
+
+.item[data-highlighted] {
+  color: var(--color-accent-300);
+  background-color: var(--color-accent-900);
+  outline: none;
+}
+
+.label {
+  display: block;
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var(--color-dark-100);
+
+  &.disabled {
+    color: var(--color-dark-300);
+  }
+}
