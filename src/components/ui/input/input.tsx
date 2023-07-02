@@ -15,6 +15,7 @@ export type InputPropsType = {
   disabled?: boolean
   type?: string
   error?: string
+  onClickClearInput?: () => void
   searchInput?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
@@ -23,7 +24,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
     {
       className,
       error,
-      onChange,
+      onClickClearInput,
       searchInput,
       value = '',
       placeholder,
@@ -44,8 +45,8 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
       e.preventDefault()
       setIconVisible(() => (iconVisible === 'password' ? 'text' : 'password'))
     }
-    const onClickClearInput = () => {
-      onChange && onChange('' as any) //заглушка
+    const onClearInput = () => {
+      onClickClearInput && onClickClearInput()
     }
 
     return (
@@ -76,7 +77,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
             {...restProps}
           />
           {searchInput && value?.toString().length > 0 && (
-            <span className={styles.closedImp} onClick={onClickClearInput}>
+            <span className={styles.closedImp} onClick={onClearInput}>
               <ClosedInputIcon />
             </span>
           )}
