@@ -1,4 +1,19 @@
-.CheckboxRoot {
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  &.disabled {
+    color: var(--color-dark-100);
+  }
+}
+
+.root {
   cursor: pointer;
 
   display: flex;
@@ -8,16 +23,22 @@
   width: 18px;
   height: 18px;
 
-  background-color: inherit;
+  background-color: var(--color-dark-900);
   border: 2px solid var(--color-light-900);
   border-radius: 2px;
 
   &:hover {
-    border: 2px solid var(--color-light-900);
+    background-color: var(--color-dark-500);
+    border: 2px solid var(--color-light-100);
   }
 
   &:focus {
-    background-color: var(--color-bg-focus);
+    background-color: var(--color-dark-500);
+    outline: none;
+  }
+
+  &:active {
+    background-color: var(--color-dark-100);
     outline: none;
   }
 
@@ -25,39 +46,56 @@
     cursor: initial;
     border-color: var(--color-dark-100);
   }
-}
 
-.container:has(.CheckboxRoot:disabled) {
-  &:hover,
-  &:focus-within,
-  &:active {
-    background: none;
+  &[data-state='checked']:disabled {
+    background-color: var(--color-dark-100);
   }
 }
 
-.indicator {
-  width: 24px;
-  height: 24px;
-}
+.buttonWrapper {
+  cursor: pointer;
 
-.container {
   display: flex;
   align-items: center;
   justify-content: center;
 
   width: 36px;
   height: 36px;
+  margin-right: 3px;
 
+  background-color: rgb(255 255 255 / 0%);
   border-radius: 50%;
 
-  transition: all 0.3s ease 0s;
-
-  &:active,
-  &:focus-within {
-    background-color: var(--color-dark-500);
+  &.disabled {
+    cursor: initial;
   }
 
-  &:hover {
-    background-color: var(--color-light-100);
+  &:focus-visible {
+    outline: none;
   }
+
+  &:focus-within,
+  &:hover:not(.disabled),
+  &:hover .root:not([data-state='checked']) {
+    background-color: var(--color-dark-100);
+  }
+
+  &:active:not(.disabled) {
+    background-color: var(--color-dark-100);
+  }
+
+  &.left {
+    margin-left: -9px;
+  }
+}
+
+.indicator {
+  width: 18px;
+  height: 18px;
+}
+
+.wrap {
+  display: flex;
+  align-items: center;
+  color: white;
 }

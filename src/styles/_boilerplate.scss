@@ -40,8 +40,25 @@ body {
   background-color: var(--color-dark-900);
 }
 
+
+input,
+button,
+select,
+textarea,
+optgroup,
+option {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+}
+
 button {
   background: none;
+  &:hover {
+    border: none;
+  }
 }
 
 input {
