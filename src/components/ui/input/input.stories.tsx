@@ -1,3 +1,5 @@
+import { ChangeEvent, useState } from 'react'
+
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Input } from './'
@@ -34,10 +36,27 @@ export const InputPassword: Story = {
 }
 
 export const InputSearch: Story = {
+  render: () => {
+    const [value, setValue] = useState('')
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setValue(event.currentTarget.value)
+    }
+
+    return <Input searchInput={true} onChange={onChange} value={value} />
+  },
+  args: {
+    value: '',
+    label: 'Click here',
+    type: 'text',
+    disabled: false,
+  },
+}
+export const InputWithPlaceHolderAndSearch: Story = {
   args: {
     value: 'Simple input',
     label: 'Click here',
     type: 'text',
+    placeholder: 'Placeholder',
     searchInput: true,
     disabled: false,
   },
