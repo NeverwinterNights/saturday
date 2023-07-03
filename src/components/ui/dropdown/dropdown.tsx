@@ -1,6 +1,7 @@
+import { ComponentPropsWithoutRef, CSSProperties, FC, ReactNode, useState } from 'react'
+
 import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
-import { ComponentPropsWithoutRef, CSSProperties, FC, ReactNode, useState } from 'react'
 
 import { More } from '../../../assets/icons/More.tsx'
 import { Typography } from '../typography'

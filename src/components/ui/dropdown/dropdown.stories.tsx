@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Dropdown, DropdownItemWithIcon } from '.'
-
 import { Edit } from '../../../assets/icons/Edit.tsx'
 import { Play } from '../../../assets/icons/Play.tsx'
 import { Trash } from '../../../assets/icons/Trash.tsx'
 import { Button } from '../button'
+
+import { Dropdown, DropdownItemWithIcon } from '.'
 
 const meta = {
   title: 'Components/Dropdown',
@@ -15,6 +15,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+// @ts-ignore
 export const Default: Story = {
   render: args => {
     return (
@@ -79,6 +80,7 @@ export const AllDisabled: Story = {
   },
 }
 
+// @ts-ignore
 export const WithTriggerButton: Story = {
   render: args => {
     return (
