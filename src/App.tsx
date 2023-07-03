@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { Eye } from './assets/icons/Eye.tsx'
 
 import { Button } from './components/ui/button'
 import { CheckboxItem } from './components/ui/checkbox'
+import { Dropdown, DropdownItemWithIcon } from './components/ui/dropdown'
 import { Input } from './components/ui/input'
 import { Select } from './components/ui/select'
 import { Typography } from './components/ui/typography'
@@ -77,6 +79,13 @@ export function App() {
       <div style={{ padding: 30 }}>
         <Input onChange={() => {}} value={''} searchInput placeholder={'Test input'}></Input>
       </div>
+
+      <Dropdown>
+        <>
+          <DropdownItemWithIcon icon={<Eye />} text="Изменить" onSelect={() => {}} />
+          <DropdownItemWithIcon icon={<Eye />} text="Удалить" onSelect={() => {}} />
+        </>
+      </Dropdown>
     </div>
   )
 }
