@@ -45,6 +45,7 @@ export function App() {
           options={optionsPagination}
           value={valuePagination}
           onChange={e => setValuePagination(e)}
+          width={'100%'}
         />
       </div>
       <Typography variant="large" as="h1">
