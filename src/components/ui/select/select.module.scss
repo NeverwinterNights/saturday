@@ -13,7 +13,7 @@
   justify-content: space-between;
 
   box-sizing: border-box;
-  width: 210px;
+  width: 100%;
   height: 36px;
   padding: 6px 12px;
 
@@ -26,11 +26,12 @@
   border-radius: 0.125rem;
 
   &:focus-visible {
-    outline: none;
+    border: var(--color-info-700);
   }
 
   &[data-state='open'] {
-    border-bottom: transparent;
+    border-color: var(--color-dark-100);
+    border-bottom: none;
     border-radius: 0.125rem 0.125rem 0 0;
   }
 
@@ -50,36 +51,37 @@
   }
 
   &.error {
-    border: 1px solid var(--color-danger-300);
+    border-color: var(--color-danger-300);
   }
-}
 
-.trigger:hover {
-  background: var(--color-dark-500);
-  border: 1px solid var(--color-dark-100);
-}
+  &:hover {
+    background: var(--color-dark-500);
+    border: 1px solid var(--color-dark-100);
+  }
 
-.trigger:focus {
-  background-color: var(--color-dark-900);
-  border: 1px solid var(--color-info-700);
-}
+  &:focus {
+    border: 1px solid var(--color-info-700);
+    outline: 1px solid var(--color-info-700);
+  }
 
-.trigger[data-placeholder] {
-  color: var(--color-light-100);
-}
+  &[data-placeholder] {
+    color: var(--color-light-100);
+  }
 
-.trigger[data-disabled] {
-  pointer-events: none;
-  color: var(--color-dark-300);
+  &[data-disabled] {
+    pointer-events: none;
+    color: var(--color-dark-300);
+  }
 }
 
 .content {
   display: flex;
 
-  width: 210px;
+  width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
 
   background-color: var(--color-dark-900);
-  border: 1px solid var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
   border-radius: 0 0 0.125rem 0.125rem;
 
   &.pagination {
@@ -90,7 +92,6 @@
 .icon {
   width: 24px;
   height: 24px;
-  transition: var(--transtition-duration-basic) transform;
 
   &.pagination {
     display: flex;
@@ -106,7 +107,7 @@
 .item {
   display: flex;
 
-  width: 208px;
+  width: 100%;
   padding: 6px 12px;
 
   font-size: var(--font-size-s);
@@ -120,17 +121,17 @@
     font-size: var(--font-size-s);
     line-height: var(--line-height-m);
   }
-}
 
-.item[data-disabled] {
-  pointer-events: none;
-  color: var(--color-dark-300);
-}
+  &[data-highlighted] {
+    color: var(--color-accent-300);
+    background-color: var(--color-accent-900);
+    outline: none;
+  }
 
-.item[data-highlighted] {
-  color: var(--color-accent-300);
-  background-color: var(--color-accent-900);
-  outline: none;
+  &[data-disabled] {
+    pointer-events: none;
+    color: var(--color-dark-300);
+  }
 }
 
 .label {

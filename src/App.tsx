@@ -6,6 +6,7 @@ import { CheckboxItem } from './components/ui/checkbox'
 import { Dropdown, DropdownItemWithIcon } from './components/ui/dropdown'
 import { Input } from './components/ui/input'
 import { Select } from './components/ui/select'
+import { Tab, TabsType } from './components/ui/tabs/tab.tsx'
 import { Typography } from './components/ui/typography'
 
 export function App() {
@@ -22,10 +23,19 @@ export function App() {
     { value: '300', label: '300' },
   ]
   // const value = 'apple'
+  const optionsTabs: TabsType[] = [
+    { title: 'apple', value: 'apple' },
+    { title: 'apple1', value: 'apple1' },
+    { title: 'apple2', value: 'apple2' },
+    { title: 'apple3', value: 'apple3' },
+    { title: 'apple4', value: 'apple4' },
+  ]
 
   return (
     <div style={{ padding: '50px' }}>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <Tab disabled tabs={optionsTabs} />
+        <Tab tabs={optionsTabs} />
         <Select
           label={'Select Box'}
           options={optionsPrimary}
@@ -37,6 +47,7 @@ export function App() {
           options={optionsPagination}
           value={valuePagination}
           onChange={e => setValuePagination(e)}
+          width={'100%'}
         />
       </div>
       <Typography variant="large" as="h1">
