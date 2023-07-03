@@ -1,8 +1,3 @@
-.root {
-  //width: 100%;
-  width: 50px;
-}
-
 .trigger {
   all: unset;
 
@@ -104,7 +99,7 @@
 .item {
   display: flex;
 
-  width: 100%;
+  //width: 100%;
   padding: 6px 12px;
 
   font-size: var(--font-size-s);

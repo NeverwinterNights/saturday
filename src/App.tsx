@@ -42,13 +42,14 @@ export function App() {
           options={optionsPrimary}
           value={valuePrimary}
           onChange={e => setValuePrimary(e)}
+          width={'100%'}
         />
         <Select
           variant={'pagination'}
           options={optionsPagination}
           value={valuePagination}
           onChange={e => setValuePagination(e)}
-          width={'100%'}
+          width={'50px'}
         />
       </div>
       <Typography variant="large" as="h1">

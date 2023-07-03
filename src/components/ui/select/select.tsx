@@ -43,7 +43,7 @@ export const Select: FC<SelectProps> = ({
   options,
   label,
   rootClassName,
-  width = '100%',
+  width,
 }) => {
   const showError = !!errorMessage && errorMessage.length > 0
   const classNames = {
@@ -58,12 +58,12 @@ export const Select: FC<SelectProps> = ({
   const rootStyles = { width }
 
   return (
-    <div className={classNames.root} style={rootStyles}>
+    <div className={classNames.root}>
       <Typography variant={'body2'} as="label" className={classNames.label}>
         {label}
       </Typography>
       <SelectRadix.Root disabled={disabled} onValueChange={onChange}>
-        <SelectRadix.Trigger className={classNames.trigger}>
+        <SelectRadix.Trigger className={classNames.trigger} style={rootStyles}>
           <SelectRadix.Value placeholder={placeholder || withoutPlaceholder}>
             {value}
           </SelectRadix.Value>

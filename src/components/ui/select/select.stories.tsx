@@ -101,3 +101,17 @@ export const Pagination = {
     placeholder: '1',
   },
 }
+
+export const FullWidth = {
+  render: (args: SelectProps) => {
+    const [value, setValue] = useState('')
+
+    return <Select {...args} value={value} onChange={setValue} />
+  },
+
+  args: {
+    options: optionsPrimary,
+    variant: 'primary',
+    width: '100%',
+  },
+}
