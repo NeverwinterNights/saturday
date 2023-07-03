@@ -39,21 +39,22 @@ export const Select: FC<SelectProps> = ({
   disabled,
   className,
   onChange,
+  errorMessage,
   options,
   label,
   rootClassName,
   width = '100%',
 }) => {
+  const showError = !!errorMessage && errorMessage.length > 0
   const classNames = {
     root: rootClassName,
-    trigger: clsx(s.trigger, s[variant], className),
+    trigger: clsx(s.trigger, s[variant], showError && s.error, className),
     icon: clsx(s.icon, s[variant]),
     item: clsx(s.item, s[variant]),
     content: clsx(s.content, s[variant]),
     label: clsx(s.label, disabled && s.disabled),
   }
-
-  placeholder = placeholder || variant === 'pagination' ? value : 'Select Box'
+  const withoutPlaceholder = variant === 'pagination' ? value : 'Select Box'
   const rootStyles = { width }
 
   return (
@@ -63,7 +64,9 @@ export const Select: FC<SelectProps> = ({
       </Typography>
       <SelectRadix.Root disabled={disabled} onValueChange={onChange}>
         <SelectRadix.Trigger className={classNames.trigger}>
-          <SelectRadix.Value placeholder={placeholder || 'Select-box'}>{value}</SelectRadix.Value>
+          <SelectRadix.Value placeholder={placeholder || withoutPlaceholder}>
+            {value}
+          </SelectRadix.Value>
           <SelectRadix.Icon className={classNames.icon}>
             <ArrowDownIcon size={variant === 'pagination' ? 16 : 24} />
           </SelectRadix.Icon>
@@ -77,6 +80,7 @@ export const Select: FC<SelectProps> = ({
             ))}
           </SelectRadix.Content>
         </SelectRadix.Portal>
+        {showError && <Typography variant={'error'}>{errorMessage}</Typography>}
       </SelectRadix.Root>
     </div>
   )

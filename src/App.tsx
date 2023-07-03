@@ -1,10 +1,10 @@
 import { useState } from 'react'
+
 import { Button } from './components/ui/button'
 import { CheckboxItem } from './components/ui/checkbox'
 import { Input } from './components/ui/input'
-import { Typography } from './components/ui/typography'
-
 import { Select } from './components/ui/select'
+import { Typography } from './components/ui/typography'
 
 export function App() {
   const [valuePrimary, setValuePrimary] = useState('apple')
@@ -36,9 +36,9 @@ export function App() {
           value={valuePagination}
           onChange={e => setValuePagination(e)}
         />
-        </div>
+      </div>
       <Typography variant="large" as="h1">
-        Test text
+        s Test text
       </Typography>
       <Button variant="primary">
         <Typography color="inherit" variant="subtitle2">
