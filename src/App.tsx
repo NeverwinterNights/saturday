@@ -5,6 +5,7 @@ import { Button } from './components/ui/button'
 import { CheckboxItem } from './components/ui/checkbox'
 import { Dropdown, DropdownItemWithIcon } from './components/ui/dropdown'
 import { Input } from './components/ui/input'
+import { RadioGroup } from './components/ui/radio-group'
 import { Select } from './components/ui/select'
 import { Tab, TabsType } from './components/ui/tabs/tab.tsx'
 import { Typography } from './components/ui/typography'
@@ -37,6 +38,17 @@ export function App() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <Tab disabled tabs={optionsTabs} />
         <Tab tabs={optionsTabs} />
+        <RadioGroup
+          options={optionsPrimary}
+          defaultValue={'apple'}
+          onValueChange={e => console.log(e)}
+        />
+        <RadioGroup
+          options={optionsPrimary}
+          defaultValue={'apple'}
+          onValueChange={e => console.log(e)}
+          disabled
+        />
         <Select
           label={'Select Box'}
           options={optionsPrimary}
