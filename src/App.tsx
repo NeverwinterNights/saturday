@@ -7,7 +7,7 @@ import { Dropdown, DropdownItemWithIcon } from './components/ui/dropdown'
 import { Input } from './components/ui/input'
 import { RadioGroup } from './components/ui/radio-group'
 import { Select } from './components/ui/select'
-import { Tab, TabsType } from './components/ui/tabs/tab.tsx'
+import { Tab, TabsType } from './components/ui/tabs'
 import { Typography } from './components/ui/typography'
 
 export function App() {

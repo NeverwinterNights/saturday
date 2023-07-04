@@ -30,11 +30,11 @@ export const Dropdown = ({ children, trigger, align = 'end', className, style }:
 
   return (
     <DropdownMenuRadix.Root open={open} onOpenChange={setOpen}>
-      <DropdownMenuRadix.Trigger>
+      <DropdownMenuRadix.Trigger asChild>
         {trigger ?? (
-          <button className={classNames.moreButton}>
+          <div className={classNames.moreButton}>
             <More />
-          </button>
+          </div>
         )}
       </DropdownMenuRadix.Trigger>
       <div>
