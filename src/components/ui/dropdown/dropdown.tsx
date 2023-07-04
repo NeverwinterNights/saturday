@@ -14,24 +14,16 @@ export type DropdownProps = {
   trigger?: ReactNode
   className?: string
   style?: CSSProperties
-  isHeader?: boolean
 }
 
-export const Dropdown = ({
-  children,
-  trigger,
-  align = 'end',
-  className,
-  style,
-  isHeader,
-}: DropdownProps) => {
+export const Dropdown = ({ children, trigger, align = 'end', className, style }: DropdownProps) => {
   const [open, setOpen] = useState(false)
 
   const classNames = {
     button: s.button,
     content: clsx(s.content, className),
     arrowBox: s.arrowBox,
-    arrow: clsx(s.arrow, isHeader && s.arrowForHeader),
+    arrow: s.arrow,
     itemsBox: s.itemsBox,
     moreButton: s.moreButton,
   }

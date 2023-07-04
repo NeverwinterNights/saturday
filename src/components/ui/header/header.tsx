@@ -43,31 +43,34 @@ export const Header = memo(
               </Button>
             </div>
           ) : (
-            <Dropdown
-              isHeader={true}
-              trigger={
-                <button className={styles.userTrigger}>
-                  <Typography variant="subtitle1" className={styles.userName}>
-                    {name}
-                  </Typography>
-                  <Avatar photo={avatar} name={name} />
-                </button>
-              }
-            >
-              <DropdownItem onSelect={() => alert(name)}>
-                <div className={styles.userInfoContainer}>
-                  <Avatar photo={avatar} name={name} />
-                  <div className={styles.userDetails}>
-                    <Typography variant="subtitle2">{name}</Typography>
-                    <Typography variant="caption" className={styles.userEmail}>
-                      {email}
-                    </Typography>
+            <div className={styles.userTrigger}>
+              <Typography variant="subtitle1" className={styles.userName}>
+                {name}
+              </Typography>
+
+              <Dropdown
+                isHeader={true}
+                trigger={
+                  <button>
+                    <Avatar photo={avatar} name={name} />
+                  </button>
+                }
+              >
+                <DropdownItem onSelect={() => alert(name)}>
+                  <div className={styles.userInfoContainer}>
+                    <Avatar photo={avatar} name={name} />
+                    <div className={styles.userDetails}>
+                      <Typography variant="subtitle2">{name}</Typography>
+                      <Typography variant="caption" className={styles.userEmail}>
+                        {email}
+                      </Typography>
+                    </div>
                   </div>
-                </div>
-              </DropdownItem>
-              <DropdownItemWithIcon icon={<Person />} text="Profile" onSelect={onProfileClick} />
-              <DropdownItemWithIcon icon={<LogOutIcon />} text="Sign out" onSelect={onSignOut} />
-            </Dropdown>
+                </DropdownItem>
+                <DropdownItemWithIcon icon={<Person />} text="Profile" onSelect={onProfileClick} />
+                <DropdownItemWithIcon icon={<LogOutIcon />} text="Sign out" onSelect={onSignOut} />
+              </Dropdown>
+            </div>
           )}
         </div>
       </div>
