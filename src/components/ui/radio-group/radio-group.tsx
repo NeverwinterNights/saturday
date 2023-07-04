@@ -15,7 +15,7 @@ export type RadioGroupType = {
   onValueChange: (value: string) => void
   options: Option[]
   defaultValue?: string
-  value: string
+  value?: string
   ariaLabel?: string
   name?: string
 }
