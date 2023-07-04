@@ -85,7 +85,14 @@ export const WithTriggerButton: Story = {
   render: args => {
     return (
       <div>
-        <Dropdown trigger={<Button>Trigger?</Button>} {...args}>
+        <Dropdown
+          trigger={
+            <button>
+              <Button>Trigger?</Button>
+            </button>
+          }
+          {...args}
+        >
           <>
             <DropdownItemWithIcon icon={<Play />} text="Learn" onSelect={() => {}} />
             <DropdownItemWithIcon icon={<Edit />} text="Edit" onSelect={() => {}} />
