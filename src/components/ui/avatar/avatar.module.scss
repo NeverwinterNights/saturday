@@ -1,0 +1,27 @@
+.avatarRoot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  overflow: hidden;
+  user-select: none;
+  border-radius: 50%;
+  background-color: var(--color-dark-500);
+
+  .avatarImage {
+    object-fit: cover;
+    border-radius: inherit;
+  }
+  .avatarFallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-light-500);
+    color: var(--color-accent-500);
+    font-size: 25px;
+    line-height: 1;
+    font-weight: 500;
+  }
+}
