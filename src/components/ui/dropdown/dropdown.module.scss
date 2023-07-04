@@ -57,6 +57,9 @@ button {
   border: 1px solid var(--color-dark-500);
   border-top: none;
   border-left: none;
+  &.arrowForHeader {
+    left: -35px;
+  }
 }
 
 .item {
