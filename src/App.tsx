@@ -1,15 +1,8 @@
 import { useState } from 'react'
 
-import { Eye } from './assets/icons/Eye.tsx'
 import { Button } from './components/ui/button'
-import { CheckboxItem } from './components/ui/checkbox'
-import { Dropdown, DropdownItemWithIcon } from './components/ui/dropdown'
-import { Input } from './components/ui/input'
-import { Modals } from './components/ui/modals'
-import { RadioGroup } from './components/ui/radio-group'
-import { Select } from './components/ui/select'
-import { Tab, TabsType } from './components/ui/tabs'
-import { Typography } from './components/ui/typography'
+import { Modal } from './components/ui/modal'
+import { TabsType } from './components/ui/tabs'
 
 export function App() {
   const [valuePrimary, setValuePrimary] = useState('apple')
@@ -37,8 +30,9 @@ export function App() {
   return (
     <div style={{ padding: '50px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <Modals
+        <Modal
           title={'Edit profile'}
+          isOpen={true}
           renderActionButton={() => <Button>Action primary</Button>}
           renderCancelButton={() => <Button variant={'secondary'}>Cancel primary</Button>}
         />

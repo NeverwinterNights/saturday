@@ -1,19 +1,21 @@
 .DialogOverlay {
   position: fixed;
+  z-index: 100;
   inset: 0;
+
   opacity: 0.7;
+
   animation: overlayShow 450ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .DialogContent {
   position: fixed;
+  z-index: 100;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   width: 542px;
-
-  background-color: var(--color-dark-700);
 
   animation: overlayShow 450ms cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -30,16 +32,19 @@
   height: 60px;
   padding: 18px 24px;
 
+  background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
   border-radius: 2px 2px 0 0;
 }
 
 .content {
   display: flex;
+  flex-direction: column;
   gap: 24px;
 
-  padding: 24px 0;
+  padding: 24px;
 
+  background-color: var(--color-dark-700);
   border-right: 1px solid var(--color-dark-500);
   border-left: 1px solid var(--color-dark-500);
 }
@@ -52,8 +57,9 @@
   width: 100%;
   padding: 12px 24px 36px;
 
+  background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-500);
-  border-top: none;
+  border-top: 1px solid var(--color-dark-700);
   border-radius: 0 0 2px 2px;
 
   .actionBtn {

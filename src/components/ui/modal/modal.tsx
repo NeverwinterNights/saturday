@@ -5,25 +5,27 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { CloseModal } from '../../../assets/icons/CloseModal.tsx'
 import { Typography } from '../../../components/ui/typography'
 
-import s from './modals.module.scss'
+import s from './modal.module.scss'
 
-export type ModalsType = {
+export type ModalType = {
   children?: ReactNode
   title?: string
   renderCancelButton?: () => ReactNode
   renderActionButton?: () => ReactNode
   onOpenChange?: (value: boolean) => void
+  isOpen: boolean
 } & ComponentProps<'div'>
 
-export const Modals: FC<ModalsType> = ({
+export const Modal: FC<ModalType> = ({
   children,
   title,
   onOpenChange,
   renderActionButton,
   renderCancelButton,
+  isOpen,
 }) => {
   return (
-    <Dialog.Root open onOpenChange={onOpenChange}>
+    <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay className={s.DialogOverlay} />
         <Dialog.Content className={s.DialogContent}>
