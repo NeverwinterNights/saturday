@@ -92,13 +92,15 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
             </button>
           )}
         </div>
-        {error && (
-          <div style={{ margin: '4px 0' }}>
-            <Typography style={{ color: 'var( --color-danger-300 )' }} variant="caption">
-              {error}
-            </Typography>
-          </div>
-        )}
+        <div className={styles.errorContainer}>
+          {error && (
+            <div style={{ margin: '4px 0' }}>
+              <Typography style={{ color: 'var( --color-danger-300 )' }} variant="caption">
+                {error}
+              </Typography>
+            </div>
+          )}
+        </div>
       </div>
     )
   }
