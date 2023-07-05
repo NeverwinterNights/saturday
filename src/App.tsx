@@ -5,6 +5,7 @@ import { Button } from './components/ui/button'
 import { CheckboxItem } from './components/ui/checkbox'
 import { Dropdown, DropdownItemWithIcon } from './components/ui/dropdown'
 import { Input } from './components/ui/input'
+import { Modals } from './components/ui/modals'
 import { RadioGroup } from './components/ui/radio-group'
 import { Select } from './components/ui/select'
 import { Tab, TabsType } from './components/ui/tabs'
@@ -36,81 +37,87 @@ export function App() {
   return (
     <div style={{ padding: '50px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <Tab disabled tabs={optionsTabs} />
-        <Tab tabs={optionsTabs} />
-        <RadioGroup
-          options={optionsPrimary}
-          defaultValue={'apple'}
-          onValueChange={e => console.log(e)}
+        <Modals
+          title={'Edit profile'}
+          renderActionButton={() => <Button>Action primary</Button>}
+          renderCancelButton={() => <Button variant={'secondary'}>Cancel primary</Button>}
         />
-        <RadioGroup
-          options={optionsPrimary}
-          defaultValue={'apple'}
-          onValueChange={e => console.log(e)}
-          disabled
-        />
-        <Select
-          label={'Select Box'}
-          options={optionsPrimary}
-          value={valuePrimary}
-          onChange={e => setValuePrimary(e)}
-          width={'100%'}
-        />
-        <Select
-          variant={'pagination'}
-          options={optionsPagination}
-          value={valuePagination}
-          onChange={e => setValuePagination(e)}
-          width={'50px'}
-        />
-      </div>
-      <Typography variant="large" as="h1">
-        s Test text
-      </Typography>
-      <Button variant="primary">
-        <Typography color="inherit" variant="subtitle2">
-          Button Primary
-        </Typography>
-      </Button>
-      <Button variant="tertiary">
-        <Typography color="inherit" variant="subtitle2">
-          Button Primary
-        </Typography>
-      </Button>
-      <Typography variant="h2" as="span">
-        aaaaaaaaaaaaaaaaa
-      </Typography>
-      <Typography>aaaaaaaaaaaaaaaaa</Typography>
-      <div
-        style={{
-          width: 100,
-          height: 100,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <CheckboxItem label={'Click Me'} disabled={false} />
-      </div>
-      <div style={{ padding: 30 }}>
-        <Input
-          onChange={() => {}}
-          value={''}
-          label="Mail"
-          placeholder={'Test input'}
-          type="password"
-        ></Input>
-      </div>
-      <div style={{ padding: 30 }}>
-        <Input onChange={() => {}} value={''} searchInput placeholder={'Test input'}></Input>
-      </div>
+        {/*  <Tab disabled tabs={optionsTabs} />*/}
+        {/*  <Tab tabs={optionsTabs} />*/}
+        {/*  <RadioGroup*/}
+        {/*    options={optionsPrimary}*/}
+        {/*    defaultValue={'apple'}*/}
+        {/*    onValueChange={e => console.log(e)}*/}
+        {/*  />*/}
+        {/*  <RadioGroup*/}
+        {/*    options={optionsPrimary}*/}
+        {/*    defaultValue={'apple'}*/}
+        {/*    onValueChange={e => console.log(e)}*/}
+        {/*    disabled*/}
+        {/*  />*/}
+        {/*  <Select*/}
+        {/*    label={'Select Box'}*/}
+        {/*    options={optionsPrimary}*/}
+        {/*    value={valuePrimary}*/}
+        {/*    onChange={e => setValuePrimary(e)}*/}
+        {/*    width={'100%'}*/}
+        {/*  />*/}
+        {/*  <Select*/}
+        {/*    variant={'pagination'}*/}
+        {/*    options={optionsPagination}*/}
+        {/*    value={valuePagination}*/}
+        {/*    onChange={e => setValuePagination(e)}*/}
+        {/*    width={'50px'}*/}
+        {/*  />*/}
+        {/*</div>*/}
+        {/*<Typography variant="large" as="h1">*/}
+        {/*  s Test text*/}
+        {/*</Typography>*/}
+        {/*<Button variant="primary">*/}
+        {/*  <Typography color="inherit" variant="subtitle2">*/}
+        {/*    Button Primary*/}
+        {/*  </Typography>*/}
+        {/*</Button>*/}
+        {/*<Button variant="tertiary">*/}
+        {/*  <Typography color="inherit" variant="subtitle2">*/}
+        {/*    Button Primary*/}
+        {/*  </Typography>*/}
+        {/*</Button>*/}
+        {/*<Typography variant="h2" as="span">*/}
+        {/*  aaaaaaaaaaaaaaaaa*/}
+        {/*</Typography>*/}
+        {/*<Typography>aaaaaaaaaaaaaaaaa</Typography>*/}
+        {/*<div*/}
+        {/*  style={{*/}
+        {/*    width: 100,*/}
+        {/*    height: 100,*/}
+        {/*    display: 'flex',*/}
+        {/*    alignItems: 'center',*/}
+        {/*    justifyContent: 'center',*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  <CheckboxItem label={'Click Me'} disabled={false} />*/}
+        {/*</div>*/}
+        {/*<div style={{ padding: 30 }}>*/}
+        {/*  <Input*/}
+        {/*    onChange={() => {}}*/}
+        {/*    value={''}*/}
+        {/*    label="Mail"*/}
+        {/*    placeholder={'Test input'}*/}
+        {/*    type="password"*/}
+        {/*  ></Input>*/}
+        {/*</div>*/}
+        {/*<div style={{ padding: 30 }}>*/}
+        {/*  <Input onChange={() => {}} value={''} searchInput placeholder={'Test input'}></Input>*/}
+        {/*</div>*/}
 
-      <Dropdown>
-        <>
-          <DropdownItemWithIcon icon={<Eye />} text="Изменить" onSelect={() => {}} />
-          <DropdownItemWithIcon icon={<Eye />} text="Удалить" onSelect={() => {}} />
-        </>
-      </Dropdown>
+        {/*<Dropdown>*/}
+        {/*  <>*/}
+        {/*    <DropdownItemWithIcon icon={<Eye />} text="Изменить" onSelect={() => {}} />*/}
+        {/*    <DropdownItemWithIcon icon={<Eye />} text="Удалить" onSelect={() => {}} />*/}
+        {/*  </>*/}
+        {/*</Dropdown>*/}
+      </div>
     </div>
   )
 }
