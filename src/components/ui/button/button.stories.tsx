@@ -30,7 +30,6 @@ export const Primary: Story = {
 export const PrimaryWithTypography: Story = {
   args: {
     variant: 'primary',
-    // children: 'Primary Button',
     children: (
       <Typography color="inherit" variant="subtitle2">
         Button Primary
@@ -89,5 +88,13 @@ export const AsLink: Story = {
     variant: 'primary',
     children: 'Link that looks like a button',
     as: 'a',
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Disabled',
+    disabled: true,
   },
 }
