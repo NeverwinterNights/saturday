@@ -1,41 +1,79 @@
 import { memo } from 'react'
 
+import { LogOutIcon } from '../../../assets/icons/LogOutIcon.tsx'
+import { Person } from '../../../assets/icons/Person.tsx'
+import { Avatar } from '../avatar/avatar.tsx'
 import { Button } from '../button'
+import { Dropdown, DropdownItem, DropdownItemWithIcon } from '../dropdown'
 import { Typography } from '../typography'
 
 import logo from './../../../assets/images/logo.png'
 import styles from './header.module.scss'
 
 type HeaderPropsType = {
-  isAuth?: boolean
+  isAuth: boolean
   name?: string
-  img?: string
+  avatar?: string
+  email?: string
+  onSignIn?: () => void
+  onSignOut: () => void
+  onProfileClick: () => void
 }
 
-export const Header = memo(({ isAuth, name, img }: HeaderPropsType) => {
-  return (
-    <div className={styles.main}>
-      <div className={styles.logo}>
-        <img src={logo} alt="logo" />
-      </div>
-      <div className={styles.rightItem}>
-        {!isAuth ? (
-          <div className={styles.button}>
-            <Button variant="primary">Sign In</Button>
-          </div>
-        ) : (
-          <div className={styles.info}>
-            <div className={styles.name}>
-              <Typography className={styles.textName} variant="subtitle1">
+export const Header = memo(
+  ({
+    isAuth,
+    name = 'NoName',
+    avatar,
+    email = 'NoNameEmail@.com',
+    onSignIn,
+    onSignOut,
+    onProfileClick,
+  }: HeaderPropsType) => {
+    return (
+      <div className={styles.main}>
+        <div className={styles.logo}>
+          <img src={logo} alt="logo" />
+        </div>
+        <div className={styles.rightItem}>
+          {!isAuth ? (
+            <div className={styles.button}>
+              <Button onClick={onSignIn} variant="primary">
+                Sign In
+              </Button>
+            </div>
+          ) : (
+            <div className={styles.userTrigger}>
+              <Typography variant="subtitle1" className={styles.userName}>
                 {name}
               </Typography>
+
+              <Dropdown
+                isHeader={true}
+                trigger={
+                  <button>
+                    <Avatar photo={avatar} name={name} />
+                  </button>
+                }
+              >
+                <DropdownItem onSelect={() => alert(name)}>
+                  <div className={styles.userInfoContainer}>
+                    <Avatar photo={avatar} name={name} />
+                    <div className={styles.userDetails}>
+                      <Typography variant="subtitle2">{name}</Typography>
+                      <Typography variant="caption" className={styles.userEmail}>
+                        {email}
+                      </Typography>
+                    </div>
+                  </div>
+                </DropdownItem>
+                <DropdownItemWithIcon icon={<Person />} text="Profile" onSelect={onProfileClick} />
+                <DropdownItemWithIcon icon={<LogOutIcon />} text="Sign out" onSelect={onSignOut} />
+              </Dropdown>
             </div>
-            <div className={styles.avatar}>
-              <img src={img} alt={'avatar'} />
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
-  )
-})
+    )
+  }
+)

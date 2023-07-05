@@ -45,7 +45,7 @@ export const Dropdown = ({ children, trigger, align = 'end', className, style }:
               forceMount
               className={classNames.content}
               align={align}
-              sideOffset={6}
+              sideOffset={8}
               style={style}
               onClick={event => event.stopPropagation()}
             >
