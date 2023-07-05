@@ -32,9 +32,9 @@ export const Dropdown = ({ children, trigger, align = 'end', className, style }:
     <DropdownMenuRadix.Root open={open} onOpenChange={setOpen}>
       <DropdownMenuRadix.Trigger asChild>
         {trigger ?? (
-          <div className={classNames.moreButton}>
+          <button className={classNames.moreButton}>
             <More />
-          </div>
+          </button>
         )}
       </DropdownMenuRadix.Trigger>
       <div>
