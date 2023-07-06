@@ -25,6 +25,10 @@ option {
   color: inherit;
 }
 
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+}
+
 a:visited {
   color: inherit;
 }
@@ -55,6 +59,7 @@ option {
 
 button {
   background: none;
+
   &:hover {
     border: none;
   }
