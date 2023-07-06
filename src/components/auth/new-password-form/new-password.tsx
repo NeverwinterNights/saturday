@@ -1,27 +1,18 @@
 import { memo } from 'react'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-
-import { NewPasswordSchema } from '../../../common/schema'
 import { Button } from '../../ui/button'
 import { ControlledInput } from '../../ui/controlled'
 import { Typography } from '../../ui/typography'
 
 import styles from './new-password.module.scss'
-
-type FormType = z.infer<typeof NewPasswordSchema>
+import { useNewPassword } from './use-new-password-form.ts'
 
 type ForgotPasswordPropsType = {
   onChangeInput?: (value: string) => void
 }
 
 export const NewPassword = memo(({}: ForgotPasswordPropsType) => {
-  const { handleSubmit, control } = useForm<FormType>({
-    resolver: zodResolver(NewPasswordSchema),
-    mode: 'onSubmit',
-  })
+  const { handleSubmit, control } = useNewPassword()
 
   return (
     <form onSubmit={handleSubmit(data => console.log('data', data))} className={styles.main}>
