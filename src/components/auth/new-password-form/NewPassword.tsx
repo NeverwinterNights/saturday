@@ -4,49 +4,42 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { NewPasswordSchema } from '../../../common/schema'
 import { Button } from '../../ui/button'
 import { ControlledInput } from '../../ui/controlled'
 import { Typography } from '../../ui/typography'
 
-import styles from './forgotPassword.module.scss'
+import styles from './newPassword.module.scss'
 
-const schema = z.object({
-  email: z.string().trim().email('Invalid Email Address!').nonempty('Enter Email!'),
-})
-
-type FormType = z.infer<typeof schema>
+type FormType = z.infer<typeof NewPasswordSchema>
 
 type ForgotPasswordPropsType = {
   onChangeInput?: (value: string) => void
 }
 
-export const ForgotPassword = memo(({}: ForgotPasswordPropsType) => {
+export const NewPassword = memo(({}: ForgotPasswordPropsType) => {
   const { handleSubmit, control } = useForm<FormType>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(NewPasswordSchema),
     mode: 'onSubmit',
   })
 
   return (
     <form onSubmit={handleSubmit(data => console.log('data', data))} className={styles.main}>
       <Typography className={styles.title} variant="large">
-        Forgot your password?
+        Create new password
       </Typography>
       <div className={styles.input}>
-        <ControlledInput label="Email" name={'email'} control={control} />
+        <ControlledInput label="Password" name={'password'} type="password" control={control} />
       </div>
 
       <Typography className={styles.info} variant="body2">
-        Enter your email address and we will send you further instructions{' '}
+        Create new password and we will send you further instructions to email
       </Typography>
       <Button type={'submit'} fullWidth className={styles.button} variant="primary">
         <Typography className={styles.buttonText} variant="subtitle2">
-          Send Instructions
+          Create New Password
         </Typography>
       </Button>
-      <Typography className={styles.sub} variant="body2">
-        Did you remember your password?
-      </Typography>
-      <Typography className={styles.log}>Try logging in</Typography>
     </form>
   )
 })
