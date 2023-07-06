@@ -4,17 +4,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { forgotPasswordSchema } from '../../../common/schema'
 import { Button } from '../../ui/button'
 import { ControlledInput } from '../../ui/controlled'
 import { Typography } from '../../ui/typography'
 
-import styles from './forgotPassword.module.scss'
+import styles from './forgot-password.module.scss'
 
-const schema = z.object({
-  email: z.string().trim().email('Invalid Email Address!').nonempty('Enter Email!'),
-})
-
-type FormType = z.infer<typeof schema>
+type FormType = z.infer<typeof forgotPasswordSchema>
 
 type ForgotPasswordPropsType = {
   onChangeInput?: (value: string) => void
@@ -22,7 +19,7 @@ type ForgotPasswordPropsType = {
 
 export const ForgotPassword = memo(({}: ForgotPasswordPropsType) => {
   const { handleSubmit, control } = useForm<FormType>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(forgotPasswordSchema),
     mode: 'onSubmit',
   })
 

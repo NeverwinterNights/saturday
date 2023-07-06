@@ -1,0 +1,32 @@
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.05rem 2.25rem 1.2rem;
+  text-align: center;
+
+  .title {
+    margin-bottom: 27px;
+    text-align: center;
+  }
+
+  .form {
+    div {
+      margin-bottom: 4px;
+      text-align: left;
+    }
+  }
+
+  .button {
+    margin-top: 2.5rem;
+  }
+
+  .subtitle {
+    margin-top: 1.25rem;
+    color: var(--color-light-900);
+  }
+
+  .link {
+    margin: auto;
+    text-decoration: underline;
+  }
+}

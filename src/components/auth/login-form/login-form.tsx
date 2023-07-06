@@ -8,7 +8,7 @@ import { ControlledInput } from '../../ui/controlled'
 import { ControlledCheckbox } from '../../ui/controlled/controlled-checkbox.tsx'
 import { Typography } from '../../ui/typography'
 
-import s from './loginForm.module.scss'
+import s from './login-form.module.scss'
 
 const schema = z.object({
   email: z.string().trim().nonempty('Enter email').email('Invalid email address'),

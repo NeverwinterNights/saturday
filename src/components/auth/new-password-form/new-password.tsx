@@ -4,21 +4,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { NewPasswordSchema } from '../../../common/schema'
 import { Button } from '../../ui/button'
 import { ControlledInput } from '../../ui/controlled'
 import { Typography } from '../../ui/typography'
 
-import styles from './newPassword.module.scss'
+import styles from './new-password.module.scss'
 
-const schema = z.object({
-  password: z
-    .string()
-    .trim()
-    .nonempty('Enter Password')
-    .min(8, 'Password must be at least 8 characters'),
-})
-
-type FormType = z.infer<typeof schema>
+type FormType = z.infer<typeof NewPasswordSchema>
 
 type ForgotPasswordPropsType = {
   onChangeInput?: (value: string) => void
@@ -26,7 +19,7 @@ type ForgotPasswordPropsType = {
 
 export const NewPassword = memo(({}: ForgotPasswordPropsType) => {
   const { handleSubmit, control } = useForm<FormType>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(NewPasswordSchema),
     mode: 'onSubmit',
   })
 

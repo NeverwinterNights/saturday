@@ -1,6 +1,6 @@
 import { memo } from 'react'
 
-import { usePagination } from '../../../hooks/usePagination.ts'
+import { usePagination } from '../../../common/hooks/usePagination.ts'
 
 import { NextButton } from './controlButton/NextButton.tsx'
 import { PrevButton } from './controlButton/PrevButton.tsx'
