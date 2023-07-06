@@ -10,7 +10,7 @@ import { Card } from '../../../components/ui/card'
 import { ControlledInput } from '../../../components/ui/controlled'
 import { Typography } from '../../../components/ui/typography'
 
-import s from './registerForm.module.scss'
+import s from './register-form.module.scss'
 
 type RegisterFormType = z.infer<typeof registerSchema>
 

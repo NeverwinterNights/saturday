@@ -1,1 +1,1 @@
-export * from './NewPassword.tsx'
+export * from './new-password.tsx'
