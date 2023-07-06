@@ -27,7 +27,7 @@ export const LoginForm = () => {
             control={control}
           />
         </div>
-        <Typography variant="body2" as={'a'} href={'/'} className={s.recoverPasswordLink}>
+        <Typography variant="body2" as={'a'} className={s.recoverPasswordLink}>
           Forgot Password?
         </Typography>
         <Button fullWidth className={s.button} type="submit">
@@ -37,7 +37,7 @@ export const LoginForm = () => {
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           Don't have an account?
         </Typography>
-        <Typography variant="link1" as={'a'} href={'/'} className={s.signUpLink}>
+        <Typography variant="link1" as={'a'} className={s.signUpLink}>
           Sign Up
         </Typography>
       </form>
