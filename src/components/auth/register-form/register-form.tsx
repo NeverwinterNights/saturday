@@ -1,18 +1,12 @@
 import { FC } from 'react'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-
-import { registerSchema } from '../../../common/schema'
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
 import { ControlledInput } from '../../../components/ui/controlled'
 import { Typography } from '../../../components/ui/typography'
 
 import s from './register-form.module.scss'
-
-type RegisterFormType = z.infer<typeof registerSchema>
+import { RegisterFormType, useRegisterForm } from './use-register-form.ts'
 
 type RegisterFormPropsType = {
   linkPath: string
@@ -20,11 +14,7 @@ type RegisterFormPropsType = {
 }
 
 export const RegisterForm: FC<RegisterFormPropsType> = ({ linkPath, onSubmitHandler }) => {
-  const { handleSubmit, control } = useForm<RegisterFormType>({
-    resolver: zodResolver(registerSchema),
-    mode: 'onSubmit',
-  })
-
+  const { handleSubmit, control } = useRegisterForm()
   const onSubmit = handleSubmit(data => {
     console.log(data)
     onSubmitHandler(data)

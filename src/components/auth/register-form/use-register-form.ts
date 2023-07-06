@@ -1,3 +1,5 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 export const registerSchema = z
@@ -18,3 +20,11 @@ export const registerSchema = z
     message: 'The passwords did not match',
     path: ['confirm'],
   })
+
+export type RegisterFormType = z.infer<typeof registerSchema>
+export const useRegisterForm = () => {
+  return useForm<RegisterFormType>({
+    resolver: zodResolver(registerSchema),
+    mode: 'onSubmit',
+  })
+}
