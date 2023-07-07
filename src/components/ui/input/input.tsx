@@ -13,6 +13,7 @@ import styles from './input.module.scss'
 export type InputPropsType = {
   label?: string
   disabled?: boolean
+  inputTextClassName?: string
   type?: string
   error?: string
   onClickClearInput?: () => void
@@ -24,6 +25,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
     {
       className,
       error,
+      inputTextClassName,
       onClickClearInput,
       searchInput,
       value = '',
@@ -40,6 +42,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
     const classNames = {
       input: clsx(styles.inputContainer, !!error && styles.error, className),
       label: clsx(styles.inputContainer, !!error && styles.error, className),
+      inpText: clsx(styles.input, inputTextClassName),
     }
     const iconClickHandler = (e: any) => {
       e.preventDefault()
@@ -70,8 +73,9 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
           <input
             ref={ref}
             disabled={disabled}
-            className={styles.input}
+            className={classNames.inpText}
             placeholder={placeholder}
+            value={value}
             type={iconVisible}
             style={error ? { color: 'var( --color-danger-300 )' } : {}}
             {...restProps}

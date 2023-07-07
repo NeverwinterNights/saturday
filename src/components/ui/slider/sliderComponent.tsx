@@ -1,6 +1,8 @@
-import { memo, useState } from 'react'
+import { ChangeEvent, memo, useState } from 'react'
 
 import * as Slider from '@radix-ui/react-slider'
+
+import { Input } from '../input'
 
 import styles from './sliderComponent.module.scss'
 
@@ -11,13 +13,27 @@ export const SliderComponent = memo(() => {
     setValue(value)
   }
 
+  const onValueChange = (event: ChangeEvent<HTMLInputElement>, index: number) => {
+    setValue(state => {
+      return [state[index], +event.currentTarget.value]
+    })
+  }
+
   return (
     <form>
       <div className={styles.container}>
-        <div className={styles.value}>{value[0]}</div>
+        <div>
+          <Input
+            inputTextClassName={styles.textInp}
+            className={styles.value}
+            value={value[0]}
+            onChange={event => onValueChange(event, 0)}
+          />
+        </div>
+
         <Slider.Root
-          min={5}
-          max={75}
+          min={0}
+          max={100}
           onValueChange={onSliderChange}
           className={styles.SliderRoot}
           defaultValue={[5, 75]}
@@ -31,7 +47,14 @@ export const SliderComponent = memo(() => {
           <Slider.Thumb className={styles.SliderThumb} aria-label="Start" />
           <Slider.Thumb className={styles.SliderThumb} aria-label="End" />
         </Slider.Root>
-        <div className={styles.value}>{value[1]}</div>
+        <div>
+          <Input
+            inputTextClassName={styles.textInp}
+            className={styles.value}
+            value={value[1]}
+            onChange={event => onValueChange(event, 1)}
+          />
+        </div>
       </div>
     </form>
   )
