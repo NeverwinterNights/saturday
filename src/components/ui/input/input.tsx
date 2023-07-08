@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
 import { clsx } from 'clsx'
 
-import { ClosedInputIcon } from '../../../assets/icons/CloseInputIcon.tsx'
+// import { ClosedInputIcon } from '../../../assets/icons/CloseInputIcon.tsx'
 import { Eye } from '../../../assets/icons/Eye.tsx'
 import { EyeClosed } from '../../../assets/icons/EyeClosed.tsx'
 import { SearchIcon } from '../../../assets/icons/SearchIcon.tsx'
@@ -28,7 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
       inputTextClassName,
       onClickClearInput,
       searchInput,
-      value = '',
+      // value = '',
       placeholder,
       disabled,
       type,
@@ -48,9 +48,9 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
       e.preventDefault()
       setIconVisible(() => (iconVisible === 'password' ? 'text' : 'password'))
     }
-    const onClearInput = () => {
-      onClickClearInput && onClickClearInput()
-    }
+    // const onClearInput = () => {
+    //   onClickClearInput && onClickClearInput()
+    // }
 
     return (
       <div className={disabled ? styles.disabled : styles.main}>
@@ -80,11 +80,11 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
             style={error ? { color: 'var( --color-danger-300 )' } : {}}
             {...restProps}
           />
-          {searchInput && value?.toString().length > 0 && (
-            <span className={styles.closedImp} onClick={onClearInput}>
-              <ClosedInputIcon />
-            </span>
-          )}
+          {/*{searchInput && restProps?.value?.toString()?.length > 0 && (*/}
+          {/*  <span className={styles.closedImp} onClick={onClearInput}>*/}
+          {/*    <ClosedInputIcon />*/}
+          {/*  </span>*/}
+          {/*)}*/}
 
           {(type === 'password' || iconVisible === 'password') && (
             <button disabled={disabled} className={styles.fakebutton} onClick={iconClickHandler}>

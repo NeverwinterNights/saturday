@@ -1,11 +1,7 @@
-import { Input } from './components/ui/input'
-import { SliderComponent } from './components/ui/slider'
-
 export function App() {
   return (
-    <div style={{ padding: '50px', width: '600px' }}>
-      <Input />
-      <SliderComponent />
+    <div style={{ padding: '50px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}></div>
     </div>
   )
 }
