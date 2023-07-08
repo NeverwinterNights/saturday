@@ -22,7 +22,7 @@ export const CheckMail = memo(({ email }: CheckMailPropType) => {
       <Typography className={styles.info} variant="body2">
         We’ve sent an Email with instructions to {email}
       </Typography>
-      <Button type={'button'} fullWidth className={styles.button} variant="primary">
+      <Button as="a" fullWidth className={styles.button} variant="primary">
         <Typography className={styles.buttonText} variant="subtitle2">
           Back to Sign In
         </Typography>
