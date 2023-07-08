@@ -13,15 +13,11 @@ export const SliderComponent = memo(() => {
     setValue(value)
   }
 
-  const onValueChange1 = (event: ChangeEvent<HTMLInputElement>) => {
+  const onValueChange = (event: ChangeEvent<HTMLInputElement>, index: number) => {
     setValue(state => {
-      return [+event.currentTarget.value, state[1]]
-    })
-  }
-
-  const onValueChange2 = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(state => {
-      return [state[0], +event.currentTarget.value]
+      return index === 0
+        ? [+event.currentTarget.value, state[1]]
+        : [state[0], +event.currentTarget.value]
     })
   }
 
@@ -35,7 +31,7 @@ export const SliderComponent = memo(() => {
             inputTextClassName={styles.textInp}
             className={styles.value}
             value={value[0]}
-            onChange={onValueChange1}
+            onChange={event => onValueChange(event, 0)}
           />
         </div>
 
@@ -61,7 +57,7 @@ export const SliderComponent = memo(() => {
             inputTextClassName={styles.textInp}
             className={styles.value}
             value={value[1]}
-            onChange={onValueChange2}
+            onChange={event => onValueChange(event, 1)}
           />
         </div>
       </div>
