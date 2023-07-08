@@ -21,8 +21,6 @@ export const SliderComponent = memo(() => {
     })
   }
 
-  console.log('value', value)
-
   return (
     <form>
       <div className={styles.container}>

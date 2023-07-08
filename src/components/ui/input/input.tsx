@@ -28,7 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
       inputTextClassName,
       onClickClearInput,
       searchInput,
-      // value = '',
+      value = '',
       placeholder,
       disabled,
       type,
@@ -48,9 +48,6 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
       e.preventDefault()
       setIconVisible(() => (iconVisible === 'password' ? 'text' : 'password'))
     }
-    // const onClearInput = () => {
-    //   onClickClearInput && onClickClearInput()
-    // }
 
     return (
       <div className={disabled ? styles.disabled : styles.main}>
