@@ -13,11 +13,19 @@ export const SliderComponent = memo(() => {
     setValue(value)
   }
 
-  const onValueChange = (event: ChangeEvent<HTMLInputElement>, index: number) => {
+  const onValueChange1 = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(state => {
-      return [state[index], +event.currentTarget.value]
+      return [+event.currentTarget.value, state[1]]
     })
   }
+
+  const onValueChange2 = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(state => {
+      return [state[0], +event.currentTarget.value]
+    })
+  }
+
+  console.log('value', value)
 
   return (
     <form>
@@ -27,7 +35,7 @@ export const SliderComponent = memo(() => {
             inputTextClassName={styles.textInp}
             className={styles.value}
             value={value[0]}
-            onChange={event => onValueChange(event, 0)}
+            onChange={onValueChange1}
           />
         </div>
 
@@ -39,6 +47,7 @@ export const SliderComponent = memo(() => {
           defaultValue={[5, 75]}
           step={1}
           minStepsBetweenThumbs={1}
+          value={value}
         >
           <Slider.Track className={styles.SliderTrack}>
             <Slider.Range className={styles.SliderRange} />
@@ -52,7 +61,7 @@ export const SliderComponent = memo(() => {
             inputTextClassName={styles.textInp}
             className={styles.value}
             value={value[1]}
-            onChange={event => onValueChange(event, 1)}
+            onChange={onValueChange2}
           />
         </div>
       </div>
