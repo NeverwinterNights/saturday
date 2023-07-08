@@ -49,7 +49,6 @@ export const Header = memo(
               </Typography>
 
               <Dropdown
-                isHeader={true}
                 trigger={
                   <button>
                     <Avatar photo={avatar} name={name} />
