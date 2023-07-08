@@ -14,6 +14,7 @@ export type DropdownProps = {
   trigger?: ReactNode
   className?: string
   style?: CSSProperties
+  isHeader?: boolean
 }
 
 export const Dropdown = ({ children, trigger, align = 'end', className, style }: DropdownProps) => {
