@@ -25,6 +25,8 @@
 
 .recoverPasswordLink,
 .recoverPasswordLink:visited {
+  cursor: pointer;
+
   display: flex;
   justify-content: flex-end;
 
@@ -34,6 +36,7 @@
   color: inherit;
   text-align: right;
   text-decoration: none;
+
   &:hover {
     text-decoration: underline;
   }
@@ -50,15 +53,19 @@
 }
 
 .signUpLink {
+  cursor: pointer;
+
   display: flex;
   justify-content: center;
 
-  color: var(--color-accent-500);
   font-size: var(--font-size-m);
   font-weight: var(--font-weight-bold);
+  color: var(--color-accent-500);
+
   &:visited {
     color: var(--color-accent-500);
   }
+
   &:hover {
     text-decoration: none;
   }
