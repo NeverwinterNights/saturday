@@ -14,6 +14,7 @@ export const StarRating = (props: StarRatingPropsType) => {
   const { value = 0, isInteractive = false, onChanged } = props
 
   const [rating, setRating] = useState<number>(value)
+  const [hover, setHover] = useState<number>(value)
 
   return (
     <div className={s.root}>
@@ -31,7 +32,13 @@ export const StarRating = (props: StarRatingPropsType) => {
                 onChange={onChanged}
               />
             )}
-            {ratingValue <= rating ? <StarFilled /> : <StarEmpty />}
+            {isInteractive ? (
+              <div onMouseEnter={() => setHover(ratingValue)} onMouseLeave={() => setHover(0)}>
+                {ratingValue <= (hover || rating) ? <StarFilled /> : <StarEmpty />}
+              </div>
+            ) : (
+              <div>{ratingValue <= rating ? <StarFilled /> : <StarEmpty />}</div>
+            )}
           </label>
         )
       })}
