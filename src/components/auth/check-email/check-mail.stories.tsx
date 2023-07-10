@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { CheckMail } from './index.ts'
 
 const meta = {
-  title: 'Components/CheckMail',
+  title: 'Auth/CheckMail',
   component: CheckMail,
   tags: ['autodocs'],
   argTypes: {},

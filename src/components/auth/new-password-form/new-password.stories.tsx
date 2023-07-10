@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { NewPassword } from './'
 
 const meta = {
-  title: 'Components/NewPassword',
+  title: 'Auth/NewPassword',
   component: NewPassword,
   tags: ['autodocs'],
   argTypes: {},
