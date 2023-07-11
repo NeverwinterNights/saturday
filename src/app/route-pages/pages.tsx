@@ -6,6 +6,10 @@ import { LoginPage } from '../../features/auth/login'
 import { NewPasswordPage } from '../../features/auth/new-password'
 import { ForgotPasswordPage } from '../../features/auth/password-recovery'
 import { RegisterPage } from '../../features/auth/register'
+import { Cards } from '../../features/cards'
+import { Learn } from '../../features/learn'
+import { Packs } from '../../features/packs'
+import { Profile } from '../../features/profile'
 
 import { PrivateRoute } from './private-route.tsx'
 
@@ -20,11 +24,11 @@ export const Pages = () => {
       <Route path={PATH.ERROR} element={<h1>error 404</h1>} />
 
       <Route element={<PrivateRoute />}>
-        <Route index path={'/'} element={<div>Packs</div>} />
-        <Route path={PATH.PACKS} element={<div>Packs</div>} />
-        <Route path={PATH.PROFILE} element={<div>Profile</div>} />
-        <Route path={PATH.PACKS + PATH.CARDS} element={<div>Cards</div>} />
-        <Route path={PATH.LEARN + PATH.ID} element={<div>Learn</div>} />
+        <Route index path={'/'} element={<Packs />} />
+        <Route path={PATH.PACKS} element={<Packs />} />
+        <Route path={PATH.PROFILE} element={<Profile />} />
+        <Route path={PATH.PACKS + PATH.CARDS} element={<Cards />} />
+        <Route path={PATH.LEARN + PATH.ID} element={<Learn />} />
       </Route>
     </Routes>
   )
