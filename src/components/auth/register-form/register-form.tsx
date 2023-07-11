@@ -1,5 +1,6 @@
 import { FC } from 'react'
 
+import { PATH } from '../../../common'
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
 import { ControlledInput } from '../../../components/ui/controlled'
@@ -9,14 +10,12 @@ import s from './register-form.module.scss'
 import { RegisterFormType, useRegisterForm } from './use-register-form.ts'
 
 type RegisterFormPropsType = {
-  linkPath: string
   onSubmitHandler: (data: RegisterFormType) => void
 }
 
-export const RegisterForm: FC<RegisterFormPropsType> = ({ linkPath, onSubmitHandler }) => {
+export const RegisterForm: FC<RegisterFormPropsType> = ({ onSubmitHandler }) => {
   const { handleSubmit, control } = useRegisterForm()
   const onSubmit = handleSubmit(data => {
-    console.log(data)
     onSubmitHandler(data)
   })
 
@@ -40,7 +39,7 @@ export const RegisterForm: FC<RegisterFormPropsType> = ({ linkPath, onSubmitHand
         <Typography className={s.subtitle} variant="body2">
           Already have an account?
         </Typography>
-        <Button variant="link" as={'a'} className={s.link} href={linkPath}>
+        <Button variant="link" as={'a'} className={s.link} href={PATH.LOGIN}>
           Sign In
         </Button>
       </form>
