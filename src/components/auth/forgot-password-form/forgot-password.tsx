@@ -1,19 +1,20 @@
 import { memo } from 'react'
 
+import { PATH } from '../../../common'
 import { Button } from '../../ui/button'
 import { ControlledInput } from '../../ui/controlled'
 import { Typography } from '../../ui/typography'
 
 import styles from './forgot-password.module.scss'
-import { useForgotPassword } from './use-forgot-password.ts'
+import { ForgotPasswordFormType, useForgotPassword } from './use-forgot-password.ts'
 
 type ForgotPasswordPropsType = {
-  onChangeInput?: (value: string) => void
+  onSubmitHandler: (data: ForgotPasswordFormType) => void
 }
 
-export const ForgotPassword = memo(({}: ForgotPasswordPropsType) => {
+export const ForgotPassword = memo(({ onSubmitHandler }: ForgotPasswordPropsType) => {
   const { handleSubmit, control } = useForgotPassword()
-  const onSubmit = handleSubmit(data => console.log('data', data))
+  const onSubmit = handleSubmit(data => onSubmitHandler(data))
 
   return (
     <form onSubmit={onSubmit} className={styles.main}>
@@ -35,7 +36,9 @@ export const ForgotPassword = memo(({}: ForgotPasswordPropsType) => {
       <Typography className={styles.sub} variant="body2">
         Did you remember your password?
       </Typography>
-      <Typography className={styles.log}>Try logging in</Typography>
+      <Typography className={styles.log} as={'a'} href={PATH.LOGIN}>
+        Try logging in
+      </Typography>
     </form>
   )
 })

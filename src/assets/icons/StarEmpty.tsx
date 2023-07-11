@@ -6,7 +6,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
     width={16}
     height={16}
     fill="none"
-    stroke="#fbff00"
+    stroke="#E5AC39"
     viewBox="0 0 24 24"
     {...props}
   >
