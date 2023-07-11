@@ -12,6 +12,7 @@ html {
   box-sizing: border-box;
 }
 
+a,
 input,
 button,
 select,
@@ -29,9 +30,6 @@ input:-webkit-autofill {
   -webkit-background-clip: text;
 }
 
-a:visited {
-  color: inherit;
-}
 
 body {
   margin: 0;

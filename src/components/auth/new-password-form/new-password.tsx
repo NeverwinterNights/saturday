@@ -5,17 +5,18 @@ import { ControlledInput } from '../../ui/controlled'
 import { Typography } from '../../ui/typography'
 
 import styles from './new-password.module.scss'
-import { useNewPassword } from './use-new-password-form.ts'
+import { NewPasswordFormType, useNewPassword } from './use-new-password-form.ts'
 
 type ForgotPasswordPropsType = {
-  onChangeInput?: (value: string) => void
+  onSubmitHandler: (data: NewPasswordFormType) => void
 }
 
-export const NewPassword = memo(({}: ForgotPasswordPropsType) => {
+export const NewPassword = memo(({ onSubmitHandler }: ForgotPasswordPropsType) => {
   const { handleSubmit, control } = useNewPassword()
+  const onSubmit = handleSubmit(data => onSubmitHandler(data))
 
   return (
-    <form onSubmit={handleSubmit(data => console.log('data', data))} className={styles.main}>
+    <form onSubmit={onSubmit} className={styles.main}>
       <Typography className={styles.title} variant="large">
         Create new password
       </Typography>
