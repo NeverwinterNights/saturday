@@ -8,13 +8,14 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "baseUrl": "./src",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
