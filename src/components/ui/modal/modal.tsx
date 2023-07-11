@@ -24,7 +24,6 @@ export const Modal: FC<ModalType> = ({
   renderActionButton,
   renderCancelButton,
   isOpen,
-  onConfirm,
 }) => {
   return (
     <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
@@ -44,7 +43,7 @@ export const Modal: FC<ModalType> = ({
 
           <div className={s.footer}>
             <Dialog.Close asChild>{renderCancelButton?.()}</Dialog.Close>
-            <Dialog.Close asChild className={s.actionBtn} onClick={onConfirm}>
+            <Dialog.Close asChild className={s.actionBtn}>
               {renderActionButton?.()}
             </Dialog.Close>
 

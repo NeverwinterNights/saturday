@@ -3,7 +3,12 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 export const addEditPackSchema = z.object({
-  name: z.string().trim().nonempty('Enter Name!'),
+  name: z
+    .string({
+      required_error: 'Enter Name!',
+    })
+    .trim()
+    .nonempty('Enter Name!'),
   private: z.boolean().optional(),
 })
 export type FormType = z.infer<typeof addEditPackSchema>
