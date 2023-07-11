@@ -2,14 +2,14 @@ import { useState } from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SliderComponent } from './'
+import { SliderOmponent } from './'
 
 const meta = {
-  title: 'Components/SliderComponent',
-  component: SliderComponent,
+  title: 'Components/SliderOmponent',
+  component: SliderOmponent,
   tags: ['autodocs'],
   argTypes: {},
-} satisfies Meta<typeof SliderComponent>
+} satisfies Meta<typeof SliderOmponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -23,7 +23,7 @@ export const SliderRangeController: Story = {
   render: () => {
     const [value, setValue] = useState<[number, number]>([0, 75])
 
-    return <SliderComponent defaultValue={value} setValue={setValue} value={value} />
+    return <SliderOmponent defaultValue={value} setValue={setValue} value={value} />
   },
   args: {
     value: [0, 75],
