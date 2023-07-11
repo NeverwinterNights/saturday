@@ -12,6 +12,7 @@ export type ModalType = {
   title?: string
   renderCancelButton?: () => ReactNode
   renderActionButton?: () => ReactNode
+  actionButton: ReactNode
   onOpenChange?: (value: boolean) => void
   isOpen: boolean
   onConfirm: () => void
@@ -21,6 +22,7 @@ export const Modal: FC<ModalType> = ({
   children,
   title,
   onOpenChange,
+  actionButton,
   renderActionButton,
   renderCancelButton,
   isOpen,
@@ -44,7 +46,7 @@ export const Modal: FC<ModalType> = ({
           <div className={s.footer}>
             <Dialog.Close asChild>{renderCancelButton?.()}</Dialog.Close>
             <Dialog.Close asChild className={s.actionBtn}>
-              {renderActionButton?.()}
+              {actionButton}
             </Dialog.Close>
 
             {/*{RenderCancelButton && (*/}

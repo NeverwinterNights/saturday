@@ -1,15 +1,17 @@
+import { ReactNode } from 'react'
+
 import { Button } from '../../ui/button'
 import { Typography } from '../../ui/typography'
 
 type RenderActionButtonPropType = {
-  title?: string
-  onclick?: () => void
+  children?: ReactNode
+  onClick?: () => void
 }
 
-export const RenderActionButton = ({ title = 'Save', onclick }: RenderActionButtonPropType) => {
+export const RenderActionButton = ({ children = 'Save', onClick }: RenderActionButtonPropType) => {
   return (
-    <Button variant="primary" onClick={onclick}>
-      <Typography variant="subtitle2">{title}</Typography>
+    <Button variant="primary" onClick={onClick}>
+      <Typography variant="subtitle2">{children}</Typography>
     </Button>
   )
 }

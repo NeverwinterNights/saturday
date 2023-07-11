@@ -23,9 +23,9 @@ export const DeletePack = memo(
   }: DeletePackPropsType) => {
     return (
       <Modal
-        renderActionButton={() => (
-          <RenderActionButton title={buttonName} onclick={onClickDataHandler} />
-        )}
+        actionButton={
+          <RenderActionButton onClick={onClickDataHandler}>{buttonName}</RenderActionButton>
+        }
         renderCancelButton={RenderCancelButton}
         isOpen={isOpen}
         title={'Delete  Pack'}

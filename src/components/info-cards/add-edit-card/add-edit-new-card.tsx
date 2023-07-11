@@ -48,13 +48,15 @@ export const AddEditNewCard = memo(
       <>
         <Select
           label={selectLabel}
-          options={}
+          options={[]}
           value={selectValue}
           width={'100%'}
           onChange={setSelectValue}
         />
         <Modal
-          renderActionButton={() => <RenderActionButton title={buttonName} onclick={onSubmit} />}
+          renderActionButton={() => (
+            <RenderActionButton onClick={onSubmit}>{buttonName}</RenderActionButton>
+          )}
           renderCancelButton={RenderCancelButton}
           onOpenChange={onOpenChange}
           title={title}
