@@ -1,1 +1,1 @@
-export * from './sliderComponent.tsx'
+export * from './slider-сomponent'
