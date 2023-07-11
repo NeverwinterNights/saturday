@@ -1,7 +1,11 @@
+@import "../../../components/ui/typography/typography.module";
+
 .card {
   width: 100%;
   max-width: 420px;
+  margin: 36px auto;
   padding: 2.05rem 2.25rem 1.2rem;
+
   text-align: center;
 
   .title {
@@ -26,7 +30,10 @@
   }
 
   .link {
+    @include typography-mixin(var(--font-size-m), var(--line-height-m),var(--font-weight-bold))
+  ;
+
     margin: auto;
-    text-decoration: underline;
-  }
+    color: var(--color-accent-500);
+    text-decoration: underline;}
 }

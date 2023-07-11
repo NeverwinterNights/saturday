@@ -6,8 +6,8 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
     xmlSpace="preserve"
     width={16}
     height={16}
-    fill="#fff700"
-    stroke="#fff700"
+    fill="#E5AC39"
+    stroke="#E5AC39"
     strokeWidth={0}
     viewBox="0 0 473.5 473.5"
     {...props}

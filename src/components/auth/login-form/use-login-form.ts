@@ -12,9 +12,9 @@ const schema = z.object({
   rememberMe: z.boolean().optional(),
 })
 
-type Form = z.infer<typeof schema>
+export type LoginFormType = z.infer<typeof schema>
 export const useLoginForm = () => {
-  return useForm<Form>({
+  return useForm<LoginFormType>({
     resolver: zodResolver(schema),
     mode: 'onSubmit',
   })

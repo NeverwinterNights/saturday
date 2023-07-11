@@ -9,10 +9,10 @@ export const NewPasswordSchema = z.object({
     .nonempty('Enter Password')
     .min(8, 'Password must be at least 8 characters'),
 })
-type FormType = z.infer<typeof NewPasswordSchema>
+export type NewPasswordFormType = z.infer<typeof NewPasswordSchema>
 
 export const useNewPassword = () => {
-  return useForm<FormType>({
+  return useForm<NewPasswordFormType>({
     resolver: zodResolver(NewPasswordSchema),
     mode: 'onSubmit',
   })
