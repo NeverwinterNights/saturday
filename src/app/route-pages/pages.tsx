@@ -1,17 +1,19 @@
 import { Route, Routes } from 'react-router-dom'
 
 import { PATH } from '../../common'
-import { CheckEmailPage } from '../../features/auth/check-email'
-import { LoginPage } from '../../features/auth/login'
-import { NewPasswordPage } from '../../features/auth/new-password'
-import { ForgotPasswordPage } from '../../features/auth/password-recovery'
-import { RegisterPage } from '../../features/auth/register'
-import { Cards } from '../../features/cards'
-import { Learn } from '../../features/learn'
-import { Packs } from '../../features/packs'
-import { Profile } from '../../features/profile'
+import {
+  CheckEmailPage,
+  LoginPage,
+  NewPasswordPage,
+  ForgotPasswordPage,
+  RegisterPage,
+  Cards,
+  Learn,
+  Packs,
+  Profile,
+} from '../../features'
 
-import { PrivateRoute } from './private-route.tsx'
+import { PrivateRoute } from './private-route'
 
 export const Pages = () => {
   return (

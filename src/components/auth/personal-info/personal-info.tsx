@@ -6,7 +6,7 @@ import { z } from 'zod'
 
 import { Edit } from '../../../assets/icons/Edit.tsx'
 import { LogOutIcon } from '../../../assets/icons/LogOutIcon.tsx'
-import { Avatar } from '../../ui/avatar/avatar.tsx'
+import { Avatar } from '../../ui/avatar'
 import { Button } from '../../ui/button'
 import { ControlledInput } from '../../ui/controlled'
 import { Typography } from '../../ui/typography'

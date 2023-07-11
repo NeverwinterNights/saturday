@@ -3,7 +3,7 @@ import { ComponentProps, FC, ReactNode } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import { CloseModal } from '../../../assets/icons/CloseModal.tsx'
-import { Typography } from '../../../components/ui/typography'
+import { Typography } from '../typography'
 
 import s from './modal.module.scss'
 
@@ -12,14 +12,17 @@ export type ModalType = {
   title?: string
   renderCancelButton?: () => ReactNode
   renderActionButton?: () => ReactNode
+  actionButton: ReactNode
   onOpenChange?: (value: boolean) => void
   isOpen: boolean
+  onConfirm: () => void
 } & ComponentProps<'div'>
 
 export const Modal: FC<ModalType> = ({
   children,
   title,
   onOpenChange,
+  actionButton,
   renderActionButton,
   renderCancelButton,
   isOpen,
@@ -41,8 +44,17 @@ export const Modal: FC<ModalType> = ({
           <div className={s.content}>{children}</div>
 
           <div className={s.footer}>
-            <Dialog.Close>{renderCancelButton?.()}</Dialog.Close>
-            <Dialog.Close className={s.actionBtn}>{renderActionButton?.()}</Dialog.Close>
+            <Dialog.Close asChild>{renderCancelButton?.()}</Dialog.Close>
+            <Dialog.Close asChild className={s.actionBtn}>
+              {actionButton}
+            </Dialog.Close>
+
+            {/*{RenderCancelButton && (*/}
+            {/*  <RenderCancelButton onClick={onOpenChange ? e => onOpenChange(false) : () => {}} />*/}
+            {/*)}*/}
+            {/*<Dialog.Close asChild className={s.actionBtn}>*/}
+            {/*  {RenderActionButton && <RenderActionButton />}*/}
+            {/*</Dialog.Close>*/}
           </div>
         </Dialog.Content>
       </Dialog.Portal>

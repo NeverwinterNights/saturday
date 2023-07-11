@@ -1,1 +1,1 @@
-export * from './tab.tsx'
+export * from './tab'
