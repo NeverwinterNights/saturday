@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
 
-import { PATH } from '../common'
-import { Header } from '../components/ui/header'
-
-import { Pages } from './route-pages/pages.tsx'
+import { Pages } from '@/app/route-pages'
+import { PATH } from '@/common'
+import { Header } from '@/components/ui/header'
 
 export function App() {
   return (
