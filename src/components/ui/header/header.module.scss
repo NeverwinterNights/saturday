@@ -21,8 +21,8 @@
 }
 
 .userName {
-  cursor: auto;
-  text-decoration: dashed underline;
+  cursor: default;
+  border-bottom: 1px dashed;
 }
 
 .userEmail {
