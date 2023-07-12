@@ -18,6 +18,7 @@ export type InputPropsType = {
   error?: string
   onClickClearInput?: () => void
   searchInput?: boolean
+  width?: string
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = forwardRef<HTMLInputElement, InputPropsType>(
@@ -32,6 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
       placeholder,
       disabled,
       type,
+      width,
       label,
       ...restProps
     },
@@ -50,7 +52,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
     }
 
     return (
-      <div className={disabled ? styles.disabled : styles.main}>
+      <div className={clsx(styles.main, disabled && styles.disabled)} style={{ width }}>
         {label && (
           <div>
             <Typography className={styles.label} variant="body2">
@@ -93,15 +95,16 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
             </button>
           )}
         </div>
-        <div className={styles.errorContainer}>
-          {error && (
+
+        {error && (
+          <div className={styles.errorContainer}>
             <div style={{ margin: '4px 0' }}>
               <Typography style={{ color: 'var( --color-danger-300 )' }} variant="caption">
                 {error}
               </Typography>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     )
   }
