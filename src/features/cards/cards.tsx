@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/container'
+
 export const Cards = () => {
-  return <div>Cards</div>
+  return <Container>Cards</Container>
 }
