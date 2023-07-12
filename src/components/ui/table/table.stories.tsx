@@ -3,9 +3,11 @@ import { Meta } from '@storybook/react'
 import photo from '../../../assets/images/react.png'
 import { StarRating } from '../rating-stars'
 
+import { TableCardIcons } from './icons/tableCardIcons.tsx'
+import { TablePackIcons } from './icons/tableIcons.tsx'
 import { Table } from './table.tsx'
-import { TableCardIcons } from './tableCardIcons.tsx'
-import { TablePackIcons } from './tableIcons.tsx'
+
+import { ReadMore } from '@/components/ui/read-more'
 
 export default {
   title: 'Data Display/Table',
@@ -16,6 +18,7 @@ const packsData = [
   {
     id: '01',
     name: 'Pack Name',
+    deckCover: true,
     card: '4',
     lastUpdate: '18.03.2021',
     createdBy: 'Ivan Ivanov',
@@ -23,6 +26,7 @@ const packsData = [
   {
     id: '02',
     name: 'Pack Name',
+    deckCover: false,
     card: '4',
     lastUpdate: '18.03.2021',
     createdBy: 'Ivan Ivanov',
@@ -30,6 +34,7 @@ const packsData = [
   {
     id: '03',
     name: 'Pack Name',
+    deckCover: true,
     card: '4',
     lastUpdate: '18.03.2021',
     createdBy: 'Ivan Ivanov',
@@ -64,7 +69,7 @@ export const PacksTable = {
             <Table.Row key={item.id}>
               <Table.Cell>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <img src={photo} alt="" />
+                  {item.deckCover && <img src={photo} alt="" />}
                   {item.name}
                 </div>
               </Table.Cell>
@@ -86,7 +91,8 @@ const cardsData = [
   {
     id: '01',
     question: 'How "This" works in JavaScript?',
-    answer: 'This is how "This" works in JavaScript',
+    answer:
+      'This is how "This" works in JavaScriptin JavaScriptin JavaScriptin JavaScriptin JavaScriptin JavaScriptin JavaScriptin JavaScript',
     lastUpdate: '18.03.2021',
     grade: 1,
   },
@@ -133,7 +139,9 @@ export const MyCardsTable = {
           {cardsData.map(item => (
             <Table.Row key={item.id}>
               <Table.Cell>{item.question}</Table.Cell>
-              <Table.Cell>{item.answer}</Table.Cell>
+              <Table.Cell>
+                <ReadMore text={item.answer} maxLength={38} />
+              </Table.Cell>
               <Table.Cell>{item.lastUpdate}</Table.Cell>
               <Table.Cell>
                 <StarRating value={item.grade} />

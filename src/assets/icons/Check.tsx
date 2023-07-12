@@ -1,5 +1,5 @@
 type CheckProps = {
-  disabled: boolean
+  disabled?: boolean
 }
 
 export const Check = ({ disabled }: CheckProps) => (

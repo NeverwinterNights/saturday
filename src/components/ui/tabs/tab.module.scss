@@ -79,6 +79,7 @@
     background: var(--color-dark-700);
     border-color: var(--color-dark-300);
   }
+
   &.disabled {
     pointer-events: none;
     color: var(--color-dark-300);
@@ -91,7 +92,7 @@
   display: block;
   font-size: var(--font-size-s);
   line-height: var(--line-height-m);
-  color: var(--color-dark-100);
+  color: var(--color-light-100);
 
   &.disabled {
     color: var(--color-dark-300);

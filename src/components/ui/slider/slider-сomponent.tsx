@@ -14,7 +14,7 @@ type SliderPropsType = {
   max?: number
 }
 
-export const SliderOmponent = ({
+export const SliderComponent = ({
   defaultValue,
   min = 0,
   max = 100,

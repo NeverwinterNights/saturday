@@ -11,7 +11,7 @@ export type IconProps = {
   svgProps?: React.SVGProps<SVGSVGElement>
 } & Omit<React.HTMLProps<HTMLSpanElement>, 'color' | 'size'>
 
-export const IconWrapper: React.FC<{ icon: React.ReactNode } & IconProps> = ({
+export const IconWrapper: React.FC<{ icon?: React.ReactNode } & IconProps> = ({
   icon,
   color: colorProp,
   size: sizeProp,

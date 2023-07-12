@@ -1,7 +1,7 @@
 import { SVGProps } from 'react'
 
 type PropsType = {
-  size: number
+  size?: number
 } & SVGProps<SVGSVGElement>
 
 export const ArrowDownIcon = ({ size, ...props }: PropsType) => (
