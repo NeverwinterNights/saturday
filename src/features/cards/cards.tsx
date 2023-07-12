@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import s from './cards.module.scss'
 
 import { ArrowLeft } from '@/assets/icons/ArrowLeft.tsx'
-import { PATH } from '@/common'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import { Typography } from '@/components/ui/typography'
+import { CardsTable } from '@/features/cards/cards-table'
 
 export const Cards = () => {
-  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState([s])
   const navigate = useNavigate()
 
   return (
@@ -23,7 +23,7 @@ export const Cards = () => {
       <Typography variant={'large'}>Name Pack</Typography>
 
       {cards.length ? (
-        <div>Таблица</div>
+        <CardsTable />
       ) : (
         <div className={s.empty}>
           <Typography variant={'body1'}>
