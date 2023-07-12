@@ -16,6 +16,7 @@ const packsData = [
   {
     id: '01',
     name: 'Pack Name',
+    deckCover: true,
     card: '4',
     lastUpdate: '18.03.2021',
     createdBy: 'Ivan Ivanov',
@@ -23,6 +24,7 @@ const packsData = [
   {
     id: '02',
     name: 'Pack Name',
+    deckCover: false,
     card: '4',
     lastUpdate: '18.03.2021',
     createdBy: 'Ivan Ivanov',
@@ -30,6 +32,7 @@ const packsData = [
   {
     id: '03',
     name: 'Pack Name',
+    deckCover: true,
     card: '4',
     lastUpdate: '18.03.2021',
     createdBy: 'Ivan Ivanov',
@@ -64,7 +67,7 @@ export const PacksTable = {
             <Table.Row key={item.id}>
               <Table.Cell>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <img src={photo} alt="" />
+                  {item.deckCover && <img src={photo} alt="" />}
                   {item.name}
                 </div>
               </Table.Cell>
