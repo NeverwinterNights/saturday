@@ -3,9 +3,9 @@ import { Meta } from '@storybook/react'
 import photo from '../../../assets/images/react.png'
 import { StarRating } from '../rating-stars'
 
+import { TableCardIcons } from './icons/tableCardIcons.tsx'
+import { TablePackIcons } from './icons/tableIcons.tsx'
 import { Table } from './table.tsx'
-import { TableCardIcons } from './tableCardIcons.tsx'
-import { TablePackIcons } from './tableIcons.tsx'
 
 export default {
   title: 'Data Display/Table',
