@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/container'
+
 export const Profile = () => {
-  return <div>Profile</div>
+  return <Container>Profile</Container>
 }

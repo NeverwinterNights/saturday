@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/container'
+
 export const Packs = () => {
-  return <div>Packs</div>
+  return <Container>Packs</Container>
 }

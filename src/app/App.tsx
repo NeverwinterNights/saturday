@@ -12,7 +12,17 @@ export function App() {
         onSignOut={() => alert('Вы вышли!!')}
         onProfileClick={() => alert('Переходим в профиль')}
       />
-      <div style={{ display: 'flex', color: 'white', gap: 20, justifyContent: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          color: 'white',
+          gap: 20,
+          position: 'absolute',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          top: '20px',
+        }}
+      >
         <Link to={PATH.LOGIN}>Login</Link>
         <Link to={PATH.REGISTRATION}>Register</Link>
         <Link to={PATH.NEW_PASSWORD}>New password</Link>
