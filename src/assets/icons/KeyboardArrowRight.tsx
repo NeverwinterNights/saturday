@@ -1,4 +1,4 @@
-import { IconProps, IconWrapper } from './IconWrapper.tsx'
+import { IconProps, IconWrapper } from '@/assets/icons/IconWrapper.tsx'
 
 const KeyboardArrowRight = (allProps: IconProps) => {
   const { svgProps: props, ...restProps } = allProps
