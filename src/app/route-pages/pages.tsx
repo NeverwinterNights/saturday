@@ -1,19 +1,21 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { PATH } from '../../common'
 import {
+  Cards,
   CheckEmailPage,
+  ForgotPasswordPage,
+  Learn,
   LoginPage,
   NewPasswordPage,
-  ForgotPasswordPage,
-  RegisterPage,
-  Cards,
-  Learn,
   Packs,
   Profile,
+  RegisterPage,
 } from '../../features'
 
 import { PrivateRoute } from './private-route'
+
+import { ErrorPage } from '@/components/ui/error/error-page.tsx'
 
 export const Pages = () => {
   return (
@@ -23,7 +25,8 @@ export const Pages = () => {
       <Route path={PATH.PASSWORD_RECOVERY} element={<ForgotPasswordPage />} />
       <Route path={PATH.CHECK_EMAIL} element={<CheckEmailPage />} />
       <Route path={PATH.NEW_PASSWORD} element={<NewPasswordPage />} />
-      <Route path={PATH.ERROR} element={<h1>error 404</h1>} />
+      <Route path={PATH.ERROR} element={<ErrorPage />} />
+      <Route path={'*'} element={<Navigate to={PATH.ERROR} />} />
 
       <Route element={<PrivateRoute />}>
         <Route index path={'/'} element={<Packs />} />
