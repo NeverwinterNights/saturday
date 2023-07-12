@@ -1,0 +1,20 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-bottom: 12px;
+
+  //padding: 12px 24px 36px;
+
+  background-color: var(--color-dark-700);
+
+  //border: 1px solid var(--color-dark-500);
+  //border-top: 1px solid var(--color-dark-700);
+  //border-radius: 0 0 2px 2px;
+
+  .actionBtn {
+    justify-content: end;
+  }
+}
