@@ -7,6 +7,8 @@ import { TableCardIcons } from './icons/tableCardIcons.tsx'
 import { TablePackIcons } from './icons/tableIcons.tsx'
 import { Table } from './table.tsx'
 
+import { ReadMore } from '@/components/ui/read-more'
+
 export default {
   title: 'Data Display/Table',
   component: Table.Root,
@@ -89,7 +91,8 @@ const cardsData = [
   {
     id: '01',
     question: 'How "This" works in JavaScript?',
-    answer: 'This is how "This" works in JavaScript',
+    answer:
+      'This is how "This" works in JavaScriptin JavaScriptin JavaScriptin JavaScriptin JavaScriptin JavaScriptin JavaScriptin JavaScript',
     lastUpdate: '18.03.2021',
     grade: 1,
   },
@@ -136,7 +139,9 @@ export const MyCardsTable = {
           {cardsData.map(item => (
             <Table.Row key={item.id}>
               <Table.Cell>{item.question}</Table.Cell>
-              <Table.Cell>{item.answer}</Table.Cell>
+              <Table.Cell>
+                <ReadMore text={item.answer} maxLength={38} />
+              </Table.Cell>
               <Table.Cell>{item.lastUpdate}</Table.Cell>
               <Table.Cell>
                 <StarRating value={item.grade} />
