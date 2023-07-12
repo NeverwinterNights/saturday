@@ -1,0 +1,35 @@
+
+.root {
+  .backBtn {
+    cursor: pointer;
+
+    display: flex;
+    gap: 6px;
+    align-items: center;
+
+    max-width: 137px;
+    margin-top: 24px;
+    margin-bottom: 33px;
+
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+
+  .empty {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 70px;
+
+    p {
+      color: var(--color-dark-100);
+    }
+
+  }
+}
