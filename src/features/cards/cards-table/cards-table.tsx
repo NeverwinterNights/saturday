@@ -1,6 +1,7 @@
 import s from './cards-table.module.scss'
 
 import { StarRating } from '@/components/ui/rating-stars'
+import { ReadMore } from '@/components/ui/read-more'
 import { TableCardIcons } from '@/components/ui/table/icons/tableCardIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 
@@ -20,7 +21,8 @@ export const CardsTable = () => {
     {
       id: '02',
       question: 'How "This" works in JavaScript?',
-      answer: 'This is how "This" works in JavaScript',
+      answer:
+        'This is how "This" works in JavaScript in JavaScript in JavaScript in JavaScript in JavaScript',
       lastUpdate: '18.03.2021',
       userId: 'lox',
       grade: 2,
@@ -71,7 +73,9 @@ export const CardsTable = () => {
           {cardsData.map(item => (
             <Table.Row key={item.id}>
               <Table.Cell>{item.question}</Table.Cell>
-              <Table.Cell>{item.answer}</Table.Cell>
+              <Table.Cell>
+                <ReadMore text={item.answer} maxLength={60} />
+              </Table.Cell>
               <Table.Cell>{item.lastUpdate}</Table.Cell>
               <Table.Cell>
                 <StarRating value={item.grade} />
