@@ -1,12 +1,13 @@
 import { memo } from 'react'
 
-import { ControlledInput } from '../../ui/controlled'
-import { ControlledCheckbox } from '../../ui/controlled/controlled-checkbox.tsx'
 import { Modal } from '../../ui/modal'
 import { ModalControl } from '../modal-control'
 
 import styles from './add-edit-pack.module.scss'
 import { FormType, useAddEditPack } from './use-add-new-pack.ts'
+
+import { ControlledInput } from '@/components/ui/controlled'
+import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox.tsx'
 
 type AddEditPackPropsType = {
   isOpen: boolean

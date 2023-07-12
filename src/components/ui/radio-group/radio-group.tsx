@@ -2,9 +2,10 @@ import { FC } from 'react'
 
 import * as Radio from '@radix-ui/react-radio-group'
 
-import { Typography } from '../../../components/ui/typography'
-
 import s from './radio-group.module.scss'
+
+import { Typography } from '@/components/ui/typography'
+
 type Option = {
   label: string
   value: string
