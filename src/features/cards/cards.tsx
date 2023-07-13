@@ -16,7 +16,7 @@ import { CardsTable } from '@/features/cards/cards-table'
 
 export const Cards = () => {
   const [inputValue, setInputValue] = useState('')
-  const [cards, setCards] = useState([{}])
+  const [cards] = useState([{}])
   const myPack = true
   const packsCover = ''
   const navigate = useNavigate()
