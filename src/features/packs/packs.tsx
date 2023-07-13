@@ -21,12 +21,12 @@ export const Packs = () => {
   return (
     <Container className={s.root}>
       <div className={s.title}>
-        <Typography>Packs list</Typography>
+        <Typography variant={'large'}>Packs list</Typography>
         <Button>Add New Pack</Button>
       </div>
       <div className={s.filter}>
         <Input placeholder={'Input search'} width={'300px'} searchInput />
-        <Tab tabs={options} label={'Show packs cards'} />
+        <Tab tabs={options} label={'Show packs cards'} defaultValue={'all'} />
         <SliderComponent defaultValue={value} value={value} setValue={e => console.log(e)} />
         <Button variant={'secondary'}>
           <Trash />
