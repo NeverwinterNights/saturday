@@ -1,10 +1,7 @@
-import { memo } from 'react'
-
 import { ControlledInput } from '../../ui/controlled'
 import { Modal } from '../../ui/modal'
-import { Select } from '../../ui/select'
-import { RenderActionButton } from '../cards-buttons/RenderActionButton.tsx'
-import { RenderCancelButton } from '../cards-buttons/RenderCancelButton.tsx'
+import { Select, SelectProps } from '../../ui/select'
+import { ModalControl } from '../modal-control'
 
 import styles from './add-edit-new-card.module.scss'
 import { FormType, useAddEditCard } from './use-add-new-card.ts'
@@ -18,63 +15,60 @@ type AddEditNewCardPropsType = {
   defaultAnswer?: string
   namePack?: string
   onClickDataHandler: (value: FormType) => void
-  selectValue: string
-  setSelectValue: (value: string) => void
-  selectLabel: string
-}
+} & SelectProps
 
-export const AddEditNewCard = memo(
-  ({
-    onOpenChange,
-    buttonName,
-    // namePack,
-    title,
-    selectValue,
-    selectLabel,
-    isOpen,
-    defaultQuestion,
-    defaultAnswer,
-    setSelectValue,
-    onClickDataHandler,
-  }: AddEditNewCardPropsType) => {
-    const { handleSubmit, control } = useAddEditCard(defaultQuestion, defaultAnswer)
+export const AddEditNewCard = ({
+  onOpenChange,
+  buttonName,
+  title,
+  isOpen,
+  defaultQuestion,
+  defaultAnswer,
+  options,
+  onChange,
+  value,
+  onClickDataHandler,
+}: AddEditNewCardPropsType) => {
+  const { handleSubmit, control } = useAddEditCard(defaultQuestion, defaultAnswer)
 
-    const onSubmit = handleSubmit(data => {
-      onClickDataHandler(data)
-      onOpenChange?.(false)
-    })
+  const onSubmit = handleSubmit(data => {
+    onClickDataHandler(data)
+    onOpenChange?.(false)
+  })
 
-    return (
-      <>
-        <Select
-          label={selectLabel}
-          options={[]}
-          value={selectValue}
-          width={'100%'}
-          onChange={setSelectValue}
-        />
-        <Modal
-          renderActionButton={() => (
-            <RenderActionButton onClick={onSubmit}>{buttonName}</RenderActionButton>
-          )}
-          renderCancelButton={RenderCancelButton}
-          onOpenChange={onOpenChange}
-          title={title}
-          isOpen={isOpen}
-          onConfirm={onSubmit}
-        >
-          <div className={styles.content}>
-            <form onSubmit={onSubmit}>
+  const closedModal = () => {
+    onOpenChange?.(false)
+  }
+
+  return (
+    <>
+      <Modal onOpenChange={onOpenChange} title={title} isOpen={isOpen}>
+        <div className={styles.content}>
+          <div className={styles.selectWrap}>
+            <Select
+              placeholder={value}
+              variant="primary"
+              className={styles.select}
+              label={'Choose a question format'}
+              options={options}
+              value={value}
+              width={'100%'}
+              onChange={onChange}
+            />
+          </div>
+          <form onSubmit={onSubmit}>
+            <div className={styles.info}>
               <div className={styles.input}>
                 <ControlledInput label={'Question'} name={'question'} control={control} />
               </div>
               <div className={styles.input}>
                 <ControlledInput label={'Answer'} name={'answer'} control={control} />
               </div>
-            </form>
-          </div>
-        </Modal>
-      </>
-    )
-  }
-)
+            </div>
+            <ModalControl closedModal={closedModal} title={buttonName} onSubmit={onSubmit} />
+          </form>
+        </div>
+      </Modal>
+    </>
+  )
+}

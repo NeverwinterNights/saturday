@@ -71,6 +71,9 @@
 }
 
 .content {
+  position: relative;
+  z-index: 500;
+
   display: flex;
 
   width: var(--radix-select-trigger-width);

@@ -1,13 +1,13 @@
 import { memo } from 'react'
 
-import { ControlledInput } from '../../ui/controlled'
-import { ControlledCheckbox } from '../../ui/controlled/controlled-checkbox.tsx'
 import { Modal } from '../../ui/modal'
-import { RenderActionButton } from '../cards-buttons/RenderActionButton.tsx'
-import { RenderCancelButton } from '../cards-buttons/RenderCancelButton.tsx'
+import { ModalControl } from '../modal-control'
 
 import styles from './add-edit-pack.module.scss'
 import { FormType, useAddEditPack } from './use-add-new-pack.ts'
+
+import { ControlledInput } from '@/components/ui/controlled'
+import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox.tsx'
 
 type AddEditPackPropsType = {
   isOpen: boolean
@@ -36,16 +36,13 @@ export const AddEditPack = memo(
       onOpenChange?.(false)
     })
 
+    const closedModal = () => {
+      onOpenChange?.(false)
+    }
+
     return (
       <>
-        <Modal
-          renderActionButton={() => <RenderActionButton title={buttonName} onclick={onSubmit} />}
-          renderCancelButton={RenderCancelButton}
-          onOpenChange={onOpenChange}
-          title={title}
-          isOpen={isOpen}
-          onConfirm={onSubmit}
-        >
+        <Modal onOpenChange={onOpenChange} title={title} isOpen={isOpen}>
           <div className={styles.content}>
             <form onSubmit={onSubmit}>
               <div className={styles.input}>
@@ -59,6 +56,7 @@ export const AddEditPack = memo(
                   control={control}
                 />
               </div>
+              <ModalControl closedModal={closedModal} onSubmit={onSubmit} title={buttonName} />
             </form>
           </div>
         </Modal>

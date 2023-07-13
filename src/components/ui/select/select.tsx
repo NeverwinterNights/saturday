@@ -4,11 +4,11 @@ import * as SelectRadix from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
 import { ArrowDownIcon } from '../../../assets/icons/ArrowDown.tsx'
-import { Typography } from '../../../components/ui/typography'
+import { Typography } from '../typography'
 
 import s from './select.module.scss'
 
-type Option = { label: string; value: string }
+export type Option = { label: string; value: string }
 
 type ConditionalMultipleProps = {
   multiple?: true

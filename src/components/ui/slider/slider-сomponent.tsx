@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 import * as Slider from '@radix-ui/react-slider'
 
@@ -25,23 +25,24 @@ export const SliderComponent = ({
     setValue(value)
   }
 
-  const onValueChange = (event: ChangeEvent<HTMLInputElement>, index: number) => {
-    setValue(state => {
-      return index === 0
-        ? [+event.currentTarget.value, state[1]]
-        : [state[0], +event.currentTarget.value]
-    })
-  }
+  // const onValueChange = (event: ChangeEvent<HTMLInputElement>, index: number) => {
+  //   setValue(state => {
+  //     return index === 0
+  //       ? [+event.currentTarget.value, state[1]]
+  //       : [state[0], +event.currentTarget.value]
+  //   })
+  // }
 
   return (
     <form>
       <div className={styles.container}>
         <div>
           <Input
-            inputTextClassName={styles.textInp}
+            inputTextClassName={styles.input}
             className={styles.value}
             value={value[0]}
-            onChange={event => onValueChange(event, 0)}
+            // onChange={event => onValueChange(event, 0)}
+            onChange={() => {}}
           />
         </div>
         <Slider.Root
@@ -63,10 +64,11 @@ export const SliderComponent = ({
         </Slider.Root>
         <div>
           <Input
-            inputTextClassName={styles.textInp}
+            inputTextClassName={styles.input}
             className={styles.value}
             value={value[1]}
-            onChange={event => onValueChange(event, 1)}
+            // onChange={event => onValueChange(event, 1)}
+            onChange={() => {}}
           />
         </div>
       </div>
