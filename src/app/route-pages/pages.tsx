@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { PATH } from '../../common'
+import { PrivateRoute } from '@/app'
+import { PATH } from '@/common'
+import { ErrorPage } from '@/components/ui/error/error-page.tsx'
 import {
   Cards,
   CheckEmailPage,
@@ -11,11 +13,7 @@ import {
   Packs,
   Profile,
   RegisterPage,
-} from '../../features'
-
-import { PrivateRoute } from './private-route'
-
-import { ErrorPage } from '@/components/ui/error/error-page.tsx'
+} from '@/features'
 
 export const Pages = () => {
   return (
