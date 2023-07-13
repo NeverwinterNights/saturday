@@ -30,3 +30,21 @@ export const SliderRangeController: Story = {
     defaultValue: [0, 15],
   },
 }
+export const SliderRangeControllerWithLabel: Story = {
+  render: () => {
+    const [value, setValue] = useState<[number, number]>([0, 75])
+
+    return (
+      <SliderComponent
+        defaultValue={value}
+        label={'Number of cards'}
+        setValue={setValue}
+        value={value}
+      />
+    )
+  },
+  args: {
+    value: [0, 75],
+    defaultValue: [0, 15],
+  },
+}
