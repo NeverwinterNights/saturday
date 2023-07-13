@@ -10,6 +10,8 @@ html {
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 a,
@@ -29,7 +31,6 @@ option {
 input:-webkit-autofill {
   -webkit-background-clip: text;
 }
-
 
 body {
   margin: 0;

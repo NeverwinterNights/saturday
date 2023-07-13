@@ -1,6 +1,4 @@
 @mixin typography-mixin($fS, $lH, $fW) {
-  margin: 0;
-
   font-family: var(--font-family-primary);
   font-size: $fS;
   font-weight: $fW;
@@ -17,6 +15,7 @@
 .inherit {
   color: inherit;
 }
+
 
 .h1 {
   @include typography-mixin(var(--font-size-xl), var(--line-height-l), var(--font-weight-bold));
