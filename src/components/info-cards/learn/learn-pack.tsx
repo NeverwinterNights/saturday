@@ -30,35 +30,29 @@ export const LearnPack = ({
 
   return (
     <div className={styles.wrap}>
-      <div className={styles.title}>
-        <Typography variant="large">Learn {packName}</Typography>
-      </div>
-      <div className={styles.question}>
-        <Typography variant="body1">
-          <Typography as="span" variant="subtitle2">
-            Question:{' '}
-          </Typography>
-          {question}
+      <Typography className={styles.title} variant="large">
+        Learn {packName}
+      </Typography>
+      <Typography className={styles.question} variant="body1">
+        <Typography as="span" variant="subtitle2">
+          Question:{' '}
         </Typography>
-      </div>
-      <div style={{ marginBottom: '35px' }}>
-        <Typography color="secondary" className={styles.efforts} variant="body2">
-          Количество попыток ответов на вопрос: {numberEfforts}
-        </Typography>
-      </div>
+        {question}
+      </Typography>
+      <Typography className={styles.efforts} color="secondary" variant="body2">
+        Количество попыток ответов на вопрос: {numberEfforts}
+      </Typography>
       {isOpen && (
         <div>
-          <div style={{ marginBottom: '12px' }}>
-            <Typography variant="body1">
-              <Typography as="span" variant="subtitle2">
-                Answer:{' '}
-              </Typography>
-              {answer}
+          <Typography className={styles.mb} variant="body1">
+            <Typography as="span" variant="subtitle2">
+              Answer:{' '}
             </Typography>
-          </div>
-          <div style={{ marginBottom: '12px' }}>
-            <Typography variant="subtitle1">Rate yourself:</Typography>
-          </div>
+            {answer}
+          </Typography>
+          <Typography className={styles.mb} variant="subtitle1">
+            Rate yourself:
+          </Typography>
           <div className={styles.radio}>
             <RadioGroup
               onValueChange={onValueChange}
