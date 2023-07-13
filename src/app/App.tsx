@@ -17,10 +17,10 @@ export function App() {
           display: 'flex',
           color: 'white',
           gap: 20,
-          position: 'absolute',
+          position: 'fixed',
           left: '50%',
           transform: 'translateX(-50%)',
-          top: '20px',
+          bottom: '20px',
         }}
       >
         <Link to={PATH.LOGIN}>Login</Link>

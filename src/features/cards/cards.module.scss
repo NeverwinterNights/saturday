@@ -17,6 +17,26 @@
     }
   }
 
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  .namePack {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .cover {
+    margin-bottom: 25px;
+  }
+
+  .input {
+    margin-bottom: 24px;
+  }
 
   .empty {
     display: flex;
