@@ -19,39 +19,65 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const MainInput: Story = {
-  args: {
-    value: 'Simple input',
-    label: 'Click here',
-    disabled: false,
-  },
-}
+// export const MainInput: Story = {
+//   args: {
+//     value: 'Simple input',
+//     label: 'Click here',
+//     disabled: false,
+//   },
+// }
 export const InputPassword: Story = {
-  args: {
-    value: 'Simple input',
-    label: 'Click here',
-    type: 'password',
-    disabled: false,
-  },
-}
-
-export const InputSearch: Story = {
   render: () => {
     const [value, setValue] = useState('')
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
       setValue(event.currentTarget.value)
     }
 
-    return <Input searchInput={true} onChange={onChange} value={value} />
+    return <Input type={'password'} onChange={onChange} value={value} />
   },
   args: {
     value: '',
     label: 'Click here',
-    type: 'text',
+    type: 'password',
     disabled: false,
   },
 }
+
+// export const InputSearch: Story = {
+//   render: () => {
+//     const [value, setValue] = useState('')
+//     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+//       setValue(event.currentTarget.value)
+//     }
+//
+//     return <Input searchInput={true} onChange={onChange} value={value} />
+//   },
+//   args: {
+//     value: '',
+//     label: 'Click here',
+//     type: 'text',
+//     disabled: false,
+//   },
+// }
 export const InputWithPlaceHolderAndSearch: Story = {
+  render: () => {
+    const [value, setValue] = useState('')
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setValue(event.currentTarget.value)
+    }
+    const onClickClearInput = () => {
+      setValue('')
+    }
+
+    return (
+      <Input
+        searchInput={true}
+        onChange={onChange}
+        value={value}
+        onClickClearInput={onClickClearInput}
+      />
+    )
+  },
   args: {
     value: 'Simple input',
     label: 'Click here',

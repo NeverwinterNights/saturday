@@ -3,12 +3,14 @@ import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 import { clsx } from 'clsx'
 
 // import { ClosedInputIcon } from '../../../assets/icons/CloseInputIcon.tsx'
-import { Eye } from '../../../assets/icons/Eye.tsx'
-import { EyeClosed } from '../../../assets/icons/EyeClosed.tsx'
-import { SearchIcon } from '../../../assets/icons/SearchIcon.tsx'
 import { Typography } from '../typography'
 
 import styles from './input.module.scss'
+
+import { ClosedInputIcon } from '@/assets/icons/CloseInputIcon.tsx'
+import { Eye } from '@/assets/icons/Eye.tsx'
+import { EyeClosed } from '@/assets/icons/EyeClosed.tsx'
+import { SearchIcon } from '@/assets/icons/SearchIcon.tsx'
 
 export type InputPropsType = {
   label?: string
@@ -79,11 +81,11 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
             style={error ? { color: 'var( --color-danger-300 )' } : {}}
             {...restProps}
           />
-          {/*{searchInput && restProps?.value?.toString()?.length > 0 && (*/}
-          {/*  <span className={styles.closedImp} onClick={onClearInput}>*/}
-          {/*    <ClosedInputIcon />*/}
-          {/*  </span>*/}
-          {/*)}*/}
+          {searchInput && value.toString()?.length > 0 && (
+            <span className={styles.closedImp} onClick={onClickClearInput}>
+              <ClosedInputIcon />
+            </span>
+          )}
 
           {(type === 'password' || iconVisible === 'password') && (
             <button disabled={disabled} className={styles.fakebutton} onClick={iconClickHandler}>

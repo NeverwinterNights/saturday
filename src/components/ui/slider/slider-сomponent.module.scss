@@ -33,8 +33,10 @@
 }
 
 .SliderThumb {
-  display: block;
   cursor: pointer;
+
+  display: block;
+
   width: 16px;
   height: 16px;
 
@@ -48,7 +50,8 @@
 }
 
 .SliderThumb:focus {
-  //outline: none;
+  outline: none;
+
   //box-shadow: 0 0 0 5px black;
 }
 
@@ -65,7 +68,12 @@
 
   width: 36px;
   height: 36px;
+  padding: 0;
 
   border: 1px solid var(--color-dark-300);
   border-radius: 2px;
+}
+
+.input {
+  text-align: center;
 }
