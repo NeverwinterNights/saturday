@@ -10,6 +10,7 @@ import { Dropdown, DropdownItemWithIcon } from '.'
 const meta = {
   title: 'Components/Dropdown',
   component: Dropdown,
+  tags: ['autodocs'],
 } satisfies Meta<typeof Dropdown>
 
 export default meta
