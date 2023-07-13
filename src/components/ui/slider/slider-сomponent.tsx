@@ -6,12 +6,15 @@ import { Input } from '../input'
 
 import styles from './slider-сomponent.module.scss'
 
+import { Typography } from '@/components/ui/typography'
+
 type SliderPropsType = {
   defaultValue: [number, number]
   value: [number, number]
   setValue: Dispatch<SetStateAction<[number, number]>>
   min?: number
   max?: number
+  label?: string
 }
 
 export const SliderComponent = ({
@@ -19,6 +22,7 @@ export const SliderComponent = ({
   min = 0,
   max = 100,
   value,
+  label,
   setValue,
 }: SliderPropsType) => {
   const onSliderChange = (value: [number, number]) => {
@@ -36,40 +40,45 @@ export const SliderComponent = ({
   return (
     <form>
       <div className={styles.container}>
-        <div>
-          <Input
-            inputTextClassName={styles.input}
-            className={styles.value}
-            value={value[0]}
-            // onChange={event => onValueChange(event, 0)}
-            onChange={() => {}}
-          />
+        <div className={styles.label}>
+          <Typography variant="body2">{label}</Typography>
         </div>
-        <Slider.Root
-          min={min}
-          max={max}
-          onValueChange={onSliderChange}
-          className={styles.SliderRoot}
-          defaultValue={defaultValue}
-          step={1}
-          minStepsBetweenThumbs={1}
-          value={value}
-        >
-          <Slider.Track className={styles.SliderTrack}>
-            <Slider.Range className={styles.SliderRange} />
-          </Slider.Track>
+        <div className={styles.main}>
+          <div>
+            <Input
+              inputTextClassName={styles.input}
+              className={styles.value}
+              value={value[0]}
+              // onChange={event => onValueChange(event, 0)}
+              onChange={() => {}}
+            />
+          </div>
+          <Slider.Root
+            min={min}
+            max={max}
+            onValueChange={onSliderChange}
+            className={styles.SliderRoot}
+            defaultValue={defaultValue}
+            step={1}
+            minStepsBetweenThumbs={1}
+            value={value}
+          >
+            <Slider.Track className={styles.SliderTrack}>
+              <Slider.Range className={styles.SliderRange} />
+            </Slider.Track>
 
-          <Slider.Thumb className={styles.SliderThumb} aria-label="Start" />
-          <Slider.Thumb className={styles.SliderThumb} aria-label="End" />
-        </Slider.Root>
-        <div>
-          <Input
-            inputTextClassName={styles.input}
-            className={styles.value}
-            value={value[1]}
-            // onChange={event => onValueChange(event, 1)}
-            onChange={() => {}}
-          />
+            <Slider.Thumb className={styles.SliderThumb} aria-label="Start" />
+            <Slider.Thumb className={styles.SliderThumb} aria-label="End" />
+          </Slider.Root>
+          <div>
+            <Input
+              inputTextClassName={styles.input}
+              className={styles.value}
+              value={value[1]}
+              // onChange={event => onValueChange(event, 1)}
+              onChange={() => {}}
+            />
+          </div>
         </div>
       </div>
     </form>
