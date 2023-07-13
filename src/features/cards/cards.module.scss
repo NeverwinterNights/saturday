@@ -17,6 +17,20 @@
     }
   }
 
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  .cover {
+    margin-bottom: 25px;
+  }
+
+  .input {
+    margin-bottom: 24px;
+  }
 
   .empty {
     display: flex;
