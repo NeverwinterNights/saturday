@@ -2,16 +2,23 @@ import { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
+import cover from '../../assets/images/packs_cover.png'
+
 import s from './cards.module.scss'
 
 import { ArrowLeft } from '@/assets/icons/ArrowLeft.tsx'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
+import { Image } from '@/components/ui/image/image.tsx'
+import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
 import { CardsTable } from '@/features/cards/cards-table'
 
 export const Cards = () => {
-  const [cards, setCards] = useState([s])
+  const [inputValue, setInputValue] = useState('')
+  const [cards] = useState([{}])
+  const myPack = true
+  const packsCover = ''
   const navigate = useNavigate()
 
   return (
@@ -20,8 +27,18 @@ export const Cards = () => {
         <ArrowLeft />
         Back to Packs List
       </Typography>
-      <Typography variant={'large'}>Name Pack</Typography>
-
+      <div className={s.title}>
+        <Typography variant={'large'}>Name Pack</Typography>
+        {myPack ? <Button>Add New Card</Button> : <Button>Learn to Pack</Button>}
+      </div>
+      <Image src={packsCover || cover} height={107} width={170} className={s.cover} />
+      <Input
+        searchInput
+        placeholder={'Input search'}
+        className={s.input}
+        value={inputValue}
+        onChange={e => setInputValue(e.currentTarget.value)}
+      />
       {cards.length ? (
         <CardsTable />
       ) : (

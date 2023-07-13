@@ -30,7 +30,7 @@ export const Packs = () => {
         <SliderComponent defaultValue={value} value={value} setValue={e => console.log(e)} />
         <Button variant={'secondary'}>
           <Trash />
-          Clear Filter
+          <Typography variant={'subtitle2'}>Clear Filter</Typography>
         </Button>
       </div>
       <PacksTable />
