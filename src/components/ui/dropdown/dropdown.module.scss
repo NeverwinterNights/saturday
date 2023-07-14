@@ -63,11 +63,14 @@ button {
   cursor: pointer;
 
   display: flex;
-  align-items: center;
   gap: 6px;
+  align-items: center;
+
   padding: 12px 0;
+
   font-size: 14px;
   line-height: 24px;
+
   outline: none;
 
   &:hover,
