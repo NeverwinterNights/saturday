@@ -1,0 +1,8 @@
+.root {
+  & th {
+    &[data-sortable='true'] {
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+}
