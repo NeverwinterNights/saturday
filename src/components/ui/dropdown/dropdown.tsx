@@ -3,10 +3,11 @@ import { ComponentPropsWithoutRef, CSSProperties, FC, ReactNode, useState } from
 import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu'
 import { clsx } from 'clsx'
 
-import { More } from '../../../assets/icons/More.tsx'
 import { Typography } from '../typography'
 
 import s from './dropdown.module.scss'
+
+import { More } from '@/assets/icons/More.tsx'
 
 export type DropdownProps = {
   children: ReactNode
