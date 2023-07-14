@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import { PATH } from '../../../common'
 import { Button } from '../../ui/button'
 import { Card } from '../../ui/card'
 import { ControlledInput } from '../../ui/controlled'
@@ -9,6 +8,8 @@ import { Typography } from '../../ui/typography'
 
 import s from './login-form.module.scss'
 import { LoginFormType, useLoginForm } from './use-login-form.ts'
+
+import { PATH } from '@/common'
 
 type PropsType = {
   onSubmitHandler: (data: LoginFormType) => void
