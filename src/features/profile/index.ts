@@ -1,1 +1,1 @@
-export * from './profile.tsx'
+export * from './components'
