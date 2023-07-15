@@ -12,10 +12,8 @@ export type Sort = {
 export type TableHeaderType = {
   key: string
   label: string
-  width?: string
+  show: boolean
   className?: string
-  show?: boolean
-  align: 'left' | 'center' | 'right'
   isSortable?: boolean
 }
 type Props = Omit<
@@ -63,9 +61,7 @@ export const TableHeader = ({ headers, onSort, sort }: Props) => {
                 }}
                 onClick={handleSorting}
                 key={header.key}
-                style={{ width: header.width }}
                 className={header.className}
-                align={header.align}
               >
                 {header.label}
                 {showSort && <span>{sort.direction === 'asc' ? '▲' : '▼'}</span>}

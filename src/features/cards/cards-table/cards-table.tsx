@@ -45,18 +45,15 @@ export const CardsTable = () => {
     {
       key: 'question',
       label: 'Question',
-      width: '301px',
+      className: `${s.question}`,
       show: true,
-      align: 'left',
       isSortable: true,
     },
     {
       key: 'answer',
       label: 'Answer',
-      width: '301px',
       show: true,
-      className: '',
-      align: 'left',
+      className: `${s.answer}`,
       isSortable: true,
     },
     {
@@ -64,7 +61,6 @@ export const CardsTable = () => {
       label: 'Last updated',
       className: `${s.lastUpdatedMy} ${myId === cardsData[0].userId ? s.lastUpdatedOther : ''}`,
       show: true,
-      align: 'left',
       isSortable: true,
     },
     {
@@ -72,20 +68,16 @@ export const CardsTable = () => {
       label: 'Grade',
       className: `${s.gradeMy} ${myId === cardsData[0].userId ? s.gradeOther : ''}`,
       show: true,
-      align: 'left',
       isSortable: true,
     },
     {
       key: 'icons',
       label: '',
-      width: '105px',
+      className: `${s.icons}`,
       show: myId !== cardsData[0].userId,
-      align: 'left',
     },
   ]
   const [sort, setSort] = useState<Sort>(null)
-
-  console.log(sort)
 
   return (
     <div>
