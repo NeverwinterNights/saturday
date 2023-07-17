@@ -4,24 +4,22 @@ import {
   FetchArgs,
   fetchBaseQuery,
   FetchBaseQueryError,
-} from '@reduxjs/toolkit/query'
+} from '@reduxjs/toolkit/query/react'
+
+const baseUrl = 'https://andri-flashcards-api.onrender.com/v1/'
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.baseURL,
+  baseUrl: baseUrl,
   credentials: 'include',
-  // prepareHeaders: (headers, { getState }) => {
-  //   const {
-  //     auth: {
-  //       user: { accessToken },
-  //     },
-  //   } = getState() as RootState
-  //
-  //   if (accessToken) {
-  //     headers.set('authorization', `Bearer ${accessToken}`)
-  //   }
-  //
-  //   return headers
-  // },
+  prepareHeaders: headers => {
+    const accessToken = localStorage.getItem('token')
+
+    if (accessToken) {
+      headers.set('authorization', `Bearer ${accessToken}`)
+    }
+
+    return headers
+  },
 })
 
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
@@ -32,16 +30,29 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
   let result = await baseQuery(args, api, extraOptions)
 
   if (result.error && result.error.status === 401) {
-    // try to get a new token
-    const refreshResult = await baseQuery('/refreshToken', api, extraOptions)
+    const refreshResult = (await baseQuery(
+      {
+        url: 'auth/refresh-tokens',
+        method: 'POST',
+      },
+      api,
+      extraOptions
+    )) as { data: { accessToken: string } }
 
-    if (refreshResult.data) {
-      // store the new token
-      // api.dispatch(tokenReceived(refreshResult.data))
+    if (refreshResult.data.accessToken) {
+      localStorage.setItem('token', refreshResult.data.accessToken as string)
+
       // retry the initial query
       result = await baseQuery(args, api, extraOptions)
     } else {
-      // api.dispatch(loggedOut())
+      await baseQuery(
+        {
+          url: 'auth/logout',
+          method: 'POST',
+        },
+        api,
+        extraOptions
+      )
     }
   }
 
