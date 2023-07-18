@@ -1,9 +1,12 @@
+import { useState } from 'react'
+
 import s from './packs-table.module.scss'
 
 import { Play } from '@/assets/icons/Play.tsx'
 import photo from '@/assets/images/react.png'
 import { TablePackIcons } from '@/components/ui/table/icons/tableIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
+import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
 
 export const PacksTable = () => {
   const packsData = [
@@ -36,27 +39,49 @@ export const PacksTable = () => {
     },
   ]
   const myId = '0000'
+  const headersPacks: TableHeaderType[] = [
+    {
+      key: 'name',
+      label: 'Name',
+      className: `${s.name}`,
+      show: true,
+      isSortable: true,
+    },
+    {
+      key: 'cards',
+      label: 'Cards',
+      className: `${s.cards}`,
+      show: true,
+      isSortable: true,
+    },
+    {
+      key: 'updated',
+      label: 'Last Updated',
+      className: `${s.updated}`,
+      show: true,
+      isSortable: true,
+    },
+    {
+      key: 'createdBy',
+      label: 'Created by',
+      className: `${s.createdBy}`,
+      show: true,
+      isSortable: true,
+    },
+    {
+      key: 'icons',
+      label: '',
+      className: `${s.icons}`,
+      show: true,
+      isSortable: false,
+    },
+  ]
+  const [sort, setSort] = useState<Sort>(null)
 
   return (
     <div>
       <Table.Root>
-        <Table.Head>
-          <Table.Row>
-            <Table.HeadCell style={{ width: '261px' }} align="left">
-              Name
-            </Table.HeadCell>
-            <Table.HeadCell style={{ width: '141px' }} align="left">
-              Cards
-            </Table.HeadCell>
-            <Table.HeadCell style={{ width: '201px' }} align="left">
-              Last Updated
-            </Table.HeadCell>
-            <Table.HeadCell style={{ width: '286px' }} align="left">
-              Created by
-            </Table.HeadCell>
-            <Table.HeadCell style={{ width: '117px' }} />
-          </Table.Row>
-        </Table.Head>
+        <TableHeader headers={headersPacks} onSort={setSort} sort={sort} />
         <Table.Body>
           {packsData.map(item => (
             <Table.Row key={item.id}>
