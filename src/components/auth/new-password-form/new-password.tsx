@@ -25,7 +25,7 @@ export const NewPassword = memo(({ onSubmitHandler }: ForgotPasswordPropsType) =
       </div>
 
       <Typography className={styles.info} variant="body2">
-        Create new password and we will send you further instructions to email
+        Create new password and we will redirect you to login
       </Typography>
       <Button type={'submit'} fullWidth className={styles.button} variant="primary">
         <Typography className={styles.buttonText} variant="subtitle2">
