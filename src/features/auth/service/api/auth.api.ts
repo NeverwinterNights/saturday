@@ -1,3 +1,5 @@
+import { createApi } from '@reduxjs/toolkit/query/react'
+
 import {
   RequestLoginType,
   RequestSignUpType,
@@ -5,9 +7,12 @@ import {
   ResponseLoginType,
   ResponseUserType,
 } from '@/features/auth/service/api/auth.types.ts'
-import { api } from '@/store/api.ts'
+import { baseQueryWithReauth } from '@/store/api.ts'
 
-export const authAPI = api.injectEndpoints({
+export const authAPI = createApi({
+  reducerPath: 'authAPI',
+  baseQuery: baseQueryWithReauth,
+  tagTypes: ['Auth'],
   endpoints: build => ({
     login: build.mutation<ResponseLoginType, RequestLoginType>({
       query: body => ({
@@ -15,25 +20,7 @@ export const authAPI = api.injectEndpoints({
         method: 'POST',
         body,
       }),
-    }),
-    getUser: build.query<ResponseUserType, unknown>({
-      query: () => ({
-        url: `auth/me`,
-      }),
-      extraOptions: { maxRetries: false },
-    }),
-    updateUser: build.mutation<ResponseUserType, RequestUpdateUserType>({
-      query: () => ({
-        url: `auth/me`,
-        method: 'PATCH',
-      }),
-      extraOptions: { maxRetries: false },
-    }),
-    logout: build.mutation({
-      query: () => ({
-        url: `auth/logout`,
-        method: 'POST',
-      }),
+      invalidatesTags: ['Auth'],
     }),
     signUp: build.mutation<ResponseUserType, RequestSignUpType>({
       query: (body: RequestSignUpType) => ({
@@ -42,6 +29,30 @@ export const authAPI = api.injectEndpoints({
         body,
       }),
     }),
+    logout: build.mutation({
+      query: () => ({
+        url: `auth/logout`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Auth'],
+    }),
+    me: build.query<ResponseUserType, unknown>({
+      query: () => ({
+        url: `auth/me`,
+        method: 'GET',
+      }),
+      providesTags: ['Auth'],
+      extraOptions: { maxTries: 3 },
+    }),
+    // move to profile
+    updateUser: build.mutation<ResponseUserType, RequestUpdateUserType>({
+      query: () => ({
+        url: `auth/me`,
+        method: 'PATCH',
+      }),
+      extraOptions: { maxRetries: false },
+    }),
+
     verifyMail: build.mutation<unknown, { code: string }>({
       query: (body: { code: string }) => ({
         url: `auth/verify-email`,
@@ -49,6 +60,7 @@ export const authAPI = api.injectEndpoints({
         body,
       }),
     }),
+
     resendEmail: build.mutation<unknown, { userId: string }>({
       query: (body: { userId: string }) => ({
         url: `auth/resend-verification-email`,
@@ -75,9 +87,9 @@ export const authAPI = api.injectEndpoints({
 
 export const {
   useLoginMutation,
-  useGetUserQuery,
   useUpdateUserMutation,
   useLogoutMutation,
+  useMeQuery,
   useSignUpMutation,
   useVerifyMailMutation,
   useResendEmailMutation,
