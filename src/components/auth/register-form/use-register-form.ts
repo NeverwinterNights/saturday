@@ -9,12 +9,12 @@ export const registerSchema = z
       .string()
       .trim()
       .nonempty('Enter password')
-      .min(8, 'Password must be at least 8 characters'),
+      .min(4, 'Password must be at least 8 characters'),
     confirm: z
       .string()
       .trim()
       .nonempty('Enter password')
-      .min(8, 'Password must be at least 8 characters'),
+      .min(4, 'Password must be at least 8 characters'),
   })
   .refine(data => data.password === data.confirm, {
     message: 'The passwords did not match',

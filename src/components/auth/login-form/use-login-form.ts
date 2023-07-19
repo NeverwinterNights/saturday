@@ -8,7 +8,7 @@ const schema = z.object({
     .string()
     .trim()
     .nonempty('Enter password')
-    .min(8, 'Password must be at least 8 characters'),
+    .min(4, 'Password must be at least 8 characters'),
   rememberMe: z.boolean().optional(),
 })
 

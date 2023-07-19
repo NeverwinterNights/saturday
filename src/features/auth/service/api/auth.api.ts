@@ -22,7 +22,7 @@ export const authAPI = createApi({
       }),
       invalidatesTags: ['Auth'],
     }),
-    signUp: build.mutation<ResponseUserType, RequestSignUpType>({
+    registration: build.mutation<ResponseUserType, RequestSignUpType>({
       query: (body: RequestSignUpType) => ({
         url: `auth/sign-up`,
         method: 'POST',
@@ -90,7 +90,7 @@ export const {
   useUpdateUserMutation,
   useLogoutMutation,
   useMeQuery,
-  useSignUpMutation,
+  useRegistrationMutation,
   useVerifyMailMutation,
   useResendEmailMutation,
   useRecoverPasswordMutation,
