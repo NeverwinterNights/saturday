@@ -18,6 +18,8 @@ export function App() {
     navigate(PATH.LOGIN)
   }
 
+  console.log(data)
+
   return (
     <>
       <Header

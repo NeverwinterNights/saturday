@@ -10,15 +10,23 @@ export const LoginPage = () => {
   const [login, { data }] = useLoginMutation()
 
   const loginHandler = async (data: LoginFormType) => {
-    await login(data)
-      .unwrap()
-      .then(data => {
-        localStorage.setItem('token', data.accessToken as string)
-      })
-      .catch(() => console.log('error Login'))
+    try {
+      const res = await login(data).unwrap()
+
+      console.log('Login', res)
+      localStorage.setItem('token', res.accessToken)
+    } catch (error) {
+      console.log('error Login')
+    }
+
+    // .then(data => {
+    //   console.log('data.accessToken', data.accessToken)
+    //   localStorage.setItem('token', data.accessToken as string)
+    // })
+    // .catch(() => console.log('error Login'))
   }
 
-  if (data) {
+  if (data?.accessToken) {
     navigate(PATH.PACKS)
   }
 

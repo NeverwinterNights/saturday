@@ -38,7 +38,7 @@ export const baseQueryWithReauth: BaseQueryFn<
       extraOptions
     )) as { data: { accessToken: string } }
 
-    if (refreshResult.data.accessToken) {
+    if (refreshResult.data && refreshResult.data.accessToken) {
       localStorage.setItem('token', refreshResult.data.accessToken as string)
 
       // retry the initial query
