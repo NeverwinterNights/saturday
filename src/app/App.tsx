@@ -1,16 +1,34 @@
+import { useEffect } from 'react'
+
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Pages } from '@/app/route-pages'
 import { PATH } from '@/common'
+import { Button } from '@/components/ui/button'
 import { Header } from '@/components/ui/header'
+import {
+  useGetUserQuery,
+  useLoginMutation,
+  useLogoutMutation,
+  useMeQuery,
+} from '@/features/auth/service/api/auth.api.ts'
 
 export function App() {
   const navigate = useNavigate()
-
   const signOutHandler = () => {
     // isAuth=false     fake code
     navigate(PATH.LOGIN)
   }
+  // const { data, error } = useMeQuery({})
+  const [logout, { error: err }] = useLogoutMutation()
+  const [login] = useLoginMutation()
+  const { data, isLoading } = useGetUserQuery({})
+
+  // console.log(data, error, '1')
+  // console.log(logout, err, '2')
+  console.log('value', data)
+
+  useEffect(() => {}, [])
 
   return (
     <>
@@ -19,6 +37,9 @@ export function App() {
         onSignOut={signOutHandler}
         onProfileClick={() => navigate(PATH.PROFILE)}
       />
+      <Button onClick={() => login({ password: '123456', email: 'igor20513@gmail.com' })}>
+        login
+      </Button>
       <div
         style={{
           display: 'flex',

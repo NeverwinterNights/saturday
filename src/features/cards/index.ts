@@ -1,1 +1,1 @@
-export * from './cards.tsx'
+export * from './components'

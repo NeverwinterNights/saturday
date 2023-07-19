@@ -1,1 +1,1 @@
-export * from './learn.tsx'
+export * from './components'

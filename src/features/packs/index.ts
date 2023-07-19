@@ -1,1 +1,1 @@
-export * from './packs.tsx'
+export * from './components'

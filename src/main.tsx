@@ -1,18 +1,21 @@
 // import './index.css'
+
+// eslint-disable-next-line import/order
+import { store } from '@/store/store.ts'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
-import './styles/index.scss'
-import { StrictMode } from 'react'
 
 import { createRoot } from 'react-dom/client'
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import { App } from './app/App.tsx'
+import './styles/index.scss'
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
+  <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </StrictMode>
+  </Provider>
 )

@@ -1,1 +1,1 @@
-export * from './route-path.ts'
+export * from './route-path'
