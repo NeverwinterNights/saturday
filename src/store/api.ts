@@ -1,6 +1,5 @@
 import {
   BaseQueryFn,
-  createApi,
   FetchArgs,
   fetchBaseQuery,
   FetchBaseQueryError,
@@ -10,7 +9,7 @@ const baseUrl = 'https://andri-flashcards-api.onrender.com/v1/'
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrl,
-  credentials: 'include',
+  // credentials: 'include',
   prepareHeaders: headers => {
     const accessToken = localStorage.getItem('token')
 
@@ -22,17 +21,17 @@ const baseQuery = fetchBaseQuery({
   },
 })
 
-const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-  args,
-  api,
-  extraOptions
-) => {
+export const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
 
   if (result.error && result.error.status === 401) {
     const refreshResult = (await baseQuery(
       {
-        url: 'auth/refresh-tokens',
+        url: 'auth/refresh-token',
         method: 'POST',
       },
       api,
@@ -58,9 +57,3 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
   return result
 }
-
-export const api = createApi({
-  reducerPath: 'api',
-  baseQuery: baseQueryWithReauth,
-  endpoints: () => ({}),
-})
