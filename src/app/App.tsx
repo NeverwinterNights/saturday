@@ -7,6 +7,7 @@ import { PATH } from '@/common'
 import { Button } from '@/components/ui/button'
 import { Header } from '@/components/ui/header'
 import {
+  useGetUserQuery,
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
@@ -18,12 +19,14 @@ export function App() {
     // isAuth=false     fake code
     navigate(PATH.LOGIN)
   }
-  const { data, error } = useMeQuery({})
+  // const { data, error } = useMeQuery({})
   const [logout, { error: err }] = useLogoutMutation()
   const [login] = useLoginMutation()
+  const { data, isLoading } = useGetUserQuery({})
 
-  console.log(data, error, '1')
-  console.log(logout, err, '2')
+  // console.log(data, error, '1')
+  // console.log(logout, err, '2')
+  console.log('value', data)
 
   useEffect(() => {}, [])
 
