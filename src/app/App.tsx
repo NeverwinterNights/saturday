@@ -1,22 +1,22 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { Pages } from '@/app/route-pages'
 import { PATH } from '@/common'
+import { Button } from '@/components/ui/button'
 import { Header } from '@/components/ui/header'
 import { useLogoutMutation, useMeQuery } from '@/features/auth/service/api/auth.api.ts'
 
 export function App() {
   const navigate = useNavigate()
+  const params = useParams()
   const [logout] = useLogoutMutation()
-  const { data, isLoading } = useMeQuery({})
+  const { data, isLoading, refetch } = useMeQuery({})
 
   const signOutHandler = () => {
-    localStorage.setItem('token', '')
     logout({})
+    localStorage.setItem('token', '')
     navigate(PATH.LOGIN)
   }
-
-  console.log(data)
 
   return (
     <>
@@ -27,6 +27,7 @@ export function App() {
         onProfileClick={() => navigate(PATH.PROFILE)}
       />
       {isLoading && <div>Loading...</div>}
+      <Button onClick={() => refetch()}>refetch</Button>
       <div
         style={{
           display: 'flex',
