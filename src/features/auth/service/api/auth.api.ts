@@ -12,15 +12,25 @@ import { baseQueryWithReauth } from '@/store/api.ts'
 export const authAPI = createApi({
   reducerPath: 'authAPI',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Auth'],
+
   endpoints: build => ({
+    me: build.query<ResponseUserType, void>({
+      query: () => {
+        return {
+          method: 'GET',
+          url: 'auth/me',
+          params: {},
+        }
+      },
+    }),
     login: build.mutation<ResponseLoginType, RequestLoginType>({
-      query: body => ({
-        url: `auth/login`,
-        method: 'POST',
-        body,
-      }),
-      invalidatesTags: ['Auth'],
+      query: ({ email, password }) => {
+        return {
+          method: 'POST',
+          url: 'auth/login',
+          body: { email, password },
+        }
+      },
     }),
     registration: build.mutation<ResponseUserType, RequestSignUpType>({
       query: (body: RequestSignUpType) => ({
@@ -29,21 +39,15 @@ export const authAPI = createApi({
         body,
       }),
     }),
-    logout: build.mutation({
-      query: () => ({
-        url: `auth/logout`,
-        method: 'POST',
-      }),
-      invalidatesTags: ['Auth'],
+    logout: build.mutation<void, void>({
+      query: () => {
+        return {
+          method: 'POST',
+          url: 'auth/logout',
+        }
+      },
     }),
-    me: build.query<ResponseUserType, unknown>({
-      query: () => ({
-        url: `auth/me`,
-        method: 'GET',
-      }),
-      providesTags: ['Auth'],
-      extraOptions: { maxTries: 3 },
-    }),
+
     // move to profile
     updateUser: build.mutation<ResponseUserType, RequestUpdateUserType>({
       query: () => ({
@@ -89,6 +93,7 @@ export const {
   useLoginMutation,
   useUpdateUserMutation,
   useLogoutMutation,
+  util,
   useMeQuery,
   useRegistrationMutation,
   useVerifyMailMutation,
