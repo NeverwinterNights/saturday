@@ -16,7 +16,6 @@ import { Image } from '@/components/ui/image/image.tsx'
 import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
 import { CardsTable } from '@/features/cards/components/cards-table/cards-table.tsx'
-import { useDeleteCardMutation } from '@/features/cards/service/api/cards.api.ts'
 
 export const Cards = () => {
   const [inputValue, setInputValue] = useState('')
@@ -24,7 +23,6 @@ export const Cards = () => {
   const myPack = false
   const packsCover = ''
   const navigate = useNavigate()
-  const [deleteCard, {}] = useDeleteCardMutation()
 
   return (
     <Container className={s.root}>
@@ -72,7 +70,7 @@ export const Cards = () => {
       />
 
       {cards.length ? (
-        <CardsTable deleteCard={deleteCard} />
+        <CardsTable />
       ) : (
         <div className={s.empty}>
           <Typography variant={'body1'}>

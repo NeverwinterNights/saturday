@@ -7,12 +7,9 @@ import { ReadMore } from '@/components/ui/read-more'
 import { TableCardIcons } from '@/components/ui/table/icons/tableCardIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
+import { useDeleteCardMutation } from '@/features/cards/service/api/cards.api.ts'
 
-type CardsTablePropsType = {
-  deleteCard: (id: string) => void
-}
-
-export const CardsTable = ({ deleteCard }: CardsTablePropsType) => {
+export const CardsTable = () => {
   //это типа нам данные будут приходить с сервера)
   const cardsData = [
     {
@@ -82,6 +79,7 @@ export const CardsTable = ({ deleteCard }: CardsTablePropsType) => {
     },
   ]
   const [sort, setSort] = useState<Sort>(null)
+  const [deleteCard, {}] = useDeleteCardMutation()
 
   return (
     <div>
