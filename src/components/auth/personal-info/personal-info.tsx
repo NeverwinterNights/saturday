@@ -1,8 +1,7 @@
-import { ChangeEvent, memo, useRef, useState } from 'react'
+import { ChangeEvent, FC, memo, useRef, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
 
@@ -15,13 +14,11 @@ import styles from './personal-info.module.scss'
 
 import { Edit } from '@/assets/icons/Edit.tsx'
 import { LogOutIcon } from '@/assets/icons/LogOutIcon.tsx'
-import { PATH } from '@/common'
+import { convertFileToBase64 } from '@/common/utils/convert-file-to-base-64.ts'
 import s from '@/components/auth/login-form/login-form.module.scss'
 import { Card } from '@/components/ui/card'
-import { useLogoutMutation, util } from '@/features/auth/service/api/auth.api.ts'
-import { useAppDispatch } from '@/store/store.ts'
 
-type PersonalInfoPropType = {
+export type PersonalInfoPropType = {
   url: string
   name: string
   email: string
@@ -31,12 +28,19 @@ const schema = z.object({
   name: z.string().trim().nonempty('Enter Your Name'),
 })
 
-export const PersonalInfo = memo(({ name, email, url }: PersonalInfoPropType) => {
-  const dispatch = useAppDispatch()
-  const [logout] = useLogoutMutation()
+type PropsType = {
+  url: string
+  name: string
+  email: string
+  onSignOut?: () => void
+  onUpdate?: (data: PersonalInfoPropType) => void
+}
+
+export const PersonalInfo: FC<PropsType> = memo(({ name, email, url, onUpdate, onSignOut }) => {
   const [editMode, setEditMode] = useState(false)
   const [title, setTitle] = useState(name)
   const [URL, setURL] = useState(url)
+
   const { handleSubmit, control } = useForm<FormType>({
     resolver: zodResolver(schema),
     mode: 'onSubmit',
@@ -44,17 +48,8 @@ export const PersonalInfo = memo(({ name, email, url }: PersonalInfoPropType) =>
       name: 'Ivan',
     },
   })
-  const navigate = useNavigate()
   const logOut = () => {
-    logout()
-      .unwrap()
-      .then(() => {
-        dispatch(util?.resetApiState())
-        navigate(PATH.LOGIN)
-      })
-      .catch(error => {
-        toast(error)
-      })
+    onSignOut?.()
   }
 
   const editModeHandler = () => {
@@ -64,17 +59,9 @@ export const PersonalInfo = memo(({ name, email, url }: PersonalInfoPropType) =>
   const SubmitHandler = (data: any) => {
     setTitle(data.name)
     editModeHandler()
+    onUpdate?.({ name: title, email: email, url: URL })
   }
-  const convertFileToBase64 = (file: File, callBack: (value: string) => void) => {
-    const reader = new FileReader()
 
-    reader.onloadend = () => {
-      const file64 = reader.result as string
-
-      callBack(file64)
-    }
-    reader.readAsDataURL(file)
-  }
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
@@ -82,9 +69,10 @@ export const PersonalInfo = memo(({ name, email, url }: PersonalInfoPropType) =>
       if (file.size < 4000000) {
         convertFileToBase64(file, (file64: string) => {
           setURL(file64)
+          onUpdate?.({ name: title, email: email, url: URL })
         })
       } else {
-        alert('Error with adding photo')
+        toast('Error with adding photo')
       }
     }
   }
