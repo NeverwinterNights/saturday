@@ -25,9 +25,9 @@ export const Packs = () => {
         <Button>Add New Pack</Button>
       </div>
       <div className={s.filter}>
-        {/*<Input placeholder={'Input search'} width={'300px'} searchInput />*/}
+        <Input placeholder={'Input search'} width={'300px'} searchInput />
         <Tab tabs={options} label={'Show packs cards'} defaultValue={'all'} />
-        {/*<SliderComponent defaultValue={value} value={value} setValue={e => console.log(e)} />*/}
+        <SliderComponent defaultValue={value} value={value} setValue={e => console.log(e)} />
         <Button variant={'secondary'}>
           <Trash />
           <Typography variant={'subtitle2'}>Clear Filter</Typography>
