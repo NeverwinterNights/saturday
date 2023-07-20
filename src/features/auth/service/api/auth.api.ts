@@ -24,13 +24,11 @@ export const authAPI = createApi({
       },
     }),
     login: build.mutation<ResponseLoginType, RequestLoginType>({
-      query: ({ email, password }) => {
-        return {
-          method: 'POST',
-          url: 'auth/login',
-          body: { email, password },
-        }
-      },
+      query: body => ({
+        url: `auth/login`,
+        method: 'POST',
+        body,
+      }),
     }),
     registration: build.mutation<ResponseUserType, RequestSignUpType>({
       query: (body: RequestSignUpType) => ({
