@@ -5,8 +5,6 @@ import { ProvisionalNavigate } from '@/components/ui/provisional-navigate/provis
 export function App() {
   console.log('App')
 
-  console.log(data)
-
   return (
     <>
       <Layout />
