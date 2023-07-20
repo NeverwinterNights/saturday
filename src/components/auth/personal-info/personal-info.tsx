@@ -3,6 +3,7 @@ import { ChangeEvent, memo, useRef, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { z } from 'zod'
 
 import { Avatar } from '../../ui/avatar'
@@ -17,6 +18,8 @@ import { LogOutIcon } from '@/assets/icons/LogOutIcon.tsx'
 import { PATH } from '@/common'
 import s from '@/components/auth/login-form/login-form.module.scss'
 import { Card } from '@/components/ui/card'
+import { useLogoutMutation, util } from '@/features/auth/service/api/auth.api.ts'
+import { useAppDispatch } from '@/store/store.ts'
 
 type PersonalInfoPropType = {
   url: string
@@ -29,6 +32,8 @@ const schema = z.object({
 })
 
 export const PersonalInfo = memo(({ name, email, url }: PersonalInfoPropType) => {
+  const dispatch = useAppDispatch()
+  const [logout] = useLogoutMutation()
   const [editMode, setEditMode] = useState(false)
   const [title, setTitle] = useState(name)
   const [URL, setURL] = useState(url)
@@ -41,8 +46,15 @@ export const PersonalInfo = memo(({ name, email, url }: PersonalInfoPropType) =>
   })
   const navigate = useNavigate()
   const logOut = () => {
-    //some code
-    navigate(PATH.LOGIN)
+    logout()
+      .unwrap()
+      .then(() => {
+        dispatch(util?.resetApiState())
+        navigate(PATH.LOGIN)
+      })
+      .catch(error => {
+        toast(error)
+      })
   }
 
   const editModeHandler = () => {
