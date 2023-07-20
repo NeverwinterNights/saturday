@@ -1,6 +1,6 @@
-import { Edit } from '../../../../assets/icons/Edit.tsx'
-import { Play } from '../../../../assets/icons/Play.tsx'
-import { Trash } from '../../../../assets/icons/Trash.tsx'
+import { Edit } from '@/assets/icons/Edit.tsx'
+import { Play } from '@/assets/icons/Play.tsx'
+import { Trash } from '@/assets/icons/Trash.tsx'
 
 export const TablePackIcons = () => {
   return (

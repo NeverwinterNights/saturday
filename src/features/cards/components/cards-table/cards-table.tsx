@@ -8,7 +8,11 @@ import { TableCardIcons } from '@/components/ui/table/icons/tableCardIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
 
-export const CardsTable = () => {
+type CardsTablePropsType = {
+  deleteCard: (id: string) => void
+}
+
+export const CardsTable = ({ deleteCard }: CardsTablePropsType) => {
   //это типа нам данные будут приходить с сервера)
   const cardsData = [
     {
@@ -96,7 +100,7 @@ export const CardsTable = () => {
               </Table.Cell>
               {myId !== item.userId ? (
                 <Table.Cell>
-                  <TableCardIcons />
+                  <TableCardIcons deleteCard={() => deleteCard(item.id)} />
                 </Table.Cell>
               ) : (
                 ''
