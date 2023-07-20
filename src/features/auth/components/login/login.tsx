@@ -8,19 +8,16 @@ import { useAppDispatch } from '@/store/store.ts'
 
 export const LoginPage = () => {
   const navigate = useNavigate()
-  const [login, { data }] = useLoginMutation()
+  const [login] = useLoginMutation()
   const dispatch = useAppDispatch()
   const loginHandler = async (data: LoginFormType) => {
     await login(data)
       .unwrap()
       .then(() => {
         dispatch(util?.resetApiState())
+        navigate(PATH.PACKS)
       })
       .catch(error => console.log(error))
-  }
-
-  if (data) {
-    navigate(PATH.PACKS)
   }
 
   return <LoginForm onSubmitHandler={loginHandler} />

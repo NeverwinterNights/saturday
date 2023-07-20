@@ -3,10 +3,6 @@ import { Layout } from '@/components/layout/layout.tsx'
 import { ProvisionalNavigate } from '@/components/ui/provisional-navigate/provisional-navigate.tsx'
 
 export function App() {
-  console.log('App')
-
-  console.log(data)
-
   return (
     <>
       <Layout />

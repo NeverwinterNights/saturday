@@ -12,7 +12,6 @@ export const Layout = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  console.log('layout')
   const onSignOut = () => {
     logout()
       .unwrap()
@@ -29,6 +28,9 @@ export const Layout = () => {
     <div>
       <Header
         isAuth={!!data}
+        email={data?.email}
+        name={data?.name}
+        avatar={data?.avatar}
         onSignOut={onSignOut}
         onSignIn={() => navigate(PATH.LOGIN)}
         onProfileClick={() => navigate(PATH.PROFILE)}
