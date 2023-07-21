@@ -2,9 +2,12 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 import { PATH } from '../../common'
 
-export const PrivateRoute = () => {
-  //let isAuth = useAppSelector(isLoggedInSelector)
-  const isAuth = true
+import { useMeQuery } from '@/features/auth/service/api/auth.api.ts'
 
-  return isAuth ? <Outlet /> : <Navigate to={PATH.LOGIN} />
+export const PrivateRoute = () => {
+  const { data, isLoading } = useMeQuery()
+
+  if (isLoading) return <div>Loading...</div>
+
+  return data ? <Outlet /> : <Navigate to={PATH.LOGIN} />
 }
