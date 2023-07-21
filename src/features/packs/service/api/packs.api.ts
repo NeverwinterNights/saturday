@@ -17,7 +17,7 @@ export const decksAPI = createApi({
   reducerPath: 'decksAPI',
   baseQuery: baseQueryWithReauth,
   endpoints: build => ({
-    getDecks: build.query<GetDecksResponseType, GetDecksRequestType>({
+    getDecks: build.query<GetDecksResponseType, GetDecksRequestType | void>({
       query: params => ({
         url: 'decks',
         method: 'GET',
@@ -77,3 +77,5 @@ export const decksAPI = createApi({
     }),
   }),
 })
+
+export const { useGetDeckQuery, useCreateDeckMutation, useGetDecksQuery } = decksAPI
