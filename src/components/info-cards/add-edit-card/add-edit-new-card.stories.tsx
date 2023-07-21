@@ -26,8 +26,12 @@ const dataSelect = [
     label: 'Text',
   },
   {
-    value: 'Audio',
-    label: 'Audio',
+    value: 'Image',
+    label: 'Image',
+  },
+  {
+    value: 'Video',
+    label: 'Video',
   },
 ]
 
@@ -40,6 +44,7 @@ export const AddNewCardComponent: Story = {
 
     console.log('modalsData', modalsData)
     console.log('allData', allData)
+
     const getData = (data: FormType) => {
       setModalsData(data)
       setAllData({ type: selectValue, ...data })
@@ -75,9 +80,10 @@ export const EditNewCardComponent: Story = {
     const [selectValue, setSelectValue] = useState('Text')
     const [allData, setAllData] = useState<AllDataType>({} as AllDataType)
 
-    console.log('modalsData', modalsData)
-    console.log('selectValue', selectValue)
-    console.log('allData', allData)
+    // console.log('modalsData', modalsData)
+    // console.log('selectValue', selectValue)
+    // console.log('allData', allData)
+    // console.log('isOpen', isOpen)
     const getData = (data: FormType) => {
       setModalsData(data)
       setAllData({ type: selectValue, ...data })

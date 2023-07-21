@@ -1,3 +1,4 @@
+import { AddMediaIcon } from '@/assets/icons/AddMediaIcon.tsx'
 import { ArrowDownIcon } from '@/assets/icons/ArrowDown.tsx'
 import { ArrowLeft } from '@/assets/icons/ArrowLeft.tsx'
 import { Check } from '@/assets/icons/Check.tsx'
@@ -46,6 +47,7 @@ export const AllIcons = {
         <StarEmpty />
         <StarFilled />
         <Trash />
+        <AddMediaIcon />
       </div>
     )
   },
