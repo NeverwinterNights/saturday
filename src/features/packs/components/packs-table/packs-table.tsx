@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 
 import s from './packs-table.module.scss'
 
@@ -7,37 +7,13 @@ import photo from '@/assets/images/react.png'
 import { TablePackIcons } from '@/components/ui/table/icons/tableIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
+import { DecksType } from '@/features/packs/service/api/packs.types.ts'
 
-export const PacksTable = () => {
-  const packsData = [
-    {
-      id: '01',
-      name: 'Pack Name',
-      deckCover: true,
-      card: '4',
-      userId: '1111',
-      lastUpdate: '18.03.2021',
-      createdBy: 'Ivan Ivanov',
-    },
-    {
-      id: '02',
-      name: 'Pack Name',
-      deckCover: false,
-      userId: '0000',
-      card: '4',
-      lastUpdate: '18.03.2021',
-      createdBy: 'Ivan Ivanov',
-    },
-    {
-      id: '03',
-      name: 'Pack Name',
-      deckCover: true,
-      userId: '1111',
-      card: '4',
-      lastUpdate: '18.03.2021',
-      createdBy: 'Ivan Ivanov',
-    },
-  ]
+type PropsType = {
+  decks: DecksType[]
+}
+
+export const PacksTable: FC<PropsType> = ({ decks }) => {
   const myId = '0000'
   const headersPacks: TableHeaderType[] = [
     {
@@ -83,23 +59,24 @@ export const PacksTable = () => {
       <Table.Root>
         <TableHeader headers={headersPacks} onSort={setSort} sort={sort} />
         <Table.Body>
-          {packsData.map(item => (
-            <Table.Row key={item.id}>
-              <Table.Cell>
-                <div className={s.deckCover}>
-                  {item.deckCover && <img src={photo} alt="" />}
-                  {item.name}
-                </div>
-              </Table.Cell>
-              <Table.Cell>{item.card}</Table.Cell>
-              <Table.Cell>{item.lastUpdate}</Table.Cell>
-              <Table.Cell>{item.createdBy}</Table.Cell>
-              <Table.Cell align="center">
-                {/*если пак не наш, то показываем только 1 иконку*/}
-                {myId !== item.userId ? <TablePackIcons /> : <Play />}
-              </Table.Cell>
-            </Table.Row>
-          ))}
+          {decks &&
+            decks.map(item => (
+              <Table.Row key={item.id}>
+                <Table.Cell>
+                  <div className={s.deckCover}>
+                    {item.cover && <img src={photo} alt="" />}
+                    {item.name}
+                  </div>
+                </Table.Cell>
+                <Table.Cell>{item.cardsCount}</Table.Cell>
+                <Table.Cell>{item.updated}</Table.Cell>
+                <Table.Cell>{item.author.name}</Table.Cell>
+                <Table.Cell align="center">
+                  {/*если пак не наш, то показываем только 1 иконку*/}
+                  {myId !== item.userId ? <Play /> : <TablePackIcons />}
+                </Table.Cell>
+              </Table.Row>
+            ))}
         </Table.Body>
       </Table.Root>
     </div>
