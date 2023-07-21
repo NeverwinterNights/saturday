@@ -1,5 +1,5 @@
-import { Edit } from '../../../../assets/icons/Edit.tsx'
-import { Trash } from '../../../../assets/icons/Trash.tsx'
+import { Edit } from '@/assets/icons/Edit.tsx'
+import { Trash } from '@/assets/icons/Trash.tsx'
 
 type TableCardIconsPropsType = {
   deleteCard?: () => void

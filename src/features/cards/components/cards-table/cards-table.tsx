@@ -7,7 +7,10 @@ import { ReadMore } from '@/components/ui/read-more'
 import { TableCardIcons } from '@/components/ui/table/icons/tableCardIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
-import { useDeleteCardMutation } from '@/features/cards/service/api/cards.api.ts'
+import {
+  useDeleteCardMutation,
+  useUpdateCardByIdMutation,
+} from '@/features/cards/service/api/cards.api.ts'
 
 export const CardsTable = () => {
   //это типа нам данные будут приходить с сервера)
@@ -80,6 +83,7 @@ export const CardsTable = () => {
   ]
   const [sort, setSort] = useState<Sort>(null)
   const [deleteCard, {}] = useDeleteCardMutation()
+  const [updateCard, {}] = useUpdateCardByIdMutation()
 
   return (
     <div>
@@ -98,7 +102,10 @@ export const CardsTable = () => {
               </Table.Cell>
               {myId !== item.userId ? (
                 <Table.Cell>
-                  <TableCardIcons deleteCard={() => deleteCard(item.id)} />
+                  <TableCardIcons
+                    // updateCard={() => updateCard(item.id)}
+                    deleteCard={() => deleteCard(item.id)}
+                  />
                 </Table.Cell>
               ) : (
                 ''
