@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react'
-
 import * as Slider from '@radix-ui/react-slider'
 
 import { Input } from '../input'
@@ -11,7 +9,8 @@ import { Typography } from '@/components/ui/typography'
 type SliderPropsType = {
   defaultValue: [number, number]
   value: [number, number]
-  setValue: Dispatch<SetStateAction<[number, number]>>
+  // setValue: Dispatch<SetStateAction<[number, number]>>
+  setValue: (value: [number, number]) => void
   min?: number
   max?: number
   label?: string

@@ -11,6 +11,7 @@ import { DecksType } from '@/features/packs/service/api/packs.types.ts'
 
 type PropsType = {
   decks: DecksType[]
+  onSort: (sort: Sort) => void
 }
 
 export const PacksTable: FC<PropsType> = ({ decks }) => {
