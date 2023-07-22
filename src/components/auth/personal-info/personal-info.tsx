@@ -1,8 +1,7 @@
-import { ChangeEvent, FC, memo, useRef, useState } from 'react'
+import { ChangeEvent, FC, memo, useEffect, useRef, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
 import { z } from 'zod'
 
 import { Avatar } from '../../ui/avatar'
@@ -14,14 +13,19 @@ import styles from './personal-info.module.scss'
 
 import { Edit } from '@/assets/icons/Edit.tsx'
 import { LogOutIcon } from '@/assets/icons/LogOutIcon.tsx'
-import { convertFileToBase64 } from '@/common/utils/convert-file-to-base-64.ts'
 import s from '@/components/auth/login-form/login-form.module.scss'
 import { Card } from '@/components/ui/card'
 
-export type PersonalInfoPropType = {
-  url: string
-  name: string
+type DataType = {
+  avatar: string
   email: string
+  name: string
+}
+
+export type PersonalInfoPropType = {
+  file?: File
+  name?: string
+  email?: string
 }
 type FormType = z.infer<typeof schema>
 const schema = z.object({
@@ -29,25 +33,24 @@ const schema = z.object({
 })
 
 type PropsType = {
-  url: string
-  name: string
-  email: string
+  data: DataType
   onSignOut?: () => void
-  onUpdate?: (data: PersonalInfoPropType) => void
+  onUpdate: (data: PersonalInfoPropType) => void
 }
 
-export const PersonalInfo: FC<PropsType> = memo(({ name, email, url, onUpdate, onSignOut }) => {
+export const PersonalInfo: FC<PropsType> = memo(({ data, onUpdate, onSignOut }) => {
   const [editMode, setEditMode] = useState(false)
-  const [title, setTitle] = useState(name)
-  const [URL, setURL] = useState(url)
+  const [name, setTitle] = useState(data.name || '')
+  const [url, setUrl] = useState(data.avatar)
 
   const { handleSubmit, control } = useForm<FormType>({
     resolver: zodResolver(schema),
     mode: 'onSubmit',
     defaultValues: {
-      name: 'Ivan',
+      name: data.name,
     },
   })
+
   const logOut = () => {
     onSignOut?.()
   }
@@ -56,27 +59,26 @@ export const PersonalInfo: FC<PropsType> = memo(({ name, email, url, onUpdate, o
     setEditMode(prev => !prev)
   }
 
-  const SubmitHandler = (data: any) => {
+  const SubmitHandler = (data: { name: string }) => {
     setTitle(data.name)
     editModeHandler()
-    onUpdate?.({ name: title, email: email, url: URL })
+    onUpdate?.({ name: data.name })
   }
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
 
-      if (file.size < 4000000) {
-        convertFileToBase64(file, (file64: string) => {
-          setURL(file64)
-          onUpdate?.({ name: title, email: email, url: URL })
-        })
-      } else {
-        toast('Error with adding photo')
-      }
+      onUpdate({ file: file })
     }
   }
   const inputRef = useRef<HTMLInputElement>(null)
+
+  if (!data) return <div>Loading...</div>
+
+  useEffect(() => {
+    setUrl(data.avatar)
+  }, [data.avatar])
 
   return (
     <Card className={s.card}>
@@ -85,7 +87,7 @@ export const PersonalInfo: FC<PropsType> = memo(({ name, email, url, onUpdate, o
           Personal Information
         </Typography>
         <div className={styles.picture}>
-          <Avatar photo={URL} name="avatar" size={96} />
+          <Avatar photo={url} name="avatar" size={96} />
           <div className={styles.editIcon}>
             <Edit onClick={() => inputRef && inputRef.current?.click()} />
             <input
@@ -115,17 +117,17 @@ export const PersonalInfo: FC<PropsType> = memo(({ name, email, url, onUpdate, o
         ) : (
           <div className={styles.personal}>
             <Typography className={styles.name} variant="h1">
-              {title}
+              {name}
             </Typography>
             <div className={styles.edit} onClick={editModeHandler}>
               <Edit />
             </div>
           </div>
         )}
-        {editMode ? null : (
+        {!editMode && (
           <>
             <Typography className={styles.email} variant="body2">
-              {email}
+              {data.email || 'example@mail.com'}
             </Typography>
             <Button onClick={logOut} className={styles.button} variant="secondary">
               <LogOutIcon />
