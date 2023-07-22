@@ -1,4 +1,4 @@
-import { BaseQueryFn, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { BaseQueryFn, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const baseUrl = 'https://andri-flashcards-api.onrender.com/v1/'
 
@@ -23,3 +23,10 @@ export const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) 
 
   return result
 }
+
+export const flashCardsAPI = createApi({
+  reducerPath: 'flashCardsAPI',
+  baseQuery: baseQueryWithReauth,
+  endpoints: () => ({}),
+  tagTypes: ['me'],
+})

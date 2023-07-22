@@ -1,5 +1,3 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
-
 import {
   RequestLoginType,
   RequestSignUpType,
@@ -7,12 +5,9 @@ import {
   ResponseLoginType,
   ResponseUserType,
 } from '@/features/auth/service/api/auth.types.ts'
-import { baseQueryWithReauth } from '@/store/api.ts'
+import { flashCardsAPI } from '@/store/api.ts'
 
-export const authAPI = createApi({
-  reducerPath: 'authAPI',
-  baseQuery: baseQueryWithReauth,
-
+export const authAPI = flashCardsAPI.injectEndpoints({
   endpoints: build => ({
     me: build.query<ResponseUserType, void>({
       query: () => {
@@ -22,6 +17,7 @@ export const authAPI = createApi({
           params: {},
         }
       },
+      providesTags: ['me'],
     }),
     login: build.mutation<ResponseLoginType, RequestLoginType>({
       query: body => ({

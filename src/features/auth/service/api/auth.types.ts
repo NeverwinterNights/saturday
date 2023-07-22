@@ -23,7 +23,7 @@ export type ResponseUserType = {
   id: string
   email: string
   isEmailVerified: true
-  name?: string
+  name: string
   avatar: string
   created: string
   updated: string
