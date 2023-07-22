@@ -8,8 +8,4 @@ export type ResponseUpdateMe = {
   updated: string
 }
 
-export type RequestDataUpdateMe = {
-  avatar: string
-  name: string
-  email: string
-}
+export type RequestDataUpdateMe = FormData
