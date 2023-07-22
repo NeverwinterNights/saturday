@@ -7,12 +7,13 @@ export const ProvisionalNavigate = () => {
     <div
       style={{
         display: 'flex',
+        flexDirection: 'column',
         color: 'white',
         gap: 20,
         position: 'fixed',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        bottom: '20px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        left: '20px',
       }}
     >
       <Link to={PATH.LOGIN}>Login</Link>

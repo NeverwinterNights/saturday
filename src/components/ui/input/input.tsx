@@ -2,7 +2,6 @@ import { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
 import { clsx } from 'clsx'
 
-// import { ClosedInputIcon } from '../../../assets/icons/CloseInputIcon.tsx'
 import { Typography } from '../typography'
 
 import styles from './input.module.scss'
@@ -12,6 +11,8 @@ import { Eye } from '@/assets/icons/Eye.tsx'
 import { EyeClosed } from '@/assets/icons/EyeClosed.tsx'
 import { SearchIcon } from '@/assets/icons/SearchIcon.tsx'
 
+// import { ClosedInputIcon } from '../../../assets/icons/CloseInputIcon.tsx'
+
 export type InputPropsType = {
   label?: string
   disabled?: boolean
@@ -20,6 +21,7 @@ export type InputPropsType = {
   error?: string
   onClickClearInput?: () => void
   searchInput?: boolean
+  onValueChange?: (value: string) => void
   width?: string
 } & ComponentPropsWithoutRef<'input'>
 
@@ -34,6 +36,8 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
       value = '',
       placeholder,
       disabled,
+      onChange,
+      onValueChange,
       type,
       width,
       label,
@@ -51,6 +55,11 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
     const iconClickHandler = (e: any) => {
       e.preventDefault()
       setIconVisible(() => (iconVisible === 'password' ? 'text' : 'password'))
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e)
+      onValueChange?.(e.target.value)
     }
 
     return (
@@ -78,6 +87,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
             placeholder={placeholder}
             value={value}
             type={iconVisible}
+            onChange={handleChange}
             style={error ? { color: 'var( --color-danger-300 )' } : {}}
             {...restProps}
           />
