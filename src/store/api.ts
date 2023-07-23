@@ -51,5 +51,5 @@ export const flashCardsAPI = createApi({
   reducerPath: 'flashCardsAPI',
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  tagTypes: ['me'],
+  tagTypes: ['me', 'decks'],
 })

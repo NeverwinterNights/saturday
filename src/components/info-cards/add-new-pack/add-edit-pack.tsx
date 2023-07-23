@@ -4,7 +4,7 @@ import { Modal } from '../../ui/modal'
 import { ModalControl } from '../modal-control'
 
 import styles from './add-edit-pack.module.scss'
-import { FormType, useAddEditPack } from './use-add-new-pack.ts'
+import { AddPackFormType, useAddEditPack } from './use-add-new-pack.ts'
 
 import { ControlledInput } from '@/components/ui/controlled'
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox.tsx'
@@ -16,7 +16,7 @@ type AddEditPackPropsType = {
   onOpenChange?: (value: boolean) => void
   defaultValue?: string
   namePack: string
-  onClickDataHandler: (value: FormType) => void
+  onClickDataHandler: (value: AddPackFormType) => void
 }
 
 export const AddEditPack = memo(

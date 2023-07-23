@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { FormType } from './use-add-new-pack.ts'
+import { AddPackFormType } from './use-add-new-pack.ts'
 
 import { AddEditPack } from './'
 
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>
 export const AddPackComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
-    const [modalsData, setModalsData] = useState<FormType>({} as FormType)
+    const [modalsData, setModalsData] = useState<AddPackFormType>({} as AddPackFormType)
 
     console.log('modalsData', modalsData)
 
@@ -44,7 +44,7 @@ export const AddPackComponent: Story = {
 export const EditPackComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
-    const [modalsData, setModalsData] = useState<FormType>({} as FormType)
+    const [modalsData, setModalsData] = useState<AddPackFormType>({} as AddPackFormType)
 
     console.log('modalsData', modalsData)
 

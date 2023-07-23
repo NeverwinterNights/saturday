@@ -11,10 +11,10 @@ export const addEditPackSchema = z.object({
     .nonempty('Enter Name!'),
   private: z.boolean().optional(),
 })
-export type FormType = z.infer<typeof addEditPackSchema>
+export type AddPackFormType = z.infer<typeof addEditPackSchema>
 
 export const useAddEditPack = (name?: string) => {
-  return useForm<FormType>({
+  return useForm<AddPackFormType>({
     resolver: zodResolver(addEditPackSchema),
     mode: 'onSubmit',
     defaultValues: {
