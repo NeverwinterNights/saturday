@@ -1,5 +1,3 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
-
 import {
   CardType,
   CreateCardType,
@@ -11,11 +9,9 @@ import {
   GetDecksResponseType,
   SaveGradeCardType,
 } from '@/features/packs/service/api/packs.types.ts'
-import { baseQueryWithReauth } from '@/store/api.ts'
+import { flashCardsAPI } from '@/store/api.ts'
 
-export const decksAPI = createApi({
-  reducerPath: 'decksAPI',
-  baseQuery: baseQueryWithReauth,
+export const decksAPI = flashCardsAPI.injectEndpoints({
   endpoints: build => ({
     getDecks: build.query<GetDecksResponseType, GetDecksRequestType | void>({
       query: params => ({
@@ -23,6 +19,7 @@ export const decksAPI = createApi({
         method: 'GET',
         params: { ...params },
       }),
+      providesTags: ['decks'],
     }),
     createDeck: build.mutation<DecksType, CreateDeckRequestType>({
       query: data => ({
@@ -30,6 +27,7 @@ export const decksAPI = createApi({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['decks'],
     }),
     getDeck: build.query<DecksType, string>({
       query: id => ({
@@ -42,12 +40,14 @@ export const decksAPI = createApi({
         url: `decks/${decksId}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['decks'],
     }),
     updateDeck: build.mutation<DecksType, string>({
       query: id => ({
         url: `decks/${id}`,
         method: 'PATCH',
       }),
+      invalidatesTags: ['decks'],
     }),
     getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
       query: id => ({

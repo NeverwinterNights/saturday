@@ -13,11 +13,12 @@ export type GetDecksResponseType = {
   maxCardsCount: number
 }
 
-export type CreateDeckRequestType = {
-  cover?: string
-  name: string
-  isPrivate?: boolean
-}
+// export type CreateDeckRequestType = {
+//   cover?: string
+//   name: string
+//   isPrivate?: boolean
+// }
+export type CreateDeckRequestType = FormData
 
 export type ItemsAuthor = {
   id: string

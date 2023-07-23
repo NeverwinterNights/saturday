@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import s from './packs.module.scss'
 
 import { Trash } from '@/assets/icons/Trash.tsx'
+import { AddEditPack } from '@/components/info-cards/add-new-pack'
+import { AddPackFormType } from '@/components/info-cards/add-new-pack/use-add-new-pack.ts'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import { Input } from '@/components/ui/input'
@@ -12,7 +14,7 @@ import { Tab } from '@/components/ui/tabs'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/features/auth/service/api/auth.api.ts'
 import { PacksTable } from '@/features/packs/components/packs-table/packs-table.tsx'
-import { useGetDecksQuery } from '@/features/packs/service/api/packs.api.ts'
+import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/service/api/packs.api.ts'
 
 export type Sort = {
   key: string
@@ -21,6 +23,7 @@ export type Sort = {
 
 export const Packs = () => {
   const { data: user } = useMeQuery()
+  const [isOpenModal, setIsOpenModal] = useState(false)
   const [search, setSearch] = useState('')
   const [range, setRange] = useState<[number, number]>([0, 100])
   const [currentPage, setCurrentPage] = useState(1)
@@ -37,6 +40,8 @@ export const Packs = () => {
     currentPage: currentPage.toString(),
     itemsPerPage: itemsPerPage,
   })
+
+  const [createDeck] = useCreateDeckMutation()
 
   const options = [
     { value: 'my', title: 'My Cards' },
@@ -59,13 +64,32 @@ export const Packs = () => {
     setRange(value)
   }
 
+  const sendModalHandler = (modalData: AddPackFormType) => {
+    const form = new FormData()
+
+    form.append('name', modalData.name)
+    modalData.private && form.append('isPrivate', 'true')
+
+    createDeck(form)
+    setIsOpenModal(false)
+  }
+
   if (isLoading) return <div>Loading...</div>
 
   return (
     <Container className={s.root}>
+      <AddEditPack
+        title={'Add New Pack'}
+        buttonName={'Add New Pack'}
+        namePack={'Name Pack'}
+        isOpen={isOpenModal}
+        onOpenChange={isOpen => setIsOpenModal(isOpen)}
+        onClickDataHandler={sendModalHandler}
+        defaultValue={'Name'}
+      />
       <div className={s.title}>
         <Typography variant={'large'}>Packs list</Typography>
-        <Button>Add New Pack</Button>
+        <Button onClick={() => setIsOpenModal(true)}>Add New Pack</Button>
       </div>
       <div className={s.filter}>
         <Input
