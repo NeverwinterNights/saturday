@@ -54,7 +54,7 @@ export type GetCardsRequestType = {
 }
 export type GetCardsResponseType = {
   pagination: PaginationType
-  items: CardType
+  items: CardType[]
 }
 
 export type CardType = {

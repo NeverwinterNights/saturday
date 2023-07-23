@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 
 import s from './cards-table.module.scss'
 
@@ -11,38 +11,43 @@ import {
   useDeleteCardMutation,
   useUpdateCardByIdMutation,
 } from '@/features/cards/service/api/cards.api.ts'
+import { CardType } from '@/features/packs/service/api/packs.types.ts'
 
-export const CardsTable = () => {
+type PropsType = {
+  cardsData: CardType[]
+}
+
+export const CardsTable: FC<PropsType> = ({ cardsData }) => {
   //это типа нам данные будут приходить с сервера)
-  const cardsData = [
-    {
-      id: '01',
-      question: 'How "This" works in JavaScript?',
-      answer: 'This is how "This" works in JavaScript',
-      lastUpdate: '18.03.2021',
-      //это мы условно загружаем наши карточки
-      //у нас быдет или наше Id или не наше ('0000'-'1111')
-      userId: '1111',
-      grade: 1,
-    },
-    {
-      id: '02',
-      question: 'How "This" works in JavaScript?',
-      answer:
-        'This is how "This" works in JavaScript in JavaScript in JavaScript in JavaScript in JavaScript',
-      lastUpdate: '18.03.2021',
-      userId: '1111',
-      grade: 2,
-    },
-    {
-      id: '03',
-      question: 'How "This" works in JavaScript?',
-      answer: 'This is how "This" works in JavaScript',
-      lastUpdate: '18.03.2021',
-      userId: '1111',
-      grade: 3,
-    },
-  ]
+  // const cardsData = [
+  //   {
+  //     id: '01',
+  //     question: 'How "This" works in JavaScript?',
+  //     answer: 'This is how "This" works in JavaScript',
+  //     lastUpdate: '18.03.2021',
+  //     //это мы условно загружаем наши карточки
+  //     //у нас быдет или наше Id или не наше ('0000'-'1111')
+  //     userId: '1111',
+  //     grade: 1,
+  //   },
+  //   {
+  //     id: '02',
+  //     question: 'How "This" works in JavaScript?',
+  //     answer:
+  //       'This is how "This" works in JavaScript in JavaScript in JavaScript in JavaScript in JavaScript',
+  //     lastUpdate: '18.03.2021',
+  //     userId: '1111',
+  //     grade: 2,
+  //   },
+  //   {
+  //     id: '03',
+  //     question: 'How "This" works in JavaScript?',
+  //     answer: 'This is how "This" works in JavaScript',
+  //     lastUpdate: '18.03.2021',
+  //     userId: '1111',
+  //     grade: 3,
+  //   },
+  // ]
   //это мы берем наше айди, что бы понять чьи карты(откуда и как берём пока не знаю)
   const myId = '0000'
   const headers: TableHeaderType[] = [
@@ -63,14 +68,14 @@ export const CardsTable = () => {
     {
       key: 'updated',
       label: 'Last updated',
-      className: `${s.lastUpdatedMy} ${myId === cardsData[0].userId ? s.lastUpdatedOther : ''}`,
+      className: `${s.lastUpdatedMy} ${myId === cardsData[0]?.userId ? s.lastUpdatedOther : ''}`,
       show: true,
       isSortable: true,
     },
     {
       key: 'grade',
       label: 'Grade',
-      className: `${s.gradeMy} ${myId === cardsData[0].userId ? s.gradeOther : ''}`,
+      className: `${s.gradeMy} ${myId === cardsData[0]?.userId ? s.gradeOther : ''}`,
       show: true,
       isSortable: true,
     },
@@ -78,7 +83,7 @@ export const CardsTable = () => {
       key: 'icons',
       label: '',
       className: `${s.icons}`,
-      show: myId !== cardsData[0].userId,
+      show: myId !== cardsData[0]?.userId,
     },
   ]
   const [sort, setSort] = useState<Sort>(null)
@@ -90,15 +95,15 @@ export const CardsTable = () => {
       <Table.Root>
         <TableHeader headers={headers} onSort={setSort} sort={sort} />
         <Table.Body>
-          {cardsData.map(item => (
+          {cardsData?.map(item => (
             <Table.Row key={item.id}>
               <Table.Cell>{item.question}</Table.Cell>
               <Table.Cell>
                 <ReadMore text={item.answer} maxLength={60} />
               </Table.Cell>
-              <Table.Cell>{item.lastUpdate}</Table.Cell>
+              <Table.Cell>{item.updated}</Table.Cell>
               <Table.Cell>
-                <StarRating value={item.grade} />
+                <StarRating value={item.rating} />
               </Table.Cell>
               {myId !== item.userId ? (
                 <Table.Cell>

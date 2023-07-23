@@ -50,9 +50,10 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
       invalidatesTags: ['decks'],
     }),
     getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
-      query: id => ({
-        url: `decks/${id}/cards`,
+      query: ({ decksId }) => ({
+        url: `decks/${decksId}/cards`,
         method: 'GET',
+        // body: { ...rest },
       }),
     }),
     createCards: build.mutation<CardType, CreateCardType>({
@@ -78,4 +79,5 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
   }),
 })
 
-export const { useGetDeckQuery, useCreateDeckMutation, useGetDecksQuery } = decksAPI
+export const { useGetDeckQuery, useCreateDeckMutation, useGetDecksQuery, useGetCardsQuery } =
+  decksAPI

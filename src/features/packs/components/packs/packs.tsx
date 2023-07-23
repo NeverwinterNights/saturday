@@ -117,15 +117,19 @@ export const Packs = () => {
           <Typography variant={'subtitle2'}>Clear Filter</Typography>
         </Button>
       </div>
+
       {decks && <PacksTable decks={decks.items} onSort={setSort} />}
-      <Pagination
-        count={decks?.pagination.totalPages ?? 10}
-        onChange={page => setCurrentPage(page)}
-        onPerPageChange={itemsPerPage => setItemsPerPage(itemsPerPage)}
-        page={decks?.pagination.currentPage ?? 1}
-        perPage={decks?.pagination.itemsPerPage}
-        perPageOptions={[4, 7, 10]}
-      />
+
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 30 }}>
+        <Pagination
+          count={decks?.pagination.totalPages ?? 10}
+          onChange={page => setCurrentPage(page)}
+          onPerPageChange={itemsPerPage => setItemsPerPage(itemsPerPage)}
+          page={decks?.pagination.currentPage ?? 1}
+          perPage={decks?.pagination.itemsPerPage}
+          perPageOptions={[4, 7, 10]}
+        />
+      </div>
     </Container>
   )
 }

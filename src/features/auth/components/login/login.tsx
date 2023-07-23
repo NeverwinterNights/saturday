@@ -21,6 +21,9 @@ export const LoginPage = () => {
       .catch(error => console.log(error))
   }
 
-  if (!data) return <LoginForm onSubmitHandler={loginHandler} />
-  if (data) navigate(PATH.PACKS)
+  if (data) {
+    navigate(PATH.PACKS)
+  }
+
+  return <LoginForm onSubmitHandler={loginHandler} />
 }

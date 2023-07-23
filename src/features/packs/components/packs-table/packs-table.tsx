@@ -66,7 +66,10 @@ export const PacksTable: FC<PropsType> = ({ decks }) => {
         <Table.Body>
           {decks &&
             decks.map(item => (
-              <Table.Row key={item.id}>
+              <Table.Row
+                key={item.id}
+                onClick={() => navigate(`${PATH.PACKS}${PATH.CARDS}/${item.id}`)}
+              >
                 <Table.Cell>
                   <div className={s.deckCover}>
                     {item.cover && <img src={photo} alt="" />}
