@@ -1,9 +1,12 @@
 import { FC, useState } from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import s from './packs-table.module.scss'
 
 import { Play } from '@/assets/icons/Play.tsx'
 import photo from '@/assets/images/react.png'
+import { PATH } from '@/common'
 import { TablePackIcons } from '@/components/ui/table/icons/tableIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
@@ -16,6 +19,7 @@ type PropsType = {
 
 export const PacksTable: FC<PropsType> = ({ decks }) => {
   const myId = '0000'
+  const navigate = useNavigate()
   const headersPacks: TableHeaderType[] = [
     {
       key: 'name',
@@ -74,7 +78,14 @@ export const PacksTable: FC<PropsType> = ({ decks }) => {
                 <Table.Cell>{item.author.name}</Table.Cell>
                 <Table.Cell align="center">
                   {/*если пак не наш, то показываем только 1 иконку*/}
-                  {myId !== item.userId ? <Play /> : <TablePackIcons />}
+                  {myId !== item.userId ? (
+                    <Play
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => navigate(`${PATH.LEARN}/${item.id}`)}
+                    />
+                  ) : (
+                    <TablePackIcons />
+                  )}
                 </Table.Cell>
               </Table.Row>
             ))}
