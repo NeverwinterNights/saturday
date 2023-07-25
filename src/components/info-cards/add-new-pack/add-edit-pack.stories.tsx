@@ -21,8 +21,6 @@ export const AddPackComponent: Story = {
     const [isOpen, setIsOpen] = useState(true)
     const [modalsData, setModalsData] = useState<FormType>({} as FormType)
 
-    console.log('modalsData', modalsData)
-
     return (
       <AddEditPack
         namePack={'Name Pack'}
