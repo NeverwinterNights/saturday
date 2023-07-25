@@ -39,23 +39,14 @@ export const AddNewCardComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
     const [modalsData, setModalsData] = useState<FormType>({} as FormType)
-    const [selectValue, setSelectValue] = useState('Text')
-    const [allData, setAllData] = useState<AllDataType>({} as AllDataType)
-
-    console.log('modalsData', modalsData)
-    console.log('allData', allData)
 
     const getData = (data: FormType) => {
-      setModalsData(data)
-      setAllData({ type: selectValue, ...data })
+      setModalsData({ ...data })
+      // setAllData({ type: selectValue, ...data })
     }
 
     return (
       <AddEditNewCard
-        placeholder={selectValue}
-        value={selectValue}
-        options={dataSelect}
-        onChange={setSelectValue}
         title={'Add New Card'}
         onOpenChange={setIsOpen}
         onClickDataHandler={getData}
@@ -65,8 +56,6 @@ export const AddNewCardComponent: Story = {
     )
   },
   args: {
-    options: [],
-    value: '',
     title: 'Add New Card',
     isOpen: true,
     buttonName: 'Add New Card',
@@ -77,28 +66,21 @@ export const EditNewCardComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
     const [modalsData, setModalsData] = useState<FormType>({} as FormType)
-    const [selectValue, setSelectValue] = useState('Text')
-    const [allData, setAllData] = useState<AllDataType>({} as AllDataType)
 
-    // console.log('modalsData', modalsData)
-    // console.log('selectValue', selectValue)
-    // console.log('allData', allData)
-    // console.log('isOpen', isOpen)
     const getData = (data: FormType) => {
       setModalsData(data)
-      setAllData({ type: selectValue, ...data })
     }
 
     return (
       <AddEditNewCard
-        placeholder={selectValue}
-        options={dataSelect}
-        onChange={setSelectValue}
-        value={selectValue}
+        // value={selectValue}
         title={'Edit Card'}
         onOpenChange={setIsOpen}
-        defaultQuestion={'Кто появился раньше курица или яйцо?'}
-        defaultAnswer={'Пиво'}
+        defaultQuestion={'Тестовый вопрос'}
+        defaultAnswer={'Тестовый ответ'}
+        questionImg={
+          'https://andrii-flashcards.s3.eu-central-1.amazonaws.com/41720658-7128-4f91-94f6-99682572b640-wallpaperflare.com_wallpaper.jpg'
+        }
         onClickDataHandler={getData}
         isOpen={isOpen}
         buttonName={'Save Changes'}
@@ -106,8 +88,6 @@ export const EditNewCardComponent: Story = {
     )
   },
   args: {
-    options: [],
-    value: '',
     title: 'Edit Card',
     isOpen: true,
     buttonName: 'Save Changes',

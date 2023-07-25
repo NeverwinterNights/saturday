@@ -15,16 +15,33 @@ export const addEditCardSchema = z.object({
     })
     .trim()
     .nonempty('Enter Answer!'),
+  questionImg: z.instanceof(FileList).optional(),
+  // questionImg: z.any().optional(),
+  answerImg: z.instanceof(FileList).optional(),
+  questionVideo: z.instanceof(FileList).optional(),
+  answerVideo: z.instanceof(FileList).optional(),
 })
+
 export type FormType = z.infer<typeof addEditCardSchema>
 
-export const useAddEditCard = (question?: string, answer?: string) => {
+export const useAddEditCard = (
+  question?: string,
+  answer?: string,
+  // questionImg?: FileList | undefined,
+  // answerImg?: FileList | undefined,
+  questionVideo?: FileList | undefined,
+  answerVideo?: FileList | undefined
+) => {
   return useForm<FormType>({
     resolver: zodResolver(addEditCardSchema),
     mode: 'onSubmit',
     defaultValues: {
       question,
       answer,
+      // questionImg,
+      // answerImg,
+      questionVideo,
+      answerVideo,
     },
   })
 }
