@@ -41,6 +41,8 @@ export const Packs = () => {
     itemsPerPage: itemsPerPage,
   })
 
+  console.log(decks)
+  const [rangeValue, setRangeValue] = useState<[number, number]>([0, 1])
   const [createDeck] = useCreateDeckMutation()
 
   const options = [
@@ -49,19 +51,16 @@ export const Packs = () => {
   ]
 
   useEffect(() => {
-    if (range[1] !== decks?.maxCardsCount) {
-      setRange(prev => [prev[0], decks?.maxCardsCount || 100])
+    if (rangeValue[1] !== decks?.maxCardsCount) {
+      setRangeValue(prev => [prev[0], decks?.maxCardsCount || 100])
     }
   }, [decks?.maxCardsCount])
 
   const clearFilter = () => {
     setSearch('')
     setTabValue('all')
-    setRange([0, decks?.maxCardsCount || 100])
-  }
-
-  const onValueChange = (value: [number, number]) => {
-    setRange(value)
+    setRange([0, 100])
+    setRangeValue([0, 100])
   }
 
   const sendModalHandler = (modalData: AddPackFormType) => {
@@ -107,9 +106,9 @@ export const Packs = () => {
           onValueChange={value => setTabValue(value)}
         />
         <SliderComponent
-          defaultValue={range}
-          value={range}
-          setValue={onValueChange}
+          onValueCommit={setRange}
+          value={rangeValue}
+          setValue={setRangeValue}
           max={decks?.maxCardsCount}
         />
         <Button variant={'secondary'} onClick={clearFilter}>
