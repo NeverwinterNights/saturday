@@ -30,7 +30,7 @@ type AddEditNewCardPropsType = {
   answerImg?: string | undefined
   questionVideo?: FileList | undefined
   answerVideo?: FileList | undefined
-  onClickDataHandler: (value: any) => void
+  onClickDataHandler: (value: FormData) => void
 }
 
 export const AddEditNewCard = ({

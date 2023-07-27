@@ -117,7 +117,7 @@ export const Packs = () => {
         </Button>
       </div>
 
-      {decks && <PacksTable decks={decks.items} onSort={setSort} />}
+      {decks && <PacksTable id={user?.id} decks={decks.items} onSort={setSort} />}
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: 30 }}>
         <Pagination
