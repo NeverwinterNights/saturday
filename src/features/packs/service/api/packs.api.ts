@@ -1,6 +1,5 @@
 import {
   CardType,
-  CreateCardType,
   CreateDeckRequestType,
   DecksType,
   GetCardsRequestType,
@@ -55,13 +54,15 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         method: 'GET',
         // body: { ...rest },
       }),
+      providesTags: ['cards'],
     }),
-    createCards: build.mutation<CardType, CreateCardType>({
-      query: ({ decksId, ...rest }) => ({
+    createCards: build.mutation<CardType, { data: FormData; decksId: string }>({
+      query: ({ decksId, data }) => ({
         url: `decks/${decksId}/cards`,
         method: 'POST',
-        body: { ...rest },
+        body: data,
       }),
+      invalidatesTags: ['cards'],
     }),
     getRandomCard: build.query<CardType, string>({
       query: id => ({
@@ -79,5 +80,10 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
   }),
 })
 
-export const { useGetDeckQuery, useCreateDeckMutation, useGetDecksQuery, useGetCardsQuery } =
-  decksAPI
+export const {
+  useGetDeckQuery,
+  useCreateDeckMutation,
+  useGetDecksQuery,
+  useGetCardsQuery,
+  useCreateCardsMutation,
+} = decksAPI

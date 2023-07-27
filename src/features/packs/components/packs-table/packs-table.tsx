@@ -15,10 +15,12 @@ import { DecksType } from '@/features/packs/service/api/packs.types.ts'
 type PropsType = {
   decks: DecksType[]
   onSort: (sort: Sort) => void
+  id?: string
 }
 
-export const PacksTable: FC<PropsType> = ({ decks }) => {
-  const myId = '0000'
+export const PacksTable: FC<PropsType> = ({ decks, id }) => {
+  // const myId = '0000'
+  const myId = id
   const navigate = useNavigate()
   const headersPacks: TableHeaderType[] = [
     {

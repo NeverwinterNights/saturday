@@ -13,7 +13,7 @@ type AddEditPackPropsType = {
   isOpen: boolean
   title: string
   buttonName: string
-  onOpenChange?: (value: boolean) => void
+  onOpenChange: (value: boolean) => void
   defaultValue?: string
   namePack: string
   onClickDataHandler: (value: AddPackFormType) => void
