@@ -7,9 +7,10 @@ import styles from './slider-сomponent.module.scss'
 import { Typography } from '@/components/ui/typography'
 
 type SliderPropsType = {
-  defaultValue: [number, number]
+  defaultValue?: [number, number]
   value: [number, number]
   // setValue: Dispatch<SetStateAction<[number, number]>>
+  onValueCommit?: (value: [number, number]) => void
   setValue: (value: [number, number]) => void
   min?: number
   max?: number
@@ -20,11 +21,13 @@ export const SliderComponent = ({
   defaultValue,
   min = 0,
   max = 100,
+  onValueCommit,
   value,
   label,
   setValue,
 }: SliderPropsType) => {
   const onSliderChange = (value: [number, number]) => {
+    console.log(value)
     setValue(value)
   }
 
@@ -61,6 +64,7 @@ export const SliderComponent = ({
             step={1}
             minStepsBetweenThumbs={1}
             value={value}
+            onValueCommit={onValueCommit}
           >
             <Slider.Track className={styles.SliderTrack}>
               <Slider.Range className={styles.SliderRange} />
