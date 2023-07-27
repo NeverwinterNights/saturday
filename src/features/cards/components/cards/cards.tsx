@@ -44,7 +44,6 @@ export const Cards = () => {
   }
 
   if (isLoading) return <div>Loading...</div>
-  console.log('data', data)
 
   return (
     <Container className={s.root}>
