@@ -9,14 +9,14 @@ export const cardAPI = flashCardsAPI.injectEndpoints({
         method: 'DELETE',
         url: `cards/${id}`,
       }),
-      invalidatesTags: ['card'],
+      invalidatesTags: ['cards'],
     }),
     getCardById: build.query<CardType, string>({
       query: id => ({
         method: 'GET',
         url: `cards/${id}`,
       }),
-      providesTags: ['card'],
+      // providesTags: ['cards'],
     }),
     updateCardById: build.mutation<CardType, { id: string; body: UpdateCardByIdRequestType }>({
       query: ({ id, body }) => ({
@@ -24,7 +24,7 @@ export const cardAPI = flashCardsAPI.injectEndpoints({
         url: `cards/${id}`,
         body: body,
       }),
-      invalidatesTags: ['card'],
+      invalidatesTags: ['cards'],
     }),
   }),
 })
