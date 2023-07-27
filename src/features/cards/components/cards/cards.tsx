@@ -23,7 +23,6 @@ export const Cards = () => {
   const { id } = useParams<{ id: string }>()
   const { data: user } = useMeQuery()
 
-  console.log(id)
   const { data, isLoading } = useGetCardsQuery({ decksId: id ?? '' })
   const { data: deck } = useGetDeckQuery(id ?? '')
   const [inputValue, setInputValue] = useState('')
