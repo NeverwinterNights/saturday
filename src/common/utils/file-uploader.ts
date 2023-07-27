@@ -11,7 +11,6 @@ export const uploadHandler = (e: File, callBack: (value: string) => void) => {
   } else {
     toast('Error with adding photo')
   }
-  console.log('result', result)
 
   return result
 }
