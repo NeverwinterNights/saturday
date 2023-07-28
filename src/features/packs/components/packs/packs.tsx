@@ -41,7 +41,6 @@ export const Packs = () => {
     itemsPerPage: itemsPerPage,
   })
 
-  console.log(decks)
   const [rangeValue, setRangeValue] = useState<[number, number]>([0, 1])
   const [createDeck] = useCreateDeckMutation()
 
@@ -99,19 +98,23 @@ export const Packs = () => {
           value={search}
         />
         <Tab
+          className={s.tab}
           tabs={options}
           label={'Show packs cards'}
           defaultValue={'all'}
           value={tabValue}
           onValueChange={value => setTabValue(value)}
         />
-        <SliderComponent
-          onValueCommit={setRange}
-          value={rangeValue}
-          setValue={setRangeValue}
-          max={decks?.maxCardsCount}
-        />
-        <Button variant={'secondary'} onClick={clearFilter}>
+        <div className={s.range}>
+          <SliderComponent
+            onValueCommit={setRange}
+            value={rangeValue}
+            setValue={setRangeValue}
+            max={decks?.maxCardsCount}
+          />
+        </div>
+
+        <Button className={s.clearBTN} variant={'secondary'} onClick={clearFilter}>
           <Trash />
           <Typography variant={'subtitle2'}>Clear Filter</Typography>
         </Button>

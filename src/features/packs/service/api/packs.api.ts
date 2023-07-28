@@ -85,5 +85,6 @@ export const {
   useCreateDeckMutation,
   useGetDecksQuery,
   useGetCardsQuery,
+  useDeleteDeckMutation,
   useCreateCardsMutation,
 } = decksAPI
