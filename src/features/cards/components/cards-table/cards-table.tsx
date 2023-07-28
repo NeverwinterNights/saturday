@@ -7,10 +7,7 @@ import { ReadMore } from '@/components/ui/read-more'
 import { TableCardIcons } from '@/components/ui/table/icons/tableCardIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
-import {
-  useDeleteCardMutation,
-  useUpdateCardByIdMutation,
-} from '@/features/cards/service/api/cards.api.ts'
+import { useDeleteCardMutation } from '@/features/cards/service/api/cards.api.ts'
 import { CardType } from '@/features/packs/service/api/packs.types.ts'
 
 type PropsType = {
@@ -88,7 +85,7 @@ export const CardsTable: FC<PropsType> = ({ cardsData }) => {
   ]
   const [sort, setSort] = useState<Sort>(null)
   const [deleteCard, {}] = useDeleteCardMutation()
-  const [updateCard, {}] = useUpdateCardByIdMutation()
+  // const [updateCard, {}] = useUpdateCardByIdMutation()
 
   return (
     <div>

@@ -10,6 +10,7 @@ import { PATH } from '@/common'
 import { TablePackIcons } from '@/components/ui/table/icons/tableIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
+import { useDeleteDeckMutation } from '@/features/packs/service/api/packs.api.ts'
 import { DecksType } from '@/features/packs/service/api/packs.types.ts'
 
 type PropsType = {
@@ -60,6 +61,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id }) => {
     },
   ]
   const [sort, setSort] = useState<Sort>(null)
+  const [deleteDeck] = useDeleteDeckMutation()
 
   return (
     <div>
@@ -68,11 +70,8 @@ export const PacksTable: FC<PropsType> = ({ decks, id }) => {
         <Table.Body>
           {decks &&
             decks.map(item => (
-              <Table.Row
-                key={item.id}
-                onClick={() => navigate(`${PATH.PACKS}${PATH.CARDS}/${item.id}`)}
-              >
-                <Table.Cell>
+              <Table.Row key={item.id}>
+                <Table.Cell onClick={() => navigate(`${PATH.PACKS}${PATH.CARDS}/${item.id}`)}>
                   <div className={s.deckCover}>
                     {item.cover && <img src={photo} alt="" />}
                     {item.name}
@@ -89,7 +88,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id }) => {
                       onClick={() => navigate(`${PATH.LEARN}/${item.id}`)}
                     />
                   ) : (
-                    <TablePackIcons />
+                    <TablePackIcons deleteDeck={() => deleteDeck(item.id)} />
                   )}
                 </Table.Cell>
               </Table.Row>

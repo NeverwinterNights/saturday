@@ -8,11 +8,13 @@ export const addEditCardSchema = z.object({
       required_error: 'Enter Question!',
     })
     .trim()
+    .min(3)
     .nonempty('Enter Question!'),
   answer: z
     .string({
       required_error: 'Enter Answer!',
     })
+    .min(3)
     .trim()
     .nonempty('Enter Answer!'),
   questionImg: z.instanceof(FileList).optional(),

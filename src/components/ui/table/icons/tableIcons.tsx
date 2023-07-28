@@ -2,7 +2,11 @@ import { Edit } from '@/assets/icons/Edit.tsx'
 import { Play } from '@/assets/icons/Play.tsx'
 import { Trash } from '@/assets/icons/Trash.tsx'
 
-export const TablePackIcons = () => {
+type TablePackIconsProp = {
+  deleteDeck?: () => void
+}
+
+export const TablePackIcons = ({ deleteDeck }: TablePackIconsProp) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
       <button style={{ cursor: 'pointer' }} onClick={() => alert('ad')}>
@@ -11,7 +15,7 @@ export const TablePackIcons = () => {
       <button style={{ cursor: 'pointer' }} onClick={() => alert('ad')}>
         <Edit />
       </button>
-      <button style={{ cursor: 'pointer' }} onClick={() => alert('ad')}>
+      <button style={{ cursor: 'pointer' }} onClick={deleteDeck}>
         <Trash />
       </button>
     </div>

@@ -1,24 +1,30 @@
 .deckCover {
+  cursor: pointer;
   display: flex;
-  align-items: center;
   gap: 10px;
+  align-items: center;
 }
+
 .name {
   width: 261px;
   text-align: left;
 }
+
 .cards {
   width: 141px;
   text-align: left;
 }
+
 .updated {
   width: 201px;
   text-align: left;
 }
+
 .createdBy {
   width: 286px;
   text-align: left;
 }
+
 .icons {
   width: 117px;
   text-align: left;

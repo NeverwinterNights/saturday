@@ -29,10 +29,11 @@ export const AddEditPack = memo(
     isOpen,
     title,
   }: AddEditPackPropsType) => {
-    const { handleSubmit, control } = useAddEditPack(defaultValue)
+    const { handleSubmit, setValue, control } = useAddEditPack(defaultValue)
 
     const onSubmit = handleSubmit(data => {
       onClickDataHandler(data)
+      setValue('name', '')
       onOpenChange?.(false)
     })
 
@@ -48,7 +49,7 @@ export const AddEditPack = memo(
               <div className={styles.input}>
                 <ControlledInput label={namePack} name={'name'} control={control} />
               </div>
-              <div className={styles.checkbox}>
+              <div>
                 <ControlledCheckbox
                   className={styles.checkbox}
                   label="Privat Pack"

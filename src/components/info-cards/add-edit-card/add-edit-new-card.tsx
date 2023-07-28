@@ -84,7 +84,8 @@ export const AddEditNewCard = ({
       form.append('answerVideo', data?.answerVideo?.[0])
     }
     onClickDataHandler(form)
-
+    setValue('question', '')
+    setValue('answer', '')
     onOpenChange?.(false)
   })
 
