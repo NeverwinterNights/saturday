@@ -41,7 +41,6 @@ export const Packs = () => {
     itemsPerPage: itemsPerPage,
   })
 
-  console.log(decks)
   const [rangeValue, setRangeValue] = useState<[number, number]>([0, 1])
   const [createDeck] = useCreateDeckMutation()
 
