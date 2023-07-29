@@ -47,7 +47,7 @@ export const AddEditNewCard = ({
   onClickDataHandler,
   isOpen,
 }: AddEditNewCardPropsType) => {
-  const { handleSubmit, setValue, control, register } = useAddEditCard(
+  const { handleSubmit, reset, setValue, control, register } = useAddEditCard(
     defaultQuestion,
     defaultAnswer,
     // questionImg,
@@ -84,8 +84,7 @@ export const AddEditNewCard = ({
       form.append('answerVideo', data?.answerVideo?.[0])
     }
     onClickDataHandler(form)
-    setValue('question', '')
-    setValue('answer', '')
+    reset()
     onOpenChange?.(false)
   })
 

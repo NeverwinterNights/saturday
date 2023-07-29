@@ -114,9 +114,11 @@ export const Packs = () => {
           />
         </div>
 
-        <Button className={s.clearBTN} variant={'secondary'} onClick={clearFilter}>
+        <Button variant={'secondary'} onClick={clearFilter}>
           <Trash />
-          <Typography variant={'subtitle2'}>Clear Filter</Typography>
+          <Typography className={s.btn} variant={'subtitle2'}>
+            Clear Filter
+          </Typography>
         </Button>
       </div>
 
