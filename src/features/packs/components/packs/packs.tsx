@@ -28,7 +28,7 @@ export const Packs = () => {
   const [range, setRange] = useState<[number, number]>([0, 100])
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState('7')
-  const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'asc' })
+  const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : undefined
   const [tabValue, setTabValue] = useState('all')
   const { data: decks, isLoading } = useGetDecksQuery({
@@ -118,7 +118,7 @@ export const Packs = () => {
         </Button>
       </div>
 
-      {decks && <PacksTable id={user?.id} decks={decks.items} onSort={setSort} />}
+      {decks && <PacksTable id={user?.id} decks={decks.items} sort={sort} onSort={setSort} />}
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: 30 }}>
         <Pagination
