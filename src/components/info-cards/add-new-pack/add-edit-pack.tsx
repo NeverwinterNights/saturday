@@ -29,11 +29,11 @@ export const AddEditPack = memo(
     isOpen,
     title,
   }: AddEditPackPropsType) => {
-    const { handleSubmit, setValue, control } = useAddEditPack(defaultValue)
+    const { handleSubmit, reset, control } = useAddEditPack(defaultValue)
 
     const onSubmit = handleSubmit(data => {
       onClickDataHandler(data)
-      setValue('name', '')
+      reset()
       onOpenChange?.(false)
     })
 

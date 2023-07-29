@@ -3,9 +3,9 @@ import { FC, ReactNode } from 'react'
 import * as Tabs from '@radix-ui/react-tabs'
 import { clsx } from 'clsx'
 
-import { Typography } from '../../../components/ui/typography'
-
 import s from './tab.module.scss'
+
+import { Typography } from '@/components/ui/typography'
 
 export type TabsType = {
   title: string
