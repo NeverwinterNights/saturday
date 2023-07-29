@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 
 import { Modal } from '../../ui/modal'
 import { ModalControl } from '../modal-control'
@@ -29,7 +29,7 @@ export const AddEditPack = memo(
     isOpen,
     title,
   }: AddEditPackPropsType) => {
-    const { handleSubmit, reset, control } = useAddEditPack(defaultValue)
+    const { handleSubmit, reset, control, setValue } = useAddEditPack(defaultValue)
 
     const onSubmit = handleSubmit(data => {
       onClickDataHandler(data)
@@ -40,6 +40,10 @@ export const AddEditPack = memo(
     const closedModal = () => {
       onOpenChange?.(false)
     }
+
+    useEffect(() => {
+      setValue('name', defaultValue || '')
+    }, [defaultValue])
 
     return (
       <>
@@ -53,7 +57,7 @@ export const AddEditPack = memo(
                 <ControlledCheckbox
                   className={styles.checkbox}
                   label="Privat Pack"
-                  name={'private'}
+                  name={'isPrivate'}
                   control={control}
                 />
               </div>

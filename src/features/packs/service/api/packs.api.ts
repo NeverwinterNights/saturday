@@ -7,6 +7,7 @@ import {
   GetDecksRequestType,
   GetDecksResponseType,
   SaveGradeCardType,
+  UpdateDeckRequestType,
 } from '@/features/packs/service/api/packs.types.ts'
 import { flashCardsAPI } from '@/store/api.ts'
 
@@ -41,10 +42,11 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
       }),
       invalidatesTags: ['decks'],
     }),
-    updateDeck: build.mutation<DecksType, string>({
-      query: id => ({
+    updateDeck: build.mutation<DecksType, { id: string; data: UpdateDeckRequestType }>({
+      query: ({ id, data }) => ({
         url: `decks/${id}`,
         method: 'PATCH',
+        body: data,
       }),
       invalidatesTags: ['decks'],
     }),
@@ -82,6 +84,7 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
 export const {
   useGetDeckQuery,
   useCreateDeckMutation,
+  useUpdateDeckMutation,
   useGetDecksQuery,
   useGetCardsQuery,
   useDeleteDeckMutation,
