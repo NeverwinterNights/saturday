@@ -59,7 +59,9 @@ export const Packs = () => {
     setSearch('')
     setTabValue('all')
     setRange([0, 100])
-    setRangeValue([0, 100])
+    if (decks) {
+      setRangeValue([0, decks.maxCardsCount])
+    }
   }
 
   const sendModalHandler = (modalData: AddPackFormType) => {
