@@ -102,16 +102,16 @@ export const CardsTable: FC<PropsType> = ({ cardsData }) => {
               <Table.Cell>
                 <StarRating value={item.rating} />
               </Table.Cell>
-              {myId !== item.userId ? (
-                <Table.Cell>
+              <Table.Cell>
+                {myId === item.userId ? (
                   <TableCardIcons
                     // updateCard={() => updateCard(item.id)}
                     deleteCard={() => deleteCard(item.id)}
                   />
-                </Table.Cell>
-              ) : (
-                ''
-              )}
+                ) : (
+                  ''
+                )}
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
