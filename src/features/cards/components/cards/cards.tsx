@@ -12,9 +12,9 @@ import cover from '@/assets/images/packs_cover.png'
 import { AddEditNewCard } from '@/components/info-cards/add-edit-card'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
+import { DebounceInput } from '@/components/ui/debounce-input'
 import { Dropdown, DropdownItemWithIcon } from '@/components/ui/dropdown'
 import { Image } from '@/components/ui/image/image.tsx'
-import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/features/auth/service/api/auth.api.ts'
 import { CardsTable } from '@/features/cards/components/cards-table/cards-table.tsx'
@@ -28,9 +28,12 @@ export const Cards = () => {
   const { id } = useParams<{ id: string }>()
   const { data: user } = useMeQuery()
 
-  const { data, isLoading } = useGetCardsQuery({ decksId: id ?? '' })
+  const [searchValue, setSearchValue] = useState('')
+  const { data, isLoading } = useGetCardsQuery({
+    decksId: id ?? '',
+    question: searchValue != null ? searchValue : '',
+  })
   const { data: deck } = useGetDeckQuery(id ?? '')
-  const [inputValue, setInputValue] = useState('')
   const myPack = deck?.userId === user?.id
   const packsCover = ''
   const navigate = useNavigate()
@@ -94,12 +97,17 @@ export const Cards = () => {
 
       {data && data.items.length ? (
         <>
-          <Input
+          {/*<Input
             searchInput
             placeholder={'Input search'}
             className={s.input}
             value={inputValue}
             onChange={e => setInputValue(e.currentTarget.value)}
+          />*/}
+          <DebounceInput
+            className={s.input}
+            onValueChange={e => setSearchValue(e)}
+            searchValue={searchValue}
           />
           <CardsTable cardsData={data.items} />
         </>

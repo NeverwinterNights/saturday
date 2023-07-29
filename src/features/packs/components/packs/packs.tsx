@@ -7,7 +7,7 @@ import { AddEditPack } from '@/components/info-cards/add-new-pack'
 import { AddPackFormType } from '@/components/info-cards/add-new-pack/use-add-new-pack.ts'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
-import { Input } from '@/components/ui/input'
+import { DebounceInput } from '@/components/ui/debounce-input/debounce-input.tsx'
 import { Pagination } from '@/components/ui/pagination'
 import { SliderComponent } from '@/components/ui/slider'
 import { Tab } from '@/components/ui/tabs'
@@ -59,7 +59,9 @@ export const Packs = () => {
     setSearch('')
     setTabValue('all')
     setRange([0, 100])
-    setRangeValue([0, 100])
+    if (decks) {
+      setRangeValue([0, decks.maxCardsCount])
+    }
   }
 
   const sendModalHandler = (modalData: AddPackFormType) => {
@@ -90,13 +92,7 @@ export const Packs = () => {
         <Button onClick={() => setIsOpenModal(true)}>Add New Pack</Button>
       </div>
       <div className={s.filter}>
-        <Input
-          placeholder={'Input search'}
-          width={'300px'}
-          searchInput
-          onValueChange={e => setSearch(e)}
-          value={search}
-        />
+        <DebounceInput onValueChange={e => setSearch(e)} searchValue={search} />
         <Tab
           className={s.tab}
           tabs={options}

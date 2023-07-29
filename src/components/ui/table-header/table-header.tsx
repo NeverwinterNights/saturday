@@ -2,6 +2,8 @@ import { ComponentPropsWithoutRef, MouseEventHandler } from 'react'
 
 import s from './table-header.module.scss'
 
+import { ArrowUp } from '@/assets/icons/ArrowUp.tsx'
+import { DownArrow } from '@/assets/icons/DownArrow.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 
 export type Sort = {
@@ -63,8 +65,10 @@ export const TableHeader = ({ headers, onSort, sort }: Props) => {
                 key={header.key}
                 className={header.className}
               >
-                {header.label}
-                {showSort && <span>{sort.direction === 'asc' ? '▲' : '▼'}</span>}
+                <div className={s.label}>
+                  {header.label}
+                  {showSort && (sort.direction === 'asc' ? <ArrowUp /> : <DownArrow />)}
+                </div>
               </Table.HeadCell>
             )
           )
