@@ -66,7 +66,7 @@ export const Packs = () => {
     const form = new FormData()
 
     form.append('name', modalData.name)
-    modalData.private && form.append('isPrivate', 'true')
+    modalData.isPrivate && form.append('isPrivate', 'true')
 
     createDeck(form)
     setIsOpenModal(false)

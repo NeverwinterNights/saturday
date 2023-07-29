@@ -13,7 +13,9 @@ export type GetDecksResponseType = {
   maxCardsCount: number
 }
 
-// export type CreateDeckRequestType = {
+export type UpdateDeckRequestType = FormData
+
+//     {
 //   cover?: string
 //   name: string
 //   isPrivate?: boolean

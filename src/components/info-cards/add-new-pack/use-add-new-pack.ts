@@ -9,7 +9,8 @@ export const addEditPackSchema = z.object({
     })
     .trim()
     .nonempty('Enter Name!'),
-  private: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
+  cover: z.string().optional(),
 })
 export type AddPackFormType = z.infer<typeof addEditPackSchema>
 

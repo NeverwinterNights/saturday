@@ -7,10 +7,15 @@ import s from './packs-table.module.scss'
 import { Play } from '@/assets/icons/Play.tsx'
 import photo from '@/assets/images/react.png'
 import { PATH } from '@/common'
+import { AddEditPack } from '@/components/info-cards/add-new-pack'
+import { AddPackFormType } from '@/components/info-cards/add-new-pack/use-add-new-pack.ts'
 import { TablePackIcons } from '@/components/ui/table/icons/tableIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
-import { useDeleteDeckMutation } from '@/features/packs/service/api/packs.api.ts'
+import {
+  useDeleteDeckMutation,
+  useUpdateDeckMutation,
+} from '@/features/packs/service/api/packs.api.ts'
 import { DecksType } from '@/features/packs/service/api/packs.types.ts'
 
 type PropsType = {
@@ -18,7 +23,10 @@ type PropsType = {
   onSort: (sort: Sort) => void
   id?: string
 }
-
+type DeckData = {
+  name: string
+  id: string
+}
 export const PacksTable: FC<PropsType> = ({ decks, id }) => {
   // const myId = '0000'
   const myId = id
@@ -62,9 +70,38 @@ export const PacksTable: FC<PropsType> = ({ decks, id }) => {
   ]
   const [sort, setSort] = useState<Sort>(null)
   const [deleteDeck] = useDeleteDeckMutation()
+  const [updateDeck] = useUpdateDeckMutation()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [deckData, setDeckData] = useState<DeckData>({} as DeckData)
+  const modalHandler = (data: AddPackFormType) => {
+    const form = new FormData()
+
+    form.append('name', data.name)
+    if (data?.cover?.[0]) {
+      form.append('cover', data?.cover)
+    }
+    if (data?.isPrivate) {
+      form.append('isPrivate', JSON.stringify(data?.isPrivate))
+    }
+    updateDeck({ id: deckData.id, data: form })
+  }
+
+  const openModalHandler = (name: string, id: string) => {
+    setDeckData({ name, id })
+    setIsModalOpen(true)
+  }
 
   return (
     <div>
+      <AddEditPack
+        defaultValue={deckData.name}
+        namePack={'Name Pack'}
+        title={'Edit Pack'}
+        onClickDataHandler={modalHandler}
+        buttonName={'Save Changes'}
+        onOpenChange={setIsModalOpen}
+        isOpen={isModalOpen}
+      />
       <Table.Root>
         <TableHeader headers={headersPacks} onSort={setSort} sort={sort} />
         <Table.Body>
@@ -88,7 +125,11 @@ export const PacksTable: FC<PropsType> = ({ decks, id }) => {
                       onClick={() => navigate(`${PATH.LEARN}/${item.id}`)}
                     />
                   ) : (
-                    <TablePackIcons deleteDeck={() => deleteDeck(item.id)} />
+                    <TablePackIcons
+                      editOpenModals={() => openModalHandler(item.name, item.id)}
+                      // editOpenModals={() => console.log('value', item.name)}
+                      deleteDeck={() => deleteDeck(item.id)}
+                    />
                   )}
                 </Table.Cell>
               </Table.Row>
