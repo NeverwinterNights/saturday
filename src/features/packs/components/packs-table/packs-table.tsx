@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -21,13 +21,14 @@ import { DecksType } from '@/features/packs/service/api/packs.types.ts'
 type PropsType = {
   decks: DecksType[]
   onSort: (sort: Sort) => void
+  sort: Sort
   id?: string
 }
 type DeckData = {
   name: string
   id: string
 }
-export const PacksTable: FC<PropsType> = ({ decks, id }) => {
+export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
   // const myId = '0000'
   const myId = id
   const navigate = useNavigate()
@@ -68,7 +69,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id }) => {
       isSortable: false,
     },
   ]
-  const [sort, setSort] = useState<Sort>(null)
+
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -103,7 +104,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id }) => {
         isOpen={isModalOpen}
       />
       <Table.Root>
-        <TableHeader headers={headersPacks} onSort={setSort} sort={sort} />
+        <TableHeader headers={headersPacks} onSort={onSort} sort={sort} />
         <Table.Body>
           {decks &&
             decks.map(item => (
