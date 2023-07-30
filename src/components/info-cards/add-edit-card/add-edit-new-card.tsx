@@ -10,6 +10,7 @@ import { AddMediaIcon } from '@/assets/icons/AddMediaIcon.tsx'
 import { uploadHandler } from '@/common/utils/file-uploader.ts'
 import { Button } from '@/components/ui/button'
 import { ControlledInput } from '@/components/ui/controlled'
+import { useTranslate } from '@/i18n.ts'
 
 type ImageType = {
   questionImg?: string
@@ -55,7 +56,7 @@ export const AddEditNewCard = ({
     answerVideo,
     questionVideo
   )
-
+  const t = useTranslate()
   const inputRef1 = useRef<HTMLInputElement>(null)
   const inputRef2 = useRef<HTMLInputElement>(null)
   const inputRef3 = useRef<HTMLInputElement>(null)
@@ -118,7 +119,7 @@ export const AddEditNewCard = ({
               <div className={styles.item}>
                 <div className={styles.imageWrap}>
                   {!image.questionImg ? (
-                    <div>No Image</div>
+                    <div>{t('No Image')}</div>
                   ) : (
                     <img
                       style={{ width: '100%', height: '100%' }}
@@ -128,7 +129,7 @@ export const AddEditNewCard = ({
                   )}
                 </div>
                 <div className={styles.infoWrap}>
-                  <div>Image Question</div>
+                  <div>{t('Image Question')}</div>
                   <input
                     style={{ display: 'none' }}
                     type="file"
@@ -148,7 +149,7 @@ export const AddEditNewCard = ({
                     onClick={() => inputRef1 && inputRef1.current?.click()}
                   >
                     <AddMediaIcon />
-                    Change Cover
+                    {t('Change Cover')}
                   </Button>
                 </div>
               </div>
@@ -156,7 +157,7 @@ export const AddEditNewCard = ({
               <div className={styles.item}>
                 <div className={styles.imageWrap}>
                   {!image.answerImg ? (
-                    <div>No Image</div>
+                    <div>{t('No Image')}</div>
                   ) : (
                     <img
                       style={{ width: '100%', height: '100%' }}
@@ -166,7 +167,7 @@ export const AddEditNewCard = ({
                   )}
                 </div>
                 <div className={styles.infoWrap}>
-                  <div>Image Answer</div>
+                  <div>{t('Image Answer')}</div>
                   <input
                     style={{ display: 'none' }}
                     type="file"
@@ -180,7 +181,7 @@ export const AddEditNewCard = ({
                     onClick={() => inputRef2 && inputRef2.current?.click()}
                   >
                     <AddMediaIcon />
-                    Change Cover
+                    {t('Change Cover')}
                   </Button>
                 </div>
               </div>
@@ -188,7 +189,7 @@ export const AddEditNewCard = ({
               <div className={styles.item}>
                 <div className={styles.imageWrap}>
                   {!image.questionVideo ? (
-                    <div>No Image</div>
+                    <div>{t('No Image')}</div>
                   ) : (
                     <img
                       style={{ width: '100%', height: '100%' }}
@@ -198,7 +199,7 @@ export const AddEditNewCard = ({
                   )}
                 </div>
                 <div className={styles.infoWrap}>
-                  <div>Video Answer</div>
+                  <div>{t('Video Answer')}</div>
                   <input
                     style={{ display: 'none' }}
                     type="file"
@@ -212,7 +213,7 @@ export const AddEditNewCard = ({
                     onClick={() => inputRef3 && inputRef3.current?.click()}
                   >
                     <AddMediaIcon />
-                    Change Cover
+                    {t('Change Cover')}
                   </Button>
                 </div>
               </div>
@@ -220,7 +221,7 @@ export const AddEditNewCard = ({
               <div className={styles.item}>
                 <div className={styles.imageWrap}>
                   {!image.answerVideo ? (
-                    <div>No Image</div>
+                    <div>{t('No Image')}</div>
                   ) : (
                     <img
                       style={{ width: '100%', height: '100%' }}
@@ -230,7 +231,7 @@ export const AddEditNewCard = ({
                   )}
                 </div>
                 <div className={styles.infoWrap}>
-                  <div>Video Answer</div>
+                  <div>{t('Video Answer')}</div>
                   <input
                     style={{ display: 'none' }}
                     type="file"
@@ -244,7 +245,7 @@ export const AddEditNewCard = ({
                     onClick={() => inputRef4 && inputRef4.current?.click()}
                   >
                     <AddMediaIcon />
-                    Change Cover
+                    {t('Change Cover')}
                   </Button>
                 </div>
               </div>

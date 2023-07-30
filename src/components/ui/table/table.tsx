@@ -7,6 +7,8 @@ import { Typography } from '../typography'
 
 import s from './table.module.scss'
 
+import { useTranslate } from '@/i18n.ts'
+
 export type RootProps = ComponentProps<'table'>
 
 export const Root: FC<RootProps> = ({ className, ...rest }) => {
@@ -60,6 +62,7 @@ export const Empty: FC<ComponentProps<'div'> & { mt?: string; mb?: string }> = (
   mt = '69px',
   mb = '30px',
 }) => {
+  const t = useTranslate()
   const classNames = {
     empty: clsx(className, s.empty),
   }
@@ -67,9 +70,9 @@ export const Empty: FC<ComponentProps<'div'> & { mt?: string; mb?: string }> = (
   return (
     <div className={classNames.empty}>
       <Typography variant="body1" color={'secondary'} style={{ marginTop: mt, marginBottom: mb }}>
-        This pack is empty. Click add new card to fill this pack
+        {t('This pack is empty. Click add new card to fill this pack')}
       </Typography>
-      <Button variant="primary">Add New Card</Button>
+      <Button variant="primary">{t('Add New Card')}</Button>
     </div>
   )
 }

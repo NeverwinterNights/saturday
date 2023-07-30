@@ -7,6 +7,7 @@ import { AddMediaIcon } from '@/assets/icons/AddMediaIcon.tsx'
 import { convertFileToBase64 } from '@/common/utils'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
+import { useTranslate } from '@/i18n.ts'
 
 type TypeVideoProp = {
   control?: Control<{ questionVideo: string; answerVideo: string }, any>
@@ -19,7 +20,7 @@ export const TypeVideo = ({ questionURL, answerURL }: TypeVideoProp) => {
   const inputRef2 = useRef<HTMLInputElement>(null)
   const [URLQuestion, setURLQuestion] = useState(questionURL)
   const [URLAnswer, setURLAnswer] = useState(answerURL)
-
+  const t = useTranslate()
   const uploadHandler = (
     e: ChangeEvent<HTMLInputElement>,
     updater: Dispatch<SetStateAction<string | undefined>>
@@ -41,7 +42,7 @@ export const TypeVideo = ({ questionURL, answerURL }: TypeVideoProp) => {
     <>
       <div style={{ marginBottom: '30px' }}>
         <Typography style={{ marginBottom: '24px' }} variant="subtitle2">
-          Question:
+          {t('Question:')}
         </Typography>
         <div
           style={{
@@ -53,7 +54,7 @@ export const TypeVideo = ({ questionURL, answerURL }: TypeVideoProp) => {
           }}
         >
           {URLQuestion && URLQuestion.length <= 0 ? (
-            <Typography variant="subtitle2">No Video</Typography>
+            <Typography variant="subtitle2">{t('No Video')}</Typography>
           ) : (
             <video src={URLQuestion} width={'100%'} height="100%" controls />
           )}
@@ -65,7 +66,7 @@ export const TypeVideo = ({ questionURL, answerURL }: TypeVideoProp) => {
           onClick={() => inputRef1 && inputRef1.current?.click()}
         >
           <AddMediaIcon />
-          Change Cover
+          {t('Change Cover')}
         </Button>
         <input
           ref={inputRef1}
@@ -76,7 +77,7 @@ export const TypeVideo = ({ questionURL, answerURL }: TypeVideoProp) => {
       </div>
       <div style={{ marginBottom: '30px' }}>
         <Typography style={{ marginBottom: '24px' }} variant="subtitle2">
-          Answer:
+          {t('Answer:')}
         </Typography>
         <div
           style={{
@@ -88,7 +89,7 @@ export const TypeVideo = ({ questionURL, answerURL }: TypeVideoProp) => {
           }}
         >
           {URLAnswer && URLAnswer.length <= 0 ? (
-            <Typography variant="subtitle2">No Video</Typography>
+            <Typography variant="subtitle2">{t('No Video')}</Typography>
           ) : (
             <video src={URLAnswer} width={'100%'} height="100%" controls />
           )}
@@ -101,7 +102,7 @@ export const TypeVideo = ({ questionURL, answerURL }: TypeVideoProp) => {
           onClick={() => inputRef2 && inputRef2.current?.click()}
         >
           <AddMediaIcon />
-          Change Cover
+          {t('Change Cover')}
         </Button>
         <input
           ref={inputRef2}

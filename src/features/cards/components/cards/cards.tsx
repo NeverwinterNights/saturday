@@ -23,8 +23,10 @@ import {
   useGetCardsQuery,
   useGetDeckQuery,
 } from '@/features/packs/service/api/packs.api.ts'
+import { useTranslate } from '@/i18n.ts'
 
 export const Cards = () => {
+  const t = useTranslate()
   const { id } = useParams<{ id: string }>()
   const { data: user } = useMeQuery()
 
@@ -46,24 +48,24 @@ export const Cards = () => {
     }
   }
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <div>{t('Loading...')}</div>
 
   return (
     <Container className={s.root}>
       <Typography variant={'body2'} onClick={() => navigate(-1)} className={s.backBtn}>
         <ArrowLeft />
-        Back to Packs List
+        {t('Back to Packs List')}
       </Typography>
       <AddEditNewCard
         isOpen={isModalOpen}
-        title="Add New Card"
+        title={t('Add New Card')}
         buttonName="Add New Card"
         onClickDataHandler={createCardHandler}
         onOpenChange={() => setIsModalOpen(false)}
       />
       <div className={s.title}>
         <div className={s.namePack}>
-          <Typography variant={'large'}>Name Pack</Typography>
+          <Typography variant={'large'}>{t('Name Pack')}</Typography>
           {myPack && (
             <Dropdown>
               <Fragment key=".0">
@@ -87,9 +89,9 @@ export const Cards = () => {
           )}
         </div>
         {myPack ? (
-          <Button onClick={() => setIsModalOpen(!isModalOpen)}>Add New Card</Button>
+          <Button onClick={() => setIsModalOpen(!isModalOpen)}>{t('Add New Card')}</Button>
         ) : (
-          <Button>Learn to Pack</Button>
+          <Button>{t('Learn to Pack')}</Button>
         )}
       </div>
 
@@ -114,9 +116,9 @@ export const Cards = () => {
       ) : (
         <div className={s.empty}>
           <Typography variant={'body1'}>
-            This pack is empty. Click add new card to fill this pack
+            {t('This pack is empty. Click add new card to fill this pack')}
           </Typography>
-          <Button onClick={() => setIsModalOpen(!isModalOpen)}>Add New Card</Button>
+          <Button onClick={() => setIsModalOpen(!isModalOpen)}>{t('Add New Card')}</Button>
         </div>
       )}
     </Container>

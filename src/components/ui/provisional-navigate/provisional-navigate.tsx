@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { PATH } from '@/common'
+import { useTranslate } from '@/i18n.ts'
 
 export const ProvisionalNavigate = () => {
   return (

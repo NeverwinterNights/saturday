@@ -17,6 +17,7 @@ import {
   useUpdateDeckMutation,
 } from '@/features/packs/service/api/packs.api.ts'
 import { DecksType } from '@/features/packs/service/api/packs.types.ts'
+import { useTranslate } from '@/i18n.ts'
 
 type PropsType = {
   decks: DecksType[]
@@ -30,33 +31,34 @@ type DeckData = {
 }
 export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
   // const myId = '0000'
+  const t = useTranslate()
   const myId = id
   const navigate = useNavigate()
   const headersPacks: TableHeaderType[] = [
     {
       key: 'name',
-      label: 'Name',
+      label: t('Name'),
       className: `${s.name}`,
       show: true,
       isSortable: true,
     },
     {
       key: 'cards',
-      label: 'Cards',
+      label: t('Cards'),
       className: `${s.cards}`,
       show: true,
       isSortable: true,
     },
     {
       key: 'updated',
-      label: 'Last Updated',
+      label: t('Last Updated'),
       className: `${s.updated}`,
       show: true,
       isSortable: true,
     },
     {
       key: 'createdBy',
-      label: 'Created by',
+      label: t('Created by'),
       className: `${s.createdBy}`,
       show: true,
       isSortable: true,

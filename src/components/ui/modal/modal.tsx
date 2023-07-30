@@ -7,6 +7,7 @@ import { Typography } from '../typography'
 import s from './modal.module.scss'
 
 import { CloseModal } from '@/assets/icons/CloseModal.tsx'
+import { useTranslate } from '@/i18n.ts'
 
 export type ModalType = {
   children?: ReactNode
@@ -16,6 +17,8 @@ export type ModalType = {
 } & ComponentProps<'div'>
 
 export const Modal: FC<ModalType> = ({ children, title, onOpenChange, isOpen }) => {
+  const t = useTranslate()
+
   return (
     <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
       <Dialog.Portal>
@@ -25,7 +28,7 @@ export const Modal: FC<ModalType> = ({ children, title, onOpenChange, isOpen }) 
             <Dialog.Title>
               <Typography variant={'h2'}>{title}</Typography>
             </Dialog.Title>
-            <Dialog.Close className={s.IconButton} aria-label="Close">
+            <Dialog.Close className={s.IconButton} aria-label={t('Close')}>
               <CloseModal />
             </Dialog.Close>
           </div>
