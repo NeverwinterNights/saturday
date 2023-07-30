@@ -30,7 +30,6 @@ type DeckData = {
   id: string
 }
 export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
-  // const myId = '0000'
   const t = useTranslate()
   const myId = id
   const navigate = useNavigate()
@@ -43,7 +42,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
       isSortable: true,
     },
     {
-      key: 'cards',
+      key: 'cardsCount',
       label: t('Cards'),
       className: `${s.cards}`,
       show: true,
@@ -57,7 +56,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
       isSortable: true,
     },
     {
-      key: 'createdBy',
+      key: 'created',
       label: t('Created by'),
       className: `${s.createdBy}`,
       show: true,
