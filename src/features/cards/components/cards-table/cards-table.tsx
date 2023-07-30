@@ -15,9 +15,10 @@ type PropsType = {
   cardsData: CardType[]
   onSort: (sort: Sort) => void
   sort: Sort
+  id?: string
 }
 
-export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort }) => {
+export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
   const t = useTranslate()
   const myId = '0000'
   const headers: TableHeaderType[] = [
@@ -75,7 +76,7 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort }) => {
                 <StarRating value={item.rating} />
               </Table.Cell>
               <Table.Cell>
-                {myId === item.userId ? (
+                {id === item.userId ? (
                   <TableCardIcons
                     // updateCard={() => updateCard(item.id)}
                     deleteCard={() => deleteCard(item.id)}
