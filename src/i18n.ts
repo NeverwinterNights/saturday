@@ -12,7 +12,7 @@ const pluralizeEn = createPluralize('en')
 const pluralizeRu = createPluralize('ru')
 
 export const i18n = new I18N({
-  defaultLang: 'ru',
+  defaultLang: 'en',
   languages: {
     en: {
       keyset: en,
