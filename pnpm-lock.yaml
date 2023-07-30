@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@ayub-begimkulov/i18n':
+    specifier: ^0.2.1
+    version: 0.2.1(react@18.2.0)
   '@fontsource/roboto':
     specifier: ^5.0.3
     version: 5.0.3
@@ -171,6 +174,17 @@ packages:
     dependencies:
       default-browser-id: 3.0.0
     dev: true
+
+  /@ayub-begimkulov/i18n@0.2.1(react@18.2.0):
+    resolution: {integrity: sha512-n9sfMa4UtxujhiqVjPxQFw1LWlj5pHEeRpUr0W09xG+Vz8DTb9MlOEHrtFshSf7aElH8CBmg3yWC9aw3p7fgDA==}
+    peerDependencies:
+      react: '>=16.8.0 || 17.x || 18.x'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@babel/code-frame@7.22.5:
     resolution: {integrity: sha512-Xmwn266vad+6DAqEB2A6V/CcZVp62BbwVmcOJc2RPuwih1kw02TjQvWVWlcKGbBPd+8/0V5DEkOcizRGYsspYQ==}

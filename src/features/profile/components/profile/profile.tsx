@@ -8,9 +8,11 @@ import { PersonalInfo, PersonalInfoPropType } from '@/components/auth/personal-i
 import { useLogoutMutation, useMeQuery, util } from '@/features/auth/service/api/auth.api.ts'
 import { useUpdateProfileMutation } from '@/features/profile/service/api/profile.api.ts'
 import { ResponseUpdateMe } from '@/features/profile/service/api/profile.types.ts'
+import { useTranslate } from '@/i18n.ts'
 import { useAppDispatch } from '@/store/store.ts'
 
 export const Profile = () => {
+  const t = useTranslate()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { data: meData, isLoading } = useMeQuery()
@@ -44,7 +46,7 @@ export const Profile = () => {
       })
   }
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <div>{t('Loading...')}</div>
 
   return <PersonalInfo onUpdate={updateProfile} onSignOut={logOut} data={data} />
 }

@@ -31,27 +31,27 @@ export const LearnPack = ({
   return (
     <div className={styles.wrap}>
       <Typography className={styles.title} variant="large">
-        Learn {packName}
+        {t('Learn')} {packName}
       </Typography>
       <Typography className={styles.question} variant="body1">
         <Typography as="span" variant="subtitle2">
-          Question:{' '}
+          {t('Question:')}
         </Typography>
         {question}
       </Typography>
       <Typography className={styles.efforts} color="secondary" variant="body2">
-        Количество попыток ответов на вопрос: {numberEfforts}
+        {t('Количество попыток ответов на вопрос:')} {numberEfforts}
       </Typography>
       {isOpen && (
         <div>
           <Typography className={styles.mb} variant="body1">
             <Typography as="span" variant="subtitle2">
-              Answer:{' '}
+              {t('Answer:')}
             </Typography>
             {answer}
           </Typography>
           <Typography className={styles.mb} variant="subtitle1">
-            Rate yourself:
+            {t('Rate yourself:')}
           </Typography>
           <div className={styles.radio}>
             <RadioGroup
@@ -64,7 +64,7 @@ export const LearnPack = ({
       )}
       <div className={styles.button}>
         <Button onClick={openAnswers} fullWidth variant="primary">
-          <Typography variant="subtitle2">Show Answer</Typography>
+          <Typography variant="subtitle2">{t('Show Answer')}</Typography>
         </Button>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { Person } from '@/assets/icons/Person.tsx'
 import logo from '@/assets/images/logo.png'
 import { Avatar } from '@/components/ui/avatar'
 import { Container } from '@/components/ui/container/container.tsx'
+import { useTranslate } from '@/i18n.ts'
 
 type HeaderPropsType = {
   isAuth: boolean
@@ -29,17 +30,19 @@ export const Header = ({
   onSignOut,
   onProfileClick,
 }: HeaderPropsType) => {
+  const t = useTranslate()
+
   return (
     <div className={styles.main}>
       <Container className={styles.container}>
         <div className={styles.logo}>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt={t('logo')} />
         </div>
         <div className={styles.rightItem}>
           {!isAuth ? (
             <div className={styles.button}>
               <Button onClick={onSignIn} variant="primary">
-                Sign In
+                {t('Sign In')}
               </Button>
             </div>
           ) : (
@@ -66,8 +69,16 @@ export const Header = ({
                     </div>
                   </div>
                 </DropdownItem>
-                <DropdownItemWithIcon icon={<Person />} text="Profile" onSelect={onProfileClick} />
-                <DropdownItemWithIcon icon={<LogOutIcon />} text="Sign out" onSelect={onSignOut} />
+                <DropdownItemWithIcon
+                  icon={<Person />}
+                  text={t('Profile')}
+                  onSelect={onProfileClick}
+                />
+                <DropdownItemWithIcon
+                  icon={<LogOutIcon />}
+                  text={t('Sign out')}
+                  onSelect={onSignOut}
+                />
               </Dropdown>
             </div>
           )}

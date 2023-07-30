@@ -15,6 +15,7 @@ import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/features/auth/service/api/auth.api.ts'
 import { PacksTable } from '@/features/packs/components/packs-table/packs-table.tsx'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/service/api/packs.api.ts'
+import { useTranslate } from '@/i18n.ts'
 
 export type Sort = {
   key: string
@@ -22,6 +23,7 @@ export type Sort = {
 } | null
 
 export const Packs = () => {
+  const t = useTranslate()
   const { data: user } = useMeQuery()
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [search, setSearch] = useState('')
@@ -45,8 +47,8 @@ export const Packs = () => {
   const [createDeck] = useCreateDeckMutation()
 
   const options = [
-    { value: 'my', title: 'My Cards' },
-    { value: 'all', title: 'All Cards' },
+    { value: 'my', title: t('My Cards') },
+    { value: 'all', title: t('All Cards') },
   ]
 
   useEffect(() => {
@@ -74,29 +76,29 @@ export const Packs = () => {
     setIsOpenModal(false)
   }
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <div>{t('Loading...')}</div>
 
   return (
     <Container className={s.root}>
       <AddEditPack
-        title={'Add New Pack'}
-        buttonName={'Add New Pack'}
-        namePack={'Name Pack'}
+        title={t('Add New Pack')}
+        buttonName={t('Add New Pack')}
+        namePack={t('Name Pack')}
         isOpen={isOpenModal}
         onOpenChange={isOpen => setIsOpenModal(isOpen)}
         onClickDataHandler={sendModalHandler}
-        defaultValue={'Name'}
+        defaultValue={t('Name Pack')}
       />
       <div className={s.title}>
-        <Typography variant={'large'}>Packs list</Typography>
-        <Button onClick={() => setIsOpenModal(true)}>Add New Pack</Button>
+        <Typography variant={'large'}>{t('Packs list')}</Typography>
+        <Button onClick={() => setIsOpenModal(true)}>{t('Add New Pack')}</Button>
       </div>
       <div className={s.filter}>
         <DebounceInput onValueChange={e => setSearch(e)} searchValue={search} />
         <Tab
           className={s.tab}
           tabs={options}
-          label={'Show packs cards'}
+          label={t('Show packs cards')}
           defaultValue={'all'}
           value={tabValue}
           onValueChange={value => setTabValue(value)}
@@ -113,7 +115,7 @@ export const Packs = () => {
         <Button variant={'secondary'} onClick={clearFilter}>
           <Trash />
           <Typography className={s.btn} variant={'subtitle2'}>
-            Clear Filter
+            {t('Clear Filter')}
           </Typography>
         </Button>
       </div>

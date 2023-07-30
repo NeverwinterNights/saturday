@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 
 import { useDebounce } from '@/common/hooks/useDebounce.ts'
 import { Input } from '@/components/ui/input'
+import { useTranslate } from '@/i18n.ts'
 
 type DebounceInputTypes = {
   onValueChange: (e: string) => void
@@ -10,6 +11,7 @@ type DebounceInputTypes = {
 }
 
 export const DebounceInput = ({ onValueChange, searchValue, className }: DebounceInputTypes) => {
+  const t = useTranslate()
   const [value, setValue] = useState<string>(searchValue)
   const debouncedValue = useDebounce<string>(value, 500)
 
@@ -30,7 +32,7 @@ export const DebounceInput = ({ onValueChange, searchValue, className }: Debounc
   return (
     <>
       <Input
-        placeholder={'Input search'}
+        placeholder={t('Input search')}
         searchInput
         onChange={handleChange}
         value={value}

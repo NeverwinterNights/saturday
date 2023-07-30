@@ -9,11 +9,15 @@ import { Typography } from '../../../components/ui/typography'
 import s from './register-form.module.scss'
 import { RegisterFormType, useRegisterForm } from './use-register-form.ts'
 
+import { useTranslate } from '@/i18n.ts'
+
 type RegisterFormPropsType = {
   onSubmitHandler: (data: RegisterFormType) => void
 }
 
 export const RegisterForm: FC<RegisterFormPropsType> = ({ onSubmitHandler }) => {
+  const t = useTranslate()
+
   const { handleSubmit, control } = useRegisterForm()
   const onSubmit = handleSubmit(data => {
     onSubmitHandler(data)
@@ -22,25 +26,30 @@ export const RegisterForm: FC<RegisterFormPropsType> = ({ onSubmitHandler }) => 
   return (
     <Card className={s.card}>
       <Typography className={s.title} as="h1" variant="large">
-        Sign Up
+        {t('Sign Up')}
       </Typography>
       <form onSubmit={onSubmit} className={s.form}>
-        <ControlledInput label="Email" name={'email'} control={control} />
-        <ControlledInput label="Password" name={'password'} type="password" control={control} />
+        <ControlledInput label={t('Email')} name={'email'} control={control} />
         <ControlledInput
-          label="Confirm Password"
+          label={t('Password')}
+          name={'password'}
+          type="password"
+          control={control}
+        />
+        <ControlledInput
+          label={t('Confirm Password')}
           name={'confirm'}
           type="password"
           control={control}
         />
         <Button fullWidth className={s.button} type="submit">
-          <Typography variant="subtitle2">Sign Up</Typography>
+          <Typography variant="subtitle2">{t('Sign Up')}</Typography>
         </Button>
         <Typography className={s.subtitle} variant="body2">
-          Already have an account?
+          {t('Already have an account?')}
         </Typography>
         <Button variant="link" as={'a'} className={s.link} href={PATH.LOGIN}>
-          Sign In
+          {t('Sign In')}
         </Button>
       </form>
     </Card>

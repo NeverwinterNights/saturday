@@ -5,6 +5,7 @@ import { Input } from '../input'
 import styles from './slider-сomponent.module.scss'
 
 import { Typography } from '@/components/ui/typography'
+import { useTranslate } from '@/i18n.ts'
 
 type SliderPropsType = {
   defaultValue?: [number, number]
@@ -26,6 +27,7 @@ export const SliderComponent = ({
   label,
   setValue,
 }: SliderPropsType) => {
+  const t = useTranslate()
   const onSliderChange = (value: [number, number]) => {
     console.log(value)
     setValue(value)
@@ -70,8 +72,8 @@ export const SliderComponent = ({
               <Slider.Range className={styles.SliderRange} />
             </Slider.Track>
 
-            <Slider.Thumb className={styles.SliderThumb} aria-label="Start" />
-            <Slider.Thumb className={styles.SliderThumb} aria-label="End" />
+            <Slider.Thumb className={styles.SliderThumb} aria-label={t('Start')} />
+            <Slider.Thumb className={styles.SliderThumb} aria-label={t('End')} />
           </Slider.Root>
           <div>
             <Input

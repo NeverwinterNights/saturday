@@ -15,6 +15,7 @@ import { Edit } from '@/assets/icons/Edit.tsx'
 import { LogOutIcon } from '@/assets/icons/LogOutIcon.tsx'
 import s from '@/components/auth/login-form/login-form.module.scss'
 import { Card } from '@/components/ui/card'
+import { useTranslate } from '@/i18n.ts'
 
 type DataType = {
   avatar: string
@@ -39,6 +40,7 @@ type PropsType = {
 }
 
 export const PersonalInfo: FC<PropsType> = memo(({ data, onUpdate, onSignOut }) => {
+  const t = useTranslate()
   const [editMode, setEditMode] = useState(false)
   const [name, setTitle] = useState(data.name || '')
   const [url, setUrl] = useState(data.avatar)
@@ -74,7 +76,7 @@ export const PersonalInfo: FC<PropsType> = memo(({ data, onUpdate, onSignOut }) 
   }
   const inputRef = useRef<HTMLInputElement>(null)
 
-  if (!data) return <div>Loading...</div>
+  if (!data) return <div>{t('Loading...')}</div>
 
   useEffect(() => {
     setUrl(data.avatar)
@@ -84,7 +86,7 @@ export const PersonalInfo: FC<PropsType> = memo(({ data, onUpdate, onSignOut }) 
     <Card className={s.card}>
       <div className={styles.main}>
         <Typography variant="large" className={styles.title}>
-          Personal Information
+          {t('Personal Information')}
         </Typography>
         <div className={styles.picture}>
           <Avatar photo={url} name="avatar" size={96} />
@@ -104,13 +106,13 @@ export const PersonalInfo: FC<PropsType> = memo(({ data, onUpdate, onSignOut }) 
             <form onSubmit={handleSubmit(SubmitHandler)}>
               <ControlledInput
                 autoFocus
-                label="Nickmame"
+                label={t('Nickmame')}
                 name={'name'}
                 type="text"
                 control={control}
               />
               <Button className={styles.subButton} variant="primary" fullWidth type={'submit'}>
-                <Typography variant="subtitle2">Save Changes</Typography>
+                <Typography variant="subtitle2">{t('Save Changes')}</Typography>
               </Button>
             </form>
           </div>
@@ -131,7 +133,7 @@ export const PersonalInfo: FC<PropsType> = memo(({ data, onUpdate, onSignOut }) 
             </Typography>
             <Button onClick={logOut} className={styles.button} variant="secondary">
               <LogOutIcon />
-              Logout
+              {t('Logout')}
             </Button>
           </>
         )}

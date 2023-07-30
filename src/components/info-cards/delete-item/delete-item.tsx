@@ -2,6 +2,8 @@ import { Modal, ModalType } from '../../ui/modal'
 import { Typography } from '../../ui/typography'
 import { ModalControl } from '../modal-control'
 
+import { useTranslate } from '@/i18n.ts'
+
 type DeleteItemPropsType = {
   isOpen: boolean
   onClickDataHandler: () => void
@@ -17,6 +19,7 @@ export const DeleteItem = ({
   buttonName,
   title,
 }: DeleteItemPropsType) => {
+  const t = useTranslate()
   const closedModal = () => {
     onOpenChange?.(false)
   }
@@ -25,12 +28,12 @@ export const DeleteItem = ({
     <Modal isOpen={isOpen} title={title} onOpenChange={onOpenChange}>
       <div>
         <Typography variant="subtitle1">
-          Do you really want to remove{' '}
+          {t('Do you really want to remove')}
           <Typography style={{ fontWeight: '900' }} as="span">
             {itemName}?
           </Typography>
         </Typography>
-        <Typography variant="subtitle1">All cards will be deleted.</Typography>
+        <Typography variant="subtitle1">{t('All cards will be deleted.')}</Typography>
       </div>
       <ModalControl closedModal={closedModal} onSubmit={onClickDataHandler} title={buttonName} />
     </Modal>

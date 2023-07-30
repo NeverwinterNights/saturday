@@ -8,6 +8,7 @@ import { AddPackFormType, useAddEditPack } from './use-add-new-pack.ts'
 
 import { ControlledInput } from '@/components/ui/controlled'
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox.tsx'
+import { useTranslate } from '@/i18n.ts'
 
 type AddEditPackPropsType = {
   isOpen: boolean
@@ -30,7 +31,7 @@ export const AddEditPack = memo(
     title,
   }: AddEditPackPropsType) => {
     const { handleSubmit, reset, control, setValue } = useAddEditPack(defaultValue)
-
+    const t = useTranslate()
     const onSubmit = handleSubmit(data => {
       onClickDataHandler(data)
       reset()
@@ -56,7 +57,7 @@ export const AddEditPack = memo(
               <div>
                 <ControlledCheckbox
                   className={styles.checkbox}
-                  label="Privat Pack"
+                  label={t('Privat Pack')}
                   name={'isPrivate'}
                   control={control}
                 />

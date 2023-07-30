@@ -2,6 +2,8 @@ import { Select } from '../../select'
 
 import styles from './PerPageSelect.module.scss'
 
+import { useTranslate } from '@/i18n.ts'
+
 export type PerPageSelectProps = {
   perPage: number
   perPageOptions: number[]
@@ -9,6 +11,7 @@ export type PerPageSelectProps = {
 }
 
 export const PerPageSelect = ({ perPage, perPageOptions, onPerPageChange }: PerPageSelectProps) => {
+  const t = useTranslate()
   const selectOptions = perPageOptions.map(value => ({
     label: value.toString(),
     value: value.toString(),
@@ -16,7 +19,7 @@ export const PerPageSelect = ({ perPage, perPageOptions, onPerPageChange }: PerP
 
   return (
     <div className={styles.selectBox}>
-      Показать
+      {t('show')}
       <Select
         className={styles.select}
         value={perPage.toString()}
@@ -24,7 +27,7 @@ export const PerPageSelect = ({ perPage, perPageOptions, onPerPageChange }: PerP
         onChange={onPerPageChange}
         variant="pagination"
       />
-      на странице
+      {t('In page')}
     </div>
   )
 }
