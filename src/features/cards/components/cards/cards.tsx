@@ -16,6 +16,7 @@ import { DebounceInput } from '@/components/ui/debounce-input'
 import { Dropdown, DropdownItemWithIcon } from '@/components/ui/dropdown'
 import { Image } from '@/components/ui/image/image.tsx'
 import { Typography } from '@/components/ui/typography'
+import { Sort } from '@/features'
 import { useMeQuery } from '@/features/auth/service/api/auth.api.ts'
 import { CardsTable } from '@/features/cards/components/cards-table/cards-table.tsx'
 import {
@@ -30,10 +31,13 @@ export const Cards = () => {
   const { id } = useParams<{ id: string }>()
   const { data: user } = useMeQuery()
 
+  const [sort, setSort] = useState<Sort>({ key: 'question', direction: 'desc' })
+  const sortString = sort ? `${sort.key}-${sort.direction}` : undefined
   const [searchValue, setSearchValue] = useState('')
   const { data, isLoading } = useGetCardsQuery({
     decksId: id ?? '',
     question: searchValue != null ? searchValue : '',
+    orderBy: sortString,
   })
   const { data: deck } = useGetDeckQuery(id ?? '')
   const myPack = deck?.userId === user?.id
@@ -111,7 +115,7 @@ export const Cards = () => {
             onValueChange={e => setSearchValue(e)}
             searchValue={searchValue}
           />
-          <CardsTable cardsData={data.items} />
+          <CardsTable sort={sort} onSort={setSort} cardsData={data.items} />
         </>
       ) : (
         <div className={s.empty}>

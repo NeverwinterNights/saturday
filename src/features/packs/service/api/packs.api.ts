@@ -51,9 +51,9 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
       invalidatesTags: ['decks'],
     }),
     getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
-      query: ({ decksId, question }) => ({
+      query: ({ decksId, question, orderBy }) => ({
         url: `decks/${decksId}/cards`,
-        params: { question },
+        params: { question, orderBy },
       }),
       providesTags: ['cards'],
     }),
