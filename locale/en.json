@@ -65,5 +65,9 @@
   "Name": "Name",
   "Cards": "Cards",
   "Last Updated": "Last Updated",
-  "Created by": "Created by"
+  "Created by": "Created by",
+  "Question": "Question",
+  "Answer": "Answer",
+  "Last updated": "Last updated",
+  "Grade": "Grade"
 }
