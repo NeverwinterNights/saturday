@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import s from './cards-table.module.scss'
 
@@ -12,40 +12,11 @@ import { CardType } from '@/features/packs/service/api/packs.types.ts'
 
 type PropsType = {
   cardsData: CardType[]
+  onSort: (sort: Sort) => void
+  sort: Sort
 }
 
-export const CardsTable: FC<PropsType> = ({ cardsData }) => {
-  //это типа нам данные будут приходить с сервера)
-  // const cardsData = [
-  //   {
-  //     id: '01',
-  //     question: 'How "This" works in JavaScript?',
-  //     answer: 'This is how "This" works in JavaScript',
-  //     lastUpdate: '18.03.2021',
-  //     //это мы условно загружаем наши карточки
-  //     //у нас быдет или наше Id или не наше ('0000'-'1111')
-  //     userId: '1111',
-  //     grade: 1,
-  //   },
-  //   {
-  //     id: '02',
-  //     question: 'How "This" works in JavaScript?',
-  //     answer:
-  //       'This is how "This" works in JavaScript in JavaScript in JavaScript in JavaScript in JavaScript',
-  //     lastUpdate: '18.03.2021',
-  //     userId: '1111',
-  //     grade: 2,
-  //   },
-  //   {
-  //     id: '03',
-  //     question: 'How "This" works in JavaScript?',
-  //     answer: 'This is how "This" works in JavaScript',
-  //     lastUpdate: '18.03.2021',
-  //     userId: '1111',
-  //     grade: 3,
-  //   },
-  // ]
-  //это мы берем наше айди, что бы понять чьи карты(откуда и как берём пока не знаю)
+export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort }) => {
   const myId = '0000'
   const headers: TableHeaderType[] = [
     {
@@ -83,14 +54,13 @@ export const CardsTable: FC<PropsType> = ({ cardsData }) => {
       show: myId !== cardsData[0]?.userId,
     },
   ]
-  const [sort, setSort] = useState<Sort>(null)
   const [deleteCard, {}] = useDeleteCardMutation()
   // const [updateCard, {}] = useUpdateCardByIdMutation()
 
   return (
     <div>
       <Table.Root>
-        <TableHeader headers={headers} onSort={setSort} sort={sort} />
+        <TableHeader headers={headers} onSort={onSort} sort={sort} />
         <Table.Body>
           {cardsData?.map(item => (
             <Table.Row key={item.id}>
