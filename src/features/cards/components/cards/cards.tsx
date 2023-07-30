@@ -115,7 +115,7 @@ export const Cards = () => {
             onValueChange={e => setSearchValue(e)}
             searchValue={searchValue}
           />
-          <CardsTable sort={sort} onSort={setSort} cardsData={data.items} />
+          <CardsTable id={user?.id} sort={sort} onSort={setSort} cardsData={data.items} />
         </>
       ) : (
         <div className={s.empty}>
