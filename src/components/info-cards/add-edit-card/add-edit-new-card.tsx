@@ -110,10 +110,10 @@ export const AddEditNewCard = ({
           <form onSubmit={onSubmit}>
             <div className={styles.info}>
               <div className={styles.input}>
-                <ControlledInput label={'Question'} name={'question'} control={control} />
+                <ControlledInput label={t('Question')} name={'question'} control={control} />
               </div>
               <div className={styles.input}>
-                <ControlledInput label={'Answer'} name={'answer'} control={control} />
+                <ControlledInput label={t('Answer')} name={'answer'} control={control} />
               </div>
 
               <div className={styles.item}>
