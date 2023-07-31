@@ -8,9 +8,15 @@ type DebounceInputTypes = {
   onValueChange: (e: string) => void
   searchValue: string
   className?: string
+  disabled?: boolean
 }
 
-export const DebounceInput = ({ onValueChange, searchValue, className }: DebounceInputTypes) => {
+export const DebounceInput = ({
+  onValueChange,
+  searchValue,
+  className,
+  disabled,
+}: DebounceInputTypes) => {
   const t = useTranslate()
   const [value, setValue] = useState<string>(searchValue)
   const debouncedValue = useDebounce<string>(value, 500)
@@ -32,6 +38,7 @@ export const DebounceInput = ({ onValueChange, searchValue, className }: Debounc
   return (
     <>
       <Input
+        disabled={disabled}
         placeholder={t('Input search')}
         searchInput
         onChange={handleChange}

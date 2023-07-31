@@ -75,6 +75,7 @@
   }
 
   &:disabled {
+    opacity: 0.5;
     color: var(--color-light-900);
     background: var(--color-dark-300);
   }
