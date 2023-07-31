@@ -4,9 +4,11 @@ import { Typography } from '../typography'
 
 import styles from './header.module.scss'
 
+import { StatusType } from '@/app/app.slice.ts'
 import { LogOutIcon } from '@/assets/icons/LogOutIcon.tsx'
 import { Person } from '@/assets/icons/Person.tsx'
 import logo from '@/assets/images/logo.png'
+import { SecondaryLoader } from '@/assets/loaders/secondary-loader/secondary-loader.tsx'
 import { Avatar } from '@/components/ui/avatar'
 import { Container } from '@/components/ui/container/container.tsx'
 import { useTranslate } from '@/i18n.ts'
@@ -19,9 +21,11 @@ type HeaderPropsType = {
   onSignIn?: () => void
   onSignOut: () => void
   onProfileClick: () => void
+  isLoading: StatusType
 }
 
 export const Header = ({
+  isLoading,
   isAuth,
   name = 'NoName',
   avatar,
@@ -84,6 +88,7 @@ export const Header = ({
           )}
         </div>
       </Container>
+      {isLoading === 'loading' ? <SecondaryLoader /> : ''}
     </div>
   )
 }
