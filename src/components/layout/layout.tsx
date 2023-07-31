@@ -1,13 +1,14 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { MainLoader } from '@/assets/loaders/main-loader.tsx'
+import { MainLoader } from '@/assets/loaders/main-loader/main-loader.tsx'
 import { PATH } from '@/common'
 import { Header } from '@/components/ui/header'
 import { useLogoutMutation, useMeQuery, util } from '@/features/auth/service/api/auth.api.ts'
-import { useAppDispatch } from '@/store/store.ts'
+import { useAppDispatch, useAppSelector } from '@/store/store.ts'
 
 export const Layout = () => {
+  const status = useAppSelector(state => state.appReducer.status)
   const { data, isLoading } = useMeQuery()
   const [logout] = useLogoutMutation()
   const dispatch = useAppDispatch()
@@ -32,6 +33,7 @@ export const Layout = () => {
       ) : (
         <>
           <Header
+            isLoading={status}
             isAuth={!!data}
             email={data?.email}
             name={data?.name}
