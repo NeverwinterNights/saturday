@@ -56,6 +56,7 @@
 
 .input:disabled {
   color: inherit;
+  opacity: 0.5;
 }
 
 .input:disabled .inputContainer:focus-within {
@@ -158,4 +159,3 @@
 //  color: inherit;
 //  background-clip: text;
 //}
-

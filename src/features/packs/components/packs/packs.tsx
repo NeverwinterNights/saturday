@@ -16,6 +16,7 @@ import { useMeQuery } from '@/features/auth/service/api/auth.api.ts'
 import { PacksTable } from '@/features/packs/components/packs-table/packs-table.tsx'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/service/api/packs.api.ts'
 import { useTranslate } from '@/i18n.ts'
+import { useAppSelector } from '@/store/store.ts'
 
 export type Sort = {
   key: string
@@ -25,6 +26,7 @@ export type Sort = {
 export const Packs = () => {
   const t = useTranslate()
   const { data: user } = useMeQuery()
+  const status = useAppSelector(state => state.appReducer.status)
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [search, setSearch] = useState('')
   const [range, setRange] = useState<[number, number]>([0, 100])
@@ -33,7 +35,7 @@ export const Packs = () => {
   const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : undefined
   const [tabValue, setTabValue] = useState('all')
-  const { data: decks, isLoading } = useGetDecksQuery({
+  const { data: decks } = useGetDecksQuery({
     minCardsCount: range[0].toString(),
     maxCardsCount: range[1].toString(),
     authorId: tabValue === 'my' ? user?.id : undefined,
@@ -76,8 +78,6 @@ export const Packs = () => {
     setIsOpenModal(false)
   }
 
-  if (isLoading) return <div>{t('Loading...')}</div>
-
   return (
     <Container className={s.root}>
       <AddEditPack
@@ -91,10 +91,16 @@ export const Packs = () => {
       />
       <div className={s.title}>
         <Typography variant={'large'}>{t('Packs list')}</Typography>
-        <Button onClick={() => setIsOpenModal(true)}>{t('Add New Pack')}</Button>
+        <Button disabled={status === 'loading'} onClick={() => setIsOpenModal(true)}>
+          {t('Add New Pack')}
+        </Button>
       </div>
       <div className={s.filter}>
-        <DebounceInput onValueChange={e => setSearch(e)} searchValue={search} />
+        <DebounceInput
+          disabled={status === 'loading'}
+          onValueChange={e => setSearch(e)}
+          searchValue={search}
+        />
         <Tab
           className={s.tab}
           tabs={options}
@@ -102,9 +108,11 @@ export const Packs = () => {
           defaultValue={'all'}
           value={tabValue}
           onValueChange={value => setTabValue(value)}
+          disabled={status === 'loading'}
         />
         <div className={s.range}>
           <SliderComponent
+            disabled={status === 'loading'}
             onValueCommit={setRange}
             value={rangeValue}
             setValue={setRangeValue}
@@ -112,7 +120,7 @@ export const Packs = () => {
           />
         </div>
 
-        <Button variant={'secondary'} onClick={clearFilter}>
+        <Button disabled={status === 'loading'} variant={'secondary'} onClick={clearFilter}>
           <Trash />
           <Typography className={s.btn} variant={'subtitle2'}>
             {t('Clear Filter')}

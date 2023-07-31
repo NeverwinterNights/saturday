@@ -16,9 +16,11 @@ type SliderPropsType = {
   min?: number
   max?: number
   label?: string
+  disabled?: boolean
 }
 
 export const SliderComponent = ({
+  disabled,
   defaultValue,
   min = 0,
   max = 100,
@@ -43,7 +45,7 @@ export const SliderComponent = ({
 
   return (
     <form>
-      <div className={styles.container}>
+      <div className={`${styles.container} ${disabled ? styles.disabled : ''}`}>
         <div className={styles.label}>
           <Typography variant="body2">{label}</Typography>
         </div>
@@ -58,6 +60,7 @@ export const SliderComponent = ({
             />
           </div>
           <Slider.Root
+            disabled={disabled}
             min={min}
             max={max}
             onValueChange={onSliderChange}
