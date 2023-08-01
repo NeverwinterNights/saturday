@@ -13,6 +13,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
+      fill="currentColor"
       stroke="none"
       d="m473 182-162-24-75-147-73 148L0 184l118 116-26 162 146-76 146 75-27-163z"
     />

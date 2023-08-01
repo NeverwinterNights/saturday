@@ -11,7 +11,8 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="#fbff00"
+      // fill="#fbff00"
+      fill="currentColor"
       fillRule="evenodd"
       d="m15 9-3-7-3 7-7 1 5 4-1 7 6-3 6 3-1-7 5-4-7-1Zm4 2-5-1-2-4-2 4-5 1 4 3-1 5 4-3 4 3-1-5 4-3Z"
       clipRule="evenodd"

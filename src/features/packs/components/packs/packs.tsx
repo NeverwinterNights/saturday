@@ -85,7 +85,7 @@ export const Packs = () => {
         isOpen={isOpenModal}
         onOpenChange={isOpen => setIsOpenModal(isOpen)}
         onClickDataHandler={sendModalHandler}
-        defaultValue={'Name'}
+        defaultValue={''}
       />
       <div className={s.title}>
         <Typography variant={'large'}>Packs list</Typography>

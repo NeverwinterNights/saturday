@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
 
 import { Modal } from '../../ui/modal'
 import { ModalControl } from '../modal-control'
@@ -41,9 +41,9 @@ export const AddEditPack = memo(
       onOpenChange?.(false)
     }
 
-    useEffect(() => {
-      setValue('name', defaultValue || '')
-    }, [defaultValue])
+    // useEffect(() => {
+    //   setValue('name', defaultValue || '')
+    // }, [defaultValue])
 
     return (
       <>

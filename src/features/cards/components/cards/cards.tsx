@@ -31,7 +31,7 @@ export const Cards = () => {
   const [searchValue, setSearchValue] = useState('')
   const { data, isLoading } = useGetCardsQuery({
     decksId: id ?? '',
-    question: searchValue != null ? searchValue : '',
+    question: searchValue ? searchValue : undefined,
   })
   const { data: deck } = useGetDeckQuery(id ?? '')
   const myPack = deck?.userId === user?.id

@@ -46,14 +46,6 @@ export type PaginationType = {
   totalItems: number
 }
 
-export type GetCardsRequestType = {
-  decksId: string
-  question?: string
-  answer?: string
-  orderBy?: string
-  currentPage?: string
-  itemsPerPage?: string
-}
 export type GetCardsResponseType = {
   pagination: PaginationType
   items: CardType[]
@@ -71,6 +63,7 @@ export type CardType = {
   rating: number
   created: string
   updated: string
+  grade: number
 }
 
 export type CreateCardType = {
@@ -87,4 +80,12 @@ export type SaveGradeCardType = {
   decksId: string
   cardId: string
   grade: number
+}
+export type GetCardsRequestType = {
+  decksId: string
+  question?: string
+  answer?: string
+  orderBy?: string
+  currentPage?: string
+  itemsPerPage?: string
 }

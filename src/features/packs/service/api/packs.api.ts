@@ -36,8 +36,8 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
       }),
     }),
     deleteDeck: build.mutation<DecksType, string>({
-      query: decksId => ({
-        url: `decks/${decksId}`,
+      query: id => ({
+        url: `decks/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['decks'],
@@ -50,13 +50,13 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
       }),
       invalidatesTags: ['decks'],
     }),
-    getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
-      query: ({ decksId, question }) => ({
-        url: `decks/${decksId}/cards`,
-        params: { question },
-      }),
-      providesTags: ['cards'],
-    }),
+    // getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
+    //   query: ({ decksId, ...params }) => ({
+    //     url: `decks/${decksId}/cards`,
+    //     params,
+    //   }),
+    //   providesTags: ['cards'],
+    // }),
     createCards: build.mutation<CardType, { data: FormData; decksId: string }>({
       query: ({ decksId, data }) => ({
         url: `decks/${decksId}/cards`,
@@ -71,12 +71,35 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         method: 'GET',
       }),
     }),
-    saveGradeCard: build.mutation<void, SaveGradeCardType>({
+    getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
+      query: ({ decksId, ...params }) => ({
+        url: `decks/${decksId}/cards`,
+        params,
+      }),
+      providesTags: ['cards'],
+    }),
+    saveGradeCard: build.mutation<void, SaveGradeCardType & GetCardsRequestType>({
       query: ({ decksId, ...rest }) => ({
         url: `decks/${decksId}/learn`,
         method: 'POST',
-        bode: { ...rest },
+        body: { ...rest },
       }),
+      async onQueryStarted({ decksId, grade, cardId, ...params }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          decksAPI.util.updateQueryData('getCards', { decksId, ...params }, draft => {
+            const card = draft.items.find(card => card.id === cardId)
+
+            if (card) card.grade = grade
+            Object.assign(draft, card)
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        }
+      },
     }),
   }),
 })
@@ -89,4 +112,5 @@ export const {
   useGetCardsQuery,
   useDeleteDeckMutation,
   useCreateCardsMutation,
+  useSaveGradeCardMutation,
 } = decksAPI
