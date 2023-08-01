@@ -7,6 +7,7 @@ import { authAPI } from '@/features/auth/service/api/auth.api.ts'
 import { cardAPI } from '@/features/cards/service/api/cards.api.ts'
 import { decksAPI } from '@/features/packs/service/api/packs.api.ts'
 import { profileAPI } from '@/features/profile/service/api/profile.api.ts'
+import { flashCardsAPI } from '@/store/api.ts'
 
 export const store = configureStore({
   reducer: {
@@ -17,13 +18,9 @@ export const store = configureStore({
     [decksAPI.reducerPath]: decksAPI.reducer,
   },
   // middleware: gDM => gDM().concat(authAPI.middleware).concat(profileAPI.middleware),
-  middleware: gDM =>
-    gDM().concat(
-      authAPI.middleware,
-      profileAPI.middleware,
-      cardAPI.middleware,
-      decksAPI.middleware
-    ),
+  middleware: gDM => {
+    return gDM().concat(flashCardsAPI.middleware)
+  },
 })
 
 export type RootState = ReturnType<typeof store.getState>

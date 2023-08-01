@@ -36,7 +36,7 @@ export const Cards = () => {
   const [searchValue, setSearchValue] = useState('')
   const { data, isLoading } = useGetCardsQuery({
     decksId: id ?? '',
-    question: searchValue != null ? searchValue : '',
+    question: searchValue ? searchValue : undefined,
     orderBy: sortString,
   })
   const { data: deck } = useGetDeckQuery(id ?? '')
