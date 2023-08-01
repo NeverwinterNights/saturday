@@ -1,13 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
 
 export type StatusType = 'idle' | 'loading' | 'failed' | 'succeeded'
 
 type AppInitialStateType = {
   status: StatusType
+  error: string
 }
 
 const initialState: AppInitialStateType = {
   status: 'idle',
+  error: '0',
 }
 
 const appSlice = createSlice({
@@ -25,11 +28,25 @@ const appSlice = createSlice({
         }
       )
       .addMatcher(
-        action => {
-          return action.type.endsWith('/rejected')
-        },
-        state => {
-          state.status = 'failed'
+        action => action.type.endsWith('executeMutation/rejected'),
+        (state, action) => {
+          console.log(action.payload.data)
+          if (action.payload.data) {
+            toast.error(action.payload.data.errorMessages[0].message)
+            state.error = '1'
+          } else {
+            toast.error(`🦕${action.payload.error}`)
+            state.error = '1'
+          }
+        }
+      )
+      .addMatcher(
+        action => action.type.endsWith('flashCardsAPI/executeQuery/rejected'),
+        (state, action) => {
+          if (state.error === '0') {
+            toast.error(`🦕${action?.payload?.error}`)
+            state.error = '1'
+          }
         }
       )
       .addMatcher(

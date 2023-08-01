@@ -1,6 +1,7 @@
 import { FC, useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import s from './packs-table.module.scss'
 
@@ -130,7 +131,13 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
                     <TablePackIcons
                       editOpenModals={() => openModalHandler(item.name, item.id)}
                       // editOpenModals={() => console.log('value', item.name)}
-                      deleteDeck={() => deleteDeck(item.id)}
+                      deleteDeck={() =>
+                        deleteDeck(item.id)
+                          .unwrap()
+                          .then(() => {
+                            toast.success('Deleted')
+                          })
+                      }
                     />
                   )}
                 </Table.Cell>
