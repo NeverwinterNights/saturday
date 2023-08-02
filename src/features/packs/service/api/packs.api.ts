@@ -10,6 +10,7 @@ import {
   UpdateDeckRequestType,
 } from '@/features/packs/service/api/packs.types.ts'
 import { flashCardsAPI } from '@/store/api.ts'
+import { RootState } from '@/store/store.ts'
 
 export const decksAPI = flashCardsAPI.injectEndpoints({
   endpoints: build => ({
@@ -50,13 +51,13 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
       }),
       invalidatesTags: ['decks'],
     }),
-    getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
-      query: ({ decksId, question, orderBy }) => ({
-        url: `decks/${decksId}/cards`,
-        params: { question, orderBy },
-      }),
-      providesTags: ['cards'],
-    }),
+    // getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
+    //   query: ({ decksId, question, orderBy }) => ({
+    //     url: `decks/${decksId}/cards`,
+    //     params: { question, orderBy },
+    //   }),
+    //   providesTags: ['cards'],
+    // }),
     createCards: build.mutation<CardType, { data: FormData; decksId: string }>({
       query: ({ decksId, data }) => ({
         url: `decks/${decksId}/cards`,
@@ -84,14 +85,27 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         method: 'POST',
         body: { ...rest },
       }),
-      async onQueryStarted({ decksId, grade, cardId, ...params }, { dispatch, queryFulfilled }) {
+      async onQueryStarted(
+        { decksId, grade, cardId, orderBy, ...params },
+        { getState, dispatch, queryFulfilled }
+      ) {
+        const state = getState() as RootState
         const patchResult = dispatch(
-          decksAPI.util.updateQueryData('getCards', { decksId, ...params }, draft => {
-            const card = draft.items.find(card => card.id === cardId)
+          decksAPI.util.updateQueryData(
+            'getCards',
+            {
+              decksId,
+              orderBy: state.appReducer.orderBy || undefined,
+              question: state.appReducer.question || undefined,
+              ...params,
+            },
+            draft => {
+              const card = draft.items.find(card => card.id === cardId)
 
-            if (card) card.grade = grade
-            Object.assign(draft, card)
-          })
+              if (card) card.grade = grade
+              Object.assign(draft, card)
+            }
+          )
         )
 
         try {

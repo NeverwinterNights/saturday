@@ -1,18 +1,17 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import s from './cards-table.module.scss'
 
-import { StarRating } from '@/components/ui/rating-stars'
+import { Grade, GradeType } from '@/components/ui/grade'
 import { ReadMore } from '@/components/ui/read-more'
 import { TableCardIcons } from '@/components/ui/table/icons/tableCardIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
 import { useDeleteCardMutation } from '@/features/cards/service/api/cards.api.ts'
-import { CardType } from '@/features/packs/service/api/packs.types.ts'
-import { useTranslate } from '@/i18n.ts'
-// import { useSaveGradeCardMutation } from '@/features/packs/service/api/packs.api.ts'
 import { useSaveGradeCardMutation } from '@/features/packs/service/api/packs.api.ts'
 import { CardType, SaveGradeCardType } from '@/features/packs/service/api/packs.types.ts'
+import { useTranslate } from '@/i18n.ts'
+// import { useSaveGradeCardMutation } from '@/features/packs/service/api/packs.api.ts'
 
 type PropsType = {
   cardsData: CardType[]
