@@ -18,8 +18,11 @@ export const useAddEditPack = (name?: string) => {
   return useForm<AddPackFormType>({
     resolver: zodResolver(addEditPackSchema),
     mode: 'onSubmit',
-    defaultValues: {
-      name,
+    // defaultValues: {
+    //   name,
+    // },
+    values: {
+      name: name ? name : '',
     },
   })
 }

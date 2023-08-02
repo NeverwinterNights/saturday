@@ -1,9 +1,10 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
 import s from './cards.module.scss'
 
+import { addOrderByAC, addQuestionAC } from '@/app/app.slice.ts'
 import { ArrowLeft } from '@/assets/icons/ArrowLeft.tsx'
 import { Edit } from '@/assets/icons/Edit.tsx'
 import { Play } from '@/assets/icons/Play.tsx'
@@ -25,6 +26,7 @@ import {
   useGetDeckQuery,
 } from '@/features/packs/service/api/packs.api.ts'
 import { useTranslate } from '@/i18n.ts'
+import { useAppDispatch } from '@/store/store.ts'
 
 export const Cards = () => {
   const t = useTranslate()
@@ -36,9 +38,19 @@ export const Cards = () => {
   const [searchValue, setSearchValue] = useState('')
   const { data, isLoading } = useGetCardsQuery({
     decksId: id ?? '',
-    question: searchValue != null ? searchValue : '',
-    orderBy: sortString,
+    question: searchValue ? searchValue : undefined,
+    // orderBy: sortString,
+    orderBy: sortString ? sortString : undefined,
   })
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(addQuestionAC(searchValue))
+    if (sortString) {
+      dispatch(addOrderByAC(sortString))
+    }
+  }, [searchValue, sortString])
+
   const { data: deck } = useGetDeckQuery(id ?? '')
   const myPack = deck?.userId === user?.id
   const packsCover = ''

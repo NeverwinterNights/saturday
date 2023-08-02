@@ -10,6 +10,7 @@ import {
   UpdateDeckRequestType,
 } from '@/features/packs/service/api/packs.types.ts'
 import { flashCardsAPI } from '@/store/api.ts'
+import { RootState } from '@/store/store.ts'
 
 export const decksAPI = flashCardsAPI.injectEndpoints({
   endpoints: build => ({
@@ -36,8 +37,8 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
       }),
     }),
     deleteDeck: build.mutation<DecksType, string>({
-      query: decksId => ({
-        url: `decks/${decksId}`,
+      query: id => ({
+        url: `decks/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['decks'],
@@ -50,13 +51,13 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
       }),
       invalidatesTags: ['decks'],
     }),
-    getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
-      query: ({ decksId, question, orderBy }) => ({
-        url: `decks/${decksId}/cards`,
-        params: { question, orderBy },
-      }),
-      providesTags: ['cards'],
-    }),
+    // getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
+    //   query: ({ decksId, question, orderBy }) => ({
+    //     url: `decks/${decksId}/cards`,
+    //     params: { question, orderBy },
+    //   }),
+    //   providesTags: ['cards'],
+    // }),
     createCards: build.mutation<CardType, { data: FormData; decksId: string }>({
       query: ({ decksId, data }) => ({
         url: `decks/${decksId}/cards`,
@@ -71,12 +72,48 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         method: 'GET',
       }),
     }),
-    saveGradeCard: build.mutation<void, SaveGradeCardType>({
+    getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
+      query: ({ decksId, ...params }) => ({
+        url: `decks/${decksId}/cards`,
+        params,
+      }),
+      providesTags: ['cards'],
+    }),
+    saveGradeCard: build.mutation<void, SaveGradeCardType & GetCardsRequestType>({
       query: ({ decksId, ...rest }) => ({
         url: `decks/${decksId}/learn`,
         method: 'POST',
-        bode: { ...rest },
+        body: { ...rest },
       }),
+      async onQueryStarted(
+        { decksId, grade, cardId, orderBy, ...params },
+        { getState, dispatch, queryFulfilled }
+      ) {
+        const state = getState() as RootState
+        const patchResult = dispatch(
+          decksAPI.util.updateQueryData(
+            'getCards',
+            {
+              decksId,
+              orderBy: state.appReducer.orderBy || undefined,
+              question: state.appReducer.question || undefined,
+              ...params,
+            },
+            draft => {
+              const card = draft.items.find(card => card.id === cardId)
+
+              if (card) card.grade = grade
+              Object.assign(draft, card)
+            }
+          )
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+        }
+      },
     }),
   }),
 })
@@ -89,4 +126,5 @@ export const {
   useGetCardsQuery,
   useDeleteDeckMutation,
   useCreateCardsMutation,
+  useSaveGradeCardMutation,
 } = decksAPI

@@ -2,14 +2,16 @@ import { FC } from 'react'
 
 import s from './cards-table.module.scss'
 
-import { StarRating } from '@/components/ui/rating-stars'
+import { Grade, GradeType } from '@/components/ui/grade'
 import { ReadMore } from '@/components/ui/read-more'
 import { TableCardIcons } from '@/components/ui/table/icons/tableCardIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
 import { useDeleteCardMutation } from '@/features/cards/service/api/cards.api.ts'
-import { CardType } from '@/features/packs/service/api/packs.types.ts'
+import { useSaveGradeCardMutation } from '@/features/packs/service/api/packs.api.ts'
+import { CardType, SaveGradeCardType } from '@/features/packs/service/api/packs.types.ts'
 import { useTranslate } from '@/i18n.ts'
+// import { useSaveGradeCardMutation } from '@/features/packs/service/api/packs.api.ts'
 
 type PropsType = {
   cardsData: CardType[]
@@ -58,7 +60,12 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
     },
   ]
   const [deleteCard, {}] = useDeleteCardMutation()
+  const [saveGrade] = useSaveGradeCardMutation()
+
   // const [updateCard, {}] = useUpdateCardByIdMutation()
+  const gradeHandler = (data: SaveGradeCardType) => {
+    saveGrade(data)
+  }
 
   return (
     <div>
@@ -73,7 +80,13 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
               </Table.Cell>
               <Table.Cell>{item.updated}</Table.Cell>
               <Table.Cell>
-                <StarRating value={item.rating} />
+                <Grade
+                  clickHandler={grade =>
+                    gradeHandler({ decksId: item.deckId, cardId: item.id, grade })
+                  }
+                  grade={item.grade as GradeType}
+                />
+                {/*<StarRating value={item.rating} />*/}
               </Table.Cell>
               <Table.Cell>
                 {id === item.userId ? (
