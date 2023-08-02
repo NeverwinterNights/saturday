@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAction, createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
 export type StatusType = 'idle' | 'loading' | 'failed' | 'succeeded'
@@ -6,12 +6,19 @@ export type StatusType = 'idle' | 'loading' | 'failed' | 'succeeded'
 type AppInitialStateType = {
   status: StatusType
   error: string
+  question: string
+  orderBy: string
 }
 
 const initialState: AppInitialStateType = {
   status: 'idle',
   error: '0',
+  question: '',
+  orderBy: '',
 }
+
+export const addQuestionAC = createAction<string>('app/addQuestion')
+export const addOrderByAC = createAction<string>('app/addOrderByAC')
 
 const appSlice = createSlice({
   name: 'app',
@@ -19,6 +26,12 @@ const appSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+      .addCase(addQuestionAC, (state, action) => {
+        state.question = action.payload
+      })
+      .addCase(addOrderByAC, (state, action) => {
+        state.orderBy = action.payload
+      })
       .addMatcher(
         action => {
           return action.type.endsWith('/pending')
