@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import { toast } from 'react-toastify'
-
 import s from './packs.module.scss'
 
 import { Trash } from '@/assets/icons/Trash.tsx'
@@ -68,7 +66,6 @@ export const Packs = () => {
     if (decks) {
       setRangeValue([0, decks.maxCardsCount])
     }
-    toast.warning('Filters reset')
   }
 
   const sendModalHandler = (modalData: AddPackFormType) => {
@@ -77,15 +74,11 @@ export const Packs = () => {
     form.append('name', modalData.name)
     modalData.isPrivate && form.append('isPrivate', 'true')
 
-    //todo добавить перевод
     createDeck(form)
-      .unwrap()
-      .then(() => {
-        toast.success('Deck created')
-      })
-
     setIsOpenModal(false)
   }
+
+  console.log('data', user)
 
   return (
     <Container className={s.root}>

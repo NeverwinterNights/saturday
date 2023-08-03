@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 
 import { PATH } from '@/common'
-import { useTranslate } from '@/i18n.ts'
 
 export const ProvisionalNavigate = () => {
   return (
@@ -27,6 +26,7 @@ export const ProvisionalNavigate = () => {
       <Link to={PATH.LEARN + '/2'}>Learn</Link>
       <Link to={PATH.PROFILE}>Profile</Link>
       <Link to={PATH.ERROR}>Error</Link>
+      <Link to={PATH.VERIFY}>Verify Email</Link>
     </div>
   )
 }

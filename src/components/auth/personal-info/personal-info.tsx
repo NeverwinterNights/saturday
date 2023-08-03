@@ -17,7 +17,7 @@ import s from '@/components/auth/login-form/login-form.module.scss'
 import { Card } from '@/components/ui/card'
 import { useTranslate } from '@/i18n.ts'
 
-type DataType = {
+export type DataType = {
   avatar: string
   email: string
   name: string

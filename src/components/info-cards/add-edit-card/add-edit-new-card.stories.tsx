@@ -2,13 +2,11 @@ import { useState } from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { FormType } from './use-add-new-card.ts'
-
 import { AddEditNewCard } from './'
 
-type AllDataType = {
-  type: string
-} & FormType
+// type AllDataType = {
+//   type: string
+// } & FormType
 
 const meta = {
   title: 'Modals/AddEditNewCard',
@@ -20,30 +18,32 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const dataSelect = [
-  {
-    value: 'Text',
-    label: 'Text',
-  },
-  {
-    value: 'Image',
-    label: 'Image',
-  },
-  {
-    value: 'Video',
-    label: 'Video',
-  },
-]
+// const dataSelect = [
+//   {
+//     value: 'Text',
+//     label: 'Text',
+//   },
+//   {
+//     value: 'Image',
+//     label: 'Image',
+//   },
+//   {
+//     value: 'Video',
+//     label: 'Video',
+//   },
+// ]
 
 export const AddNewCardComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
-    const [modalsData, setModalsData] = useState<FormType>({} as FormType)
+    const [modalsData, setModalsData] = useState<FormData>({} as FormData)
 
-    const getData = (data: FormType) => {
-      setModalsData({ ...data })
+    const getData = (value: FormData) => {
+      setModalsData({ ...value })
       // setAllData({ type: selectValue, ...data })
     }
+
+    console.log('modalsData', modalsData)
 
     return (
       <AddEditNewCard
@@ -65,11 +65,13 @@ export const AddNewCardComponent: Story = {
 export const EditNewCardComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
-    const [modalsData, setModalsData] = useState<FormType>({} as FormType)
+    const [modalsData, setModalsData] = useState<FormData>({} as FormData)
 
-    const getData = (data: FormType) => {
-      setModalsData(data)
+    const getData = (value: FormData) => {
+      setModalsData(value)
     }
+
+    console.log('modalsData', modalsData)
 
     return (
       <AddEditNewCard
