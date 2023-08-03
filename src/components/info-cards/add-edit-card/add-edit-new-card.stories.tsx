@@ -1,8 +1,11 @@
 import { useState } from 'react'
 
+import { I18NProvider } from '@ayub-begimkulov/i18n'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { AddEditNewCard } from './'
+
+import { i18n } from '@/i18n.ts'
 
 // type AllDataType = {
 //   type: string
@@ -46,13 +49,15 @@ export const AddNewCardComponent: Story = {
     console.log('modalsData', modalsData)
 
     return (
-      <AddEditNewCard
-        title={'Add New Card'}
-        onOpenChange={setIsOpen}
-        onClickDataHandler={getData}
-        isOpen={isOpen}
-        buttonName={'Add New Card'}
-      />
+      <I18NProvider i18n={i18n}>
+        <AddEditNewCard
+          title={'Add New Card'}
+          onOpenChange={setIsOpen}
+          onClickDataHandler={getData}
+          isOpen={isOpen}
+          buttonName={'Add New Card'}
+        />
+      </I18NProvider>
     )
   },
   args: {
@@ -74,19 +79,21 @@ export const EditNewCardComponent: Story = {
     console.log('modalsData', modalsData)
 
     return (
-      <AddEditNewCard
-        // value={selectValue}
-        title={'Edit Card'}
-        onOpenChange={setIsOpen}
-        defaultQuestion={'Тестовый вопрос'}
-        defaultAnswer={'Тестовый ответ'}
-        questionImg={
-          'https://andrii-flashcards.s3.eu-central-1.amazonaws.com/41720658-7128-4f91-94f6-99682572b640-wallpaperflare.com_wallpaper.jpg'
-        }
-        onClickDataHandler={getData}
-        isOpen={isOpen}
-        buttonName={'Save Changes'}
-      />
+      <I18NProvider i18n={i18n}>
+        <AddEditNewCard
+          // value={selectValue}
+          title={'Edit Card'}
+          onOpenChange={setIsOpen}
+          defaultQuestion={'Тестовый вопрос'}
+          defaultAnswer={'Тестовый ответ'}
+          questionImg={
+            'https://andrii-flashcards.s3.eu-central-1.amazonaws.com/41720658-7128-4f91-94f6-99682572b640-wallpaperflare.com_wallpaper.jpg'
+          }
+          onClickDataHandler={getData}
+          isOpen={isOpen}
+          buttonName={'Save Changes'}
+        />
+      </I18NProvider>
     )
   },
   args: {

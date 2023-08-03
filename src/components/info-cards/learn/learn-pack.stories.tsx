@@ -1,8 +1,11 @@
 import { useState } from 'react'
 
+import { I18NProvider } from '@ayub-begimkulov/i18n'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { LearnPack } from './'
+
+import { i18n } from '@/i18n.ts'
 
 const meta = {
   title: 'Modals/LearnPack',
@@ -42,15 +45,17 @@ export const LearnPackComponent: Story = {
     const [radioValue, setRadioValue] = useState('Did not know')
 
     return (
-      <LearnPack
-        options={optionsPrimary}
-        defaultValue={radioValue}
-        onValueChange={setRadioValue}
-        answer={'This is how "This" works in JavaScript'}
-        numberEfforts={10}
-        question={'How "This" works in JavaScript?'}
-        packName={'React Language'}
-      />
+      <I18NProvider i18n={i18n}>
+        <LearnPack
+          options={optionsPrimary}
+          defaultValue={radioValue}
+          onValueChange={setRadioValue}
+          answer={'This is how "This" works in JavaScript'}
+          numberEfforts={10}
+          question={'How "This" works in JavaScript?'}
+          packName={'React Language'}
+        />
+      </I18NProvider>
     )
   },
   args: {

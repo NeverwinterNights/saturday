@@ -1,10 +1,13 @@
 import { useState } from 'react'
 
+import { I18NProvider } from '@ayub-begimkulov/i18n'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { AddPackFormType } from './use-add-new-pack.ts'
 
 import { AddEditPack } from './'
+
+import { i18n } from '@/i18n.ts'
 
 const meta = {
   title: 'Modals/AddEditPack',
@@ -24,14 +27,16 @@ export const AddPackComponent: Story = {
     console.log('modalsData', modalsData)
 
     return (
-      <AddEditPack
-        namePack={'Name Pack'}
-        onOpenChange={setIsOpen}
-        isOpen={isOpen}
-        title={'Add New Pack'}
-        buttonName={'Add New Pack'}
-        onClickDataHandler={setModalsData}
-      />
+      <I18NProvider i18n={i18n}>
+        <AddEditPack
+          namePack={'Name Pack'}
+          onOpenChange={setIsOpen}
+          isOpen={isOpen}
+          title={'Add New Pack'}
+          buttonName={'Add New Pack'}
+          onClickDataHandler={setModalsData}
+        />
+      </I18NProvider>
     )
   },
   args: {
@@ -49,15 +54,17 @@ export const EditPackComponent: Story = {
     console.log('modalsData', modalsData)
 
     return (
-      <AddEditPack
-        onClickDataHandler={setModalsData}
-        namePack={'Name Pack'}
-        onOpenChange={setIsOpen}
-        isOpen={isOpen}
-        title={'Edit  Pack'}
-        buttonName={'Edit Pack'}
-        defaultValue={'Name'}
-      />
+      <I18NProvider i18n={i18n}>
+        <AddEditPack
+          onClickDataHandler={setModalsData}
+          namePack={'Name Pack'}
+          onOpenChange={setIsOpen}
+          isOpen={isOpen}
+          title={'Edit  Pack'}
+          buttonName={'Edit Pack'}
+          defaultValue={'Name'}
+        />
+      </I18NProvider>
     )
   },
   args: {

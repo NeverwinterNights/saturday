@@ -30,7 +30,7 @@ export const AddEditPack = memo(
     isOpen,
     title,
   }: AddEditPackPropsType) => {
-    const { handleSubmit, reset, control, setValue } = useAddEditPack(defaultValue)
+    const { handleSubmit, reset, control } = useAddEditPack(defaultValue)
     const t = useTranslate()
     const onSubmit = handleSubmit(data => {
       onClickDataHandler(data)

@@ -2,10 +2,11 @@ import * as CheckboxRadix from '@radix-ui/react-checkbox'
 import * as LabelRadix from '@radix-ui/react-label'
 import { clsx } from 'clsx'
 
-import { Check } from '../../../assets/icons/Check.tsx'
 import { Typography } from '../typography'
 
 import styles from './checkbox.module.scss'
+
+import { Check } from '@/assets/icons/Check.tsx'
 
 export type CheckboxProps = {
   className?: string
