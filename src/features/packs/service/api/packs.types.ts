@@ -15,11 +15,6 @@ export type GetDecksResponseType = {
 
 export type UpdateDeckRequestType = FormData
 
-//     {
-//   cover?: string
-//   name: string
-//   isPrivate?: boolean
-// }
 export type CreateDeckRequestType = FormData
 
 export type ItemsAuthor = {
