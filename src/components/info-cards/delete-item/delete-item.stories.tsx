@@ -1,8 +1,11 @@
 import { useState } from 'react'
 
+import { I18NProvider } from '@ayub-begimkulov/i18n'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { DeleteItem } from './delete-item.tsx'
+
+import { i18n } from '@/i18n.ts'
 
 const meta = {
   title: 'Modals/DeleteItem',
@@ -23,14 +26,16 @@ export const DeletePackComponent: Story = {
     }
 
     return (
-      <DeleteItem
-        onClickDataHandler={onClickDeleteHandler}
-        itemName={'Beer from your life'}
-        onOpenChange={setIsOpen}
-        isOpen={isOpen}
-        title={'Delete  Pack'}
-        buttonName={'Delete Pack'}
-      />
+      <I18NProvider i18n={i18n}>
+        <DeleteItem
+          onClickDataHandler={onClickDeleteHandler}
+          itemName={'Beer from your life'}
+          onOpenChange={setIsOpen}
+          isOpen={isOpen}
+          title={'Delete  Pack'}
+          buttonName={'Delete Pack'}
+        />
+      </I18NProvider>
     )
   },
   args: {
@@ -50,14 +55,16 @@ export const DeleteCardComponent: Story = {
     }
 
     return (
-      <DeleteItem
-        onClickDataHandler={onClickDeleteHandler}
-        itemName={'Beer from your life'}
-        onOpenChange={setIsOpen}
-        isOpen={isOpen}
-        title={'Delete  Card'}
-        buttonName={'Delete Card'}
-      />
+      <I18NProvider i18n={i18n}>
+        <DeleteItem
+          onClickDataHandler={onClickDeleteHandler}
+          itemName={'Beer from your life'}
+          onOpenChange={setIsOpen}
+          isOpen={isOpen}
+          title={'Delete  Card'}
+          buttonName={'Delete Card'}
+        />
+      </I18NProvider>
     )
   },
   args: {
