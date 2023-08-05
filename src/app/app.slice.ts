@@ -43,22 +43,36 @@ const appSlice = createSlice({
       .addMatcher(
         action => action.type.endsWith('executeMutation/rejected'),
         (state, action) => {
-          console.log(action.payload.data)
           if (action.payload.data) {
-            toast.error(action.payload.data.errorMessages[0].message)
+            if (action.payload.data.message) {
+              toast.error(action.payload.data.message)
+              state.error = '1'
+              state.status = 'failed'
+
+              return
+            }
+            toast.error(action.payload.data.errorMessages[0].message || action.payload.data.message)
             state.error = '1'
+            state.status = 'failed'
           } else {
             toast.error(`🦕${action.payload.error}`)
             state.error = '1'
+            state.status = 'failed'
           }
         }
       )
       .addMatcher(
         action => action.type.endsWith('flashCardsAPI/executeQuery/rejected'),
         (state, action) => {
+          if (action.payload.data.path.endsWith('me?')) {
+            state.status = 'failed'
+
+            return
+          }
           if (state.error === '0') {
             toast.error(`🦕${action?.payload?.error}`)
             state.error = '1'
+            state.status = 'failed'
           }
         }
       )
