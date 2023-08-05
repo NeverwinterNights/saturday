@@ -18,7 +18,6 @@ export const LoginPage = () => {
         dispatch(util?.resetApiState())
         navigate(PATH.PACKS)
       })
-      .catch(error => console.log(error))
   }
 
   if (data) {
