@@ -2,15 +2,14 @@ import { FC } from 'react'
 
 import { Link } from 'react-router-dom'
 
-import { PATH } from '../../../common'
-import { Button } from '../../../components/ui/button'
-import { Card } from '../../../components/ui/card'
-import { ControlledInput } from '../../../components/ui/controlled'
-import { Typography } from '../../../components/ui/typography'
-
 import s from './register-form.module.scss'
 import { RegisterFormType, useRegisterForm } from './use-register-form.ts'
 
+import { PATH } from '@/common'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { ControlledInput } from '@/components/ui/controlled'
+import { Typography } from '@/components/ui/typography'
 import { useTranslate } from '@/i18n.ts'
 
 type RegisterFormPropsType = {
