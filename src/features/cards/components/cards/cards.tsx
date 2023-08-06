@@ -10,6 +10,7 @@ import { Edit } from '@/assets/icons/Edit.tsx'
 import { Play } from '@/assets/icons/Play.tsx'
 import { Trash } from '@/assets/icons/Trash.tsx'
 import cover from '@/assets/images/packs_cover.png'
+import { PATH } from '@/common'
 import { AddEditNewCard } from '@/components/info-cards/add-edit-card'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
@@ -43,6 +44,7 @@ export const Cards = () => {
     orderBy: sortString ? sortString : undefined,
   })
   const dispatch = useAppDispatch()
+  // const { id } = useParams<{ id: string }>()
 
   useEffect(() => {
     dispatch(addQuestionAC(searchValue))
@@ -87,7 +89,7 @@ export const Cards = () => {
               <Fragment key=".0">
                 <DropdownItemWithIcon
                   icon={<Play />}
-                  onSelect={() => alert('learn card')}
+                  onSelect={() => navigate(`${PATH.LEARN}/${id}`)}
                   text="Learn"
                 />
                 <DropdownItemWithIcon
