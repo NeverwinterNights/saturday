@@ -5,6 +5,7 @@ import { Typography } from '../typography'
 import styles from './header.module.scss'
 
 import { StatusType } from '@/app/app.slice.ts'
+import { MainLogo } from '@/assets/icons/Incubator-logo.tsx'
 import { LogOutIcon } from '@/assets/icons/LogOutIcon.tsx'
 import { Person } from '@/assets/icons/Person.tsx'
 import logo from '@/assets/images/logo.png'
@@ -40,7 +41,7 @@ export const Header = ({
     <div className={styles.main}>
       <Container className={styles.container}>
         <div className={styles.logo}>
-          <img src={logo} alt={t('logo')} />
+          <MainLogo />
         </div>
         <div className={styles.rightItem}>
           {!isAuth ? (
