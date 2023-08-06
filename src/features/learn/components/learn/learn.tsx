@@ -84,7 +84,7 @@ export const Learn = () => {
           // onValueChange={setRadioValue}
           answer={randomCard.answer}
           question={randomCard.question}
-          defaultValue={ratingValues[randomCard?.grade - 1].value}
+          defaultValue={randomCard?.grade ? ratingValues[randomCard?.grade - 1].value : undefined}
           numberEfforts={randomCard.shots}
           packName={deck.name}
           options={ratingValues}
@@ -94,3 +94,5 @@ export const Learn = () => {
     </Container>
   )
 }
+// http://localhost:3000/learn/clksraeqa00puyw2pfxug40eq
+// http://localhost:3000/learn/clkmx6au500d8sg2of7o5vcbo
