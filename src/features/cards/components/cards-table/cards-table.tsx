@@ -11,6 +11,7 @@ import { useDeleteCardMutation } from '@/features/cards/service/api/cards.api.ts
 import { useSaveGradeCardMutation } from '@/features/packs/service/api/packs.api.ts'
 import { CardType, SaveGradeCardType } from '@/features/packs/service/api/packs.types.ts'
 import { useTranslate } from '@/i18n.ts'
+
 // import { useSaveGradeCardMutation } from '@/features/packs/service/api/packs.api.ts'
 
 type PropsType = {
@@ -22,7 +23,7 @@ type PropsType = {
 
 export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
   const t = useTranslate()
-  const myId = '0000'
+
   const headers: TableHeaderType[] = [
     {
       key: 'question',
@@ -41,14 +42,14 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
     {
       key: 'updated',
       label: t('Last updated'),
-      className: `${s.lastUpdatedMy} ${myId === cardsData[0]?.userId ? s.lastUpdatedOther : ''}`,
+      className: `${id === cardsData[0]?.userId ? s.lastUpdatedMy : s.lastUpdatedOther}`,
       show: true,
       isSortable: true,
     },
     {
       key: 'grade',
       label: t('Grade'),
-      className: `${s.gradeMy} ${myId === cardsData[0]?.userId ? s.gradeOther : ''}`,
+      className: `${id === cardsData[0]?.userId ? s.gradeMy : s.gradeOther}`,
       show: true,
       isSortable: true,
     },
@@ -56,7 +57,7 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
       key: 'icons',
       label: '',
       className: `${s.icons}`,
-      show: myId !== cardsData[0]?.userId,
+      show: id === cardsData[0]?.userId,
     },
   ]
   const [deleteCard, {}] = useDeleteCardMutation()
@@ -88,16 +89,16 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
                 />
                 {/*<StarRating value={item.rating} />*/}
               </Table.Cell>
-              <Table.Cell>
-                {id === item.userId ? (
+              {id === item.userId ? (
+                <Table.Cell>
                   <TableCardIcons
                     // updateCard={() => updateCard(item.id)}
                     deleteCard={() => deleteCard(item.id)}
                   />
-                ) : (
-                  ''
-                )}
-              </Table.Cell>
+                </Table.Cell>
+              ) : (
+                ''
+              )}
             </Table.Row>
           ))}
         </Table.Body>

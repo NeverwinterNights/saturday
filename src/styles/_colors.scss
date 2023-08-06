@@ -48,3 +48,19 @@
   --color-dark-700: #171717;
   --color-dark-900: #000;
 }
+
+:root .dark-mode {
+  // light
+  --color-light-100: #312f2f;
+  --color-light-300: #4c4c4c;
+  --color-light-500: #4c4c4c;
+  --color-light-700: #171717;
+  --color-light-900: #000;
+
+  // dark
+  --color-dark-100: #1f1c1c;
+  --color-dark-300: #b162f8;
+  --color-dark-500: #a9a6b4;
+  --color-dark-700: #dcdae0;
+  --color-dark-900: #e6e5e8;
+}
