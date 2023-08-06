@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { toast } from 'react-toastify'
+
 import s from './packs.module.scss'
 
 import { Trash } from '@/assets/icons/Trash.tsx'
@@ -66,6 +68,7 @@ export const Packs = () => {
     if (decks) {
       setRangeValue([0, decks.maxCardsCount])
     }
+    toast.warn('Filters reset')
   }
 
   const sendModalHandler = (modalData: AddPackFormType) => {
