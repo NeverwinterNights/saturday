@@ -12,14 +12,15 @@ type LearnPackPropsType = {
   question: string
   answer: string
   numberEfforts: number
-  dataHandler: () => void
-} & RadioGroupType
+  // dataHandler: () => void
+  dataHandler: (value: string) => void
+} & Omit<RadioGroupType, 'onValueChange'>
 
 export const LearnPack = ({
   packName,
   options,
   question,
-  onValueChange,
+  // onValueChange,
   dataHandler,
   defaultValue,
   answer,
@@ -27,10 +28,14 @@ export const LearnPack = ({
 }: LearnPackPropsType) => {
   const [isOpen, setIsOpen] = useState(false)
   const t = useTranslate()
+  const [radioValue, setRadioValue] = useState('')
 
   const openAnswers = () => {
     setIsOpen(prev => !prev)
   }
+
+  console.log('defaultValue', defaultValue)
+  console.log('LearnPack')
 
   return (
     <div className={styles.wrap}>
@@ -59,7 +64,7 @@ export const LearnPack = ({
           </Typography>
           <div className={styles.radio}>
             <RadioGroup
-              onValueChange={onValueChange}
+              onValueChange={setRadioValue}
               options={options}
               defaultValue={defaultValue}
             />
@@ -67,7 +72,11 @@ export const LearnPack = ({
         </div>
       )}
       <div className={styles.button}>
-        <Button onClick={isOpen ? dataHandler : openAnswers} fullWidth variant="primary">
+        <Button
+          onClick={isOpen ? () => dataHandler(radioValue) : openAnswers}
+          fullWidth
+          variant="primary"
+        >
           {/*<Typography variant="subtitle2">{t('Show Answer')}</Typography>*/}
           <Typography variant="subtitle2">
             {isOpen ? t('Next Question') : t('Show Answer')}
