@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { Link } from 'react-router-dom'
+
 import { PATH } from '../../../common'
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
@@ -48,7 +50,7 @@ export const RegisterForm: FC<RegisterFormPropsType> = ({ onSubmitHandler }) => 
         <Typography className={s.subtitle} variant="body2">
           {t('Already have an account?')}
         </Typography>
-        <Button variant="link" as={'a'} className={s.link} href={PATH.LOGIN}>
+        <Button variant="link" as={Link} className={s.link} to={PATH.LOGIN}>
           {t('Sign In')}
         </Button>
       </form>

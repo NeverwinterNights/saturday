@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { Link } from 'react-router-dom'
+
 import { Button } from '../../ui/button'
 import { Card } from '../../ui/card'
 import { ControlledInput } from '../../ui/controlled'
@@ -57,7 +59,7 @@ export const LoginForm: FC<PropsType> = ({ onSubmitHandler }) => {
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           {t("Don't have an account?")}
         </Typography>
-        <Typography variant="link1" as={'a'} className={s.signUpLink} href={PATH.REGISTRATION}>
+        <Typography variant="link1" as={Link} className={s.signUpLink} to={PATH.REGISTRATION}>
           {t('Sign Up')}
         </Typography>
       </form>
