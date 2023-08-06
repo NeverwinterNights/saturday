@@ -47,6 +47,7 @@ export const LearnPackComponent: Story = {
     return (
       <I18NProvider i18n={i18n}>
         <LearnPack
+          dataHandler={() => {}}
           options={optionsPrimary}
           defaultValue={radioValue}
           onValueChange={setRadioValue}

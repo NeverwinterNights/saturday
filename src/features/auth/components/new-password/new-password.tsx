@@ -9,8 +9,8 @@ import { useResetPasswordMutation } from '@/features/auth/service/api/auth.api.t
 export const NewPasswordPage = () => {
   const navigate = useNavigate()
   const { token } = useParams()
-  const [resetPassword, { isLoading, error }] = useResetPasswordMutation()
-  const resetPassworHandler = async (data: NewPasswordFormType) => {
+  const [resetPassword] = useResetPasswordMutation()
+  const resetPasswordHandler = async (data: NewPasswordFormType) => {
     if (token) {
       await resetPassword({ token, ...data })
         .unwrap()
@@ -25,5 +25,5 @@ export const NewPasswordPage = () => {
     }
   }
 
-  return <NewPassword onSubmitHandler={resetPassworHandler} />
+  return <NewPassword onSubmitHandler={resetPasswordHandler} />
 }
