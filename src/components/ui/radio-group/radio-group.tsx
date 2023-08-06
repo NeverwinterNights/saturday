@@ -26,14 +26,16 @@ export const RadioGroup: FC<RadioGroupType> = ({ options, disabled, ...rest }) =
     <Radio.Root className={s.root} {...rest} disabled={disabled}>
       {options.map(option => (
         <Radio.Item
+          defaultValue={rest.defaultValue}
           className={s.RadioGroupItem}
+          // checked={rest.defaultValue === option.value}
           value={option.value}
           key={option.value}
           disabled={disabled}
         >
           <div className={s.RadioGroupIndicator} />
           <Typography variant={'body2'} as={'label'} className={s.label}>
-            {option.value}
+            {option.label}
           </Typography>
         </Radio.Item>
       ))}

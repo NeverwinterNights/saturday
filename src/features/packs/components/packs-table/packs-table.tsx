@@ -129,6 +129,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
                     />
                   ) : (
                     <TablePackIcons
+                      id={item.id}
                       editOpenModals={() => openModalHandler(item.name, item.id)}
                       // editOpenModals={() => console.log('value', item.name)}
                       deleteDeck={() =>
