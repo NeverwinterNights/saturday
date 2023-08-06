@@ -78,8 +78,6 @@ export const Packs = () => {
     setIsOpenModal(false)
   }
 
-  console.log('data', user)
-
   return (
     <Container className={s.root}>
       <AddEditPack
