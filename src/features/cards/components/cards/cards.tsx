@@ -111,7 +111,12 @@ export const Cards = () => {
         )}
       </div>
 
-      <Image src={packsCover || cover} height={107} width={170} className={s.cover} />
+      <Image
+        src={packsCover}
+        height={107}
+        width={170}
+        className={`${s.cover} ${packsCover ? '' : s.noneCover}`}
+      />
 
       {data && data.items.length ? (
         <>

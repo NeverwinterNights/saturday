@@ -1,5 +1,7 @@
 import { memo } from 'react'
 
+import { Link } from 'react-router-dom'
+
 import { MailIcon } from '../../../assets/icons/MailIcom.tsx'
 import { PATH } from '../../../common'
 import { Button } from '../../ui/button'
@@ -27,7 +29,7 @@ export const CheckMail = memo(({ email }: CheckMailPropType) => {
       <Typography className={styles.info} variant="body2">
         {t('We’ve sent an Email with instructions to')} {email}
       </Typography>
-      <Button as="a" fullWidth className={styles.button} variant="primary" href={PATH.LOGIN}>
+      <Button as={Link} fullWidth className={styles.button} variant="primary" to={PATH.LOGIN}>
         <Typography className={styles.buttonText} variant="subtitle2">
           {t('Back to Sign In')}
         </Typography>
