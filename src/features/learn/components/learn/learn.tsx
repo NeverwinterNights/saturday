@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { useParams } from 'react-router-dom'
 
@@ -24,17 +24,16 @@ export const Learn = () => {
   // console.log('id', id)
   const { data: deck } = useGetDeckQuery(id as string)
   const { data: cards, isLoading } = useGetCardsQuery({ decksId: id ?? '' })
-  const [radioValue, setRadioValue] = useState('')
+  // const [radioValue, setRadioValue] = useState('')
   const [currentCardsArray, setCurrentCardsArray] = useState<CardType[] | undefined>(cards?.items)
   const [saveGrade] = useSaveGradeCardMutation()
 
-  useEffect(() => {
-    if (cards?.items) setCurrentCardsArray(cards?.items)
-  }, [cards?.items])
+  // useEffect(() => {
+  //   if (cards?.items) setCurrentCardsArray(cards?.items)
+  // }, [cards?.items])
   const randomCard = useMemo(() => getRandomCard(currentCardsArray), [currentCardsArray])
 
-  console.log('length', currentCardsArray?.length)
-  const dataHandler = () => {
+  const dataHandler = (value: string) => {
     // console.log('value', radioValue ? radioValue : randomCard?.grade)
     // console.log('dataHandler')
     const filteredCards = currentCardsArray?.filter(item => item.id !== randomCard?.id)
@@ -46,10 +45,27 @@ export const Learn = () => {
       saveGrade({
         decksId: id,
         cardId: randomCard.id,
-        grade: radioValue ? +radioValue : randomCard?.grade,
+        grade: value ? +value : randomCard?.grade,
       })
     }
   }
+
+  // const dataHandler = (value: string) => {
+  //   // console.log('value', radioValue ? radioValue : randomCard?.grade)
+  //   // console.log('dataHandler')
+  //   const filteredCards = currentCardsArray?.filter(item => item.id !== randomCard?.id)
+  //
+  //   if (filteredCards) {
+  //     setCurrentCardsArray(filteredCards)
+  //   }
+  //   if (id && randomCard && randomCard.id) {
+  //     saveGrade({
+  //       decksId: id,
+  //       cardId: randomCard.id,
+  //       grade: radioValue ? +radioValue : randomCard?.grade,
+  //     })
+  //   }
+  // }
 
   // console.log('randomCard', randomCard)
   // console.log('randomCard?.grade', randomCard?.grade)
@@ -65,10 +81,10 @@ export const Learn = () => {
       {/*{t('Learn')} {id}*/}
       {deck && randomCard && (
         <LearnPack
-          onValueChange={setRadioValue}
+          // onValueChange={setRadioValue}
           answer={randomCard.answer}
           question={randomCard.question}
-          defaultValue={ratingValues[randomCard?.grade - 1].value}
+          defaultValue={randomCard?.grade ? ratingValues[randomCard?.grade - 1].value : undefined}
           numberEfforts={randomCard.shots}
           packName={deck.name}
           options={ratingValues}
@@ -78,3 +94,5 @@ export const Learn = () => {
     </Container>
   )
 }
+// http://localhost:3000/learn/clksraeqa00puyw2pfxug40eq
+// http://localhost:3000/learn/clkmx6au500d8sg2of7o5vcbo

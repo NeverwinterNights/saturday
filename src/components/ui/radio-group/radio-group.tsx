@@ -22,6 +22,8 @@ export type RadioGroupType = {
 }
 
 export const RadioGroup: FC<RadioGroupType> = ({ options, disabled, ...rest }) => {
+  console.log('RadioGroup', rest.defaultValue)
+
   return (
     <Radio.Root className={s.root} {...rest} disabled={disabled}>
       {options.map(option => (
