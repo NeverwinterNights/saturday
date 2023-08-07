@@ -73,34 +73,41 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
       <Table.Root>
         <TableHeader headers={headers} onSort={onSort} sort={sort} />
         <Table.Body>
-          {cardsData?.map(item => (
-            <Table.Row key={item.id}>
-              <Table.Cell>{item.question}</Table.Cell>
-              <Table.Cell>
-                <ReadMore text={item.answer} maxLength={60} />
-              </Table.Cell>
-              <Table.Cell>{item.updated}</Table.Cell>
-              <Table.Cell>
-                <Grade
-                  clickHandler={grade =>
-                    gradeHandler({ decksId: item.deckId, cardId: item.id, grade })
-                  }
-                  grade={item.grade as GradeType}
-                />
-                {/*<StarRating value={item.rating} />*/}
-              </Table.Cell>
-              {id === item.userId ? (
+          {cardsData?.map(item => {
+            // console.log('id === item.userId', id === item.userId)
+            // console.log('item.userId', item.userId)
+            // console.log('id', id)
+            // console.log('item', item)
+
+            return (
+              <Table.Row key={item.id}>
+                <Table.Cell>{item.question}</Table.Cell>
                 <Table.Cell>
-                  <TableCardIcons
-                    // updateCard={() => updateCard(item.id)}
-                    deleteCard={() => deleteCard(item.id)}
-                  />
+                  <ReadMore text={item.answer} maxLength={60} />
                 </Table.Cell>
-              ) : (
-                ''
-              )}
-            </Table.Row>
-          ))}
+                <Table.Cell>{item.updated}</Table.Cell>
+                <Table.Cell>
+                  <Grade
+                    clickHandler={grade =>
+                      gradeHandler({ decksId: item.deckId, cardId: item.id, grade })
+                    }
+                    grade={item.grade as GradeType}
+                  />
+                  {/*<StarRating value={item.rating} />*/}
+                </Table.Cell>
+                {id === item.userId ? (
+                  <Table.Cell>
+                    <TableCardIcons
+                      // updateCard={() => updateCard(item.id)}
+                      deleteCard={() => deleteCard(item.id)}
+                    />
+                  </Table.Cell>
+                ) : (
+                  ''
+                )}
+              </Table.Row>
+            )
+          })}
         </Table.Body>
       </Table.Root>
     </div>

@@ -36,6 +36,13 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
+      query: ({ decksId, ...params }) => ({
+        url: `decks/${decksId}/cards`,
+        params,
+      }),
+      providesTags: ['cards'],
+    }),
     deleteDeck: build.mutation<DecksType, string>({
       query: id => ({
         url: `decks/${id}`,
@@ -66,20 +73,13 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
       }),
       invalidatesTags: ['cards'],
     }),
-    getRandomCard: build.query<CardType, string>({
-      query: id => ({
-        url: `decks/${id}/learn`,
+    getRandomCard: build.query<CardType, { id: string; previousCardId?: string }>({
+      query: ({ id, previousCardId }) => ({
+        url: `decks/${id}/learn${previousCardId ? `?previousCardId=${previousCardId}` : ''}`,
         method: 'GET',
       }),
     }),
-    getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
-      query: ({ decksId, ...params }) => ({
-        url: `decks/${decksId}/cards`,
-        params,
-      }),
-      providesTags: ['cards'],
-    }),
-    saveGradeCard: build.mutation<void, SaveGradeCardType & GetCardsRequestType>({
+    saveGradeCard: build.mutation<CardType, SaveGradeCardType & GetCardsRequestType>({
       query: ({ decksId, ...rest }) => ({
         url: `decks/${decksId}/learn`,
         method: 'POST',
@@ -127,4 +127,5 @@ export const {
   useDeleteDeckMutation,
   useCreateCardsMutation,
   useSaveGradeCardMutation,
+  useGetRandomCardQuery,
 } = decksAPI

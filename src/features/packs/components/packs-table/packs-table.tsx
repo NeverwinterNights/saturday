@@ -125,7 +125,11 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
                   {myId !== item.userId ? (
                     <Play
                       style={{ cursor: 'pointer' }}
-                      onClick={() => navigate(`${PATH.LEARN}/${item.id}`)}
+                      // onClick={() => navigate(`${PATH.LEARN}/${item.id}`)}
+                      // onClick={() => navigate(`${PATH.LEARN}` + `/${item.id}`)}
+                      // onClick={() => navigate(`${PATH.LEARN}/${item.id}`)}
+                      //onClick={() => navigate(`${PATH.LEARN}/clkdo2w5x0025wc2rkavirgzk`)}
+                      onClick={() => navigate(`${PATH.LEARN}` + `/${item.id}`)}
                     />
                   ) : (
                     <TablePackIcons
@@ -149,3 +153,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
     </div>
   )
 }
+// id clkdo2w5x0025wc2rkavirgzk
+// learn.tsx?t=1691353063290:57 Learn
+// learn-pack.tsx:40 defaultValue undefined
+// learn-pack.tsx:41 LearnPack

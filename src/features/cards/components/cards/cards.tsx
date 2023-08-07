@@ -44,8 +44,8 @@ export const Cards = () => {
     orderBy: sortString ? sortString : undefined,
   })
   const dispatch = useAppDispatch()
-  // const { id } = useParams<{ id: string }>()
 
+  // const { id } = useParams<{ id: string }>()
   useEffect(() => {
     dispatch(addQuestionAC(searchValue))
     if (sortString) {
@@ -90,6 +90,7 @@ export const Cards = () => {
                 <DropdownItemWithIcon
                   icon={<Play />}
                   onSelect={() => navigate(`${PATH.LEARN}/${id}`)}
+                  // onSelect={() => {}}
                   text="Learn"
                 />
                 <DropdownItemWithIcon
