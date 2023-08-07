@@ -118,7 +118,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
                   </div>
                 </Table.Cell>
                 <Table.Cell>{item.cardsCount}</Table.Cell>
-                <Table.Cell>{item.updated}</Table.Cell>
+                <Table.Cell>{new Date(item.updated).toLocaleString()}</Table.Cell>
                 <Table.Cell>{item.author.name}</Table.Cell>
                 <Table.Cell align="center">
                   {/*если пак не наш, то показываем только 1 иконку*/}
@@ -135,7 +135,6 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
                     <TablePackIcons
                       id={item.id}
                       editOpenModals={() => openModalHandler(item.name, item.id)}
-                      // editOpenModals={() => console.log('value', item.name)}
                       deleteDeck={() =>
                         deleteDeck(item.id)
                           .unwrap()

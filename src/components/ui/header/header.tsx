@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Button } from '../button'
 import { Dropdown, DropdownItem, DropdownItemWithIcon } from '../dropdown'
 import { Typography } from '../typography'
@@ -8,8 +10,8 @@ import { StatusType } from '@/app/app.slice.ts'
 import { MainLogo } from '@/assets/icons/Incubator-logo.tsx'
 import { LogOutIcon } from '@/assets/icons/LogOutIcon.tsx'
 import { Person } from '@/assets/icons/Person.tsx'
-import logo from '@/assets/images/logo.png'
 import { SecondaryLoader } from '@/assets/loaders/secondary-loader/secondary-loader.tsx'
+import { PATH } from '@/common'
 import { Avatar } from '@/components/ui/avatar'
 import { Container } from '@/components/ui/container/container.tsx'
 import { useTranslate } from '@/i18n.ts'
@@ -41,7 +43,9 @@ export const Header = ({
     <div className={styles.main}>
       <Container className={styles.container}>
         <div className={styles.logo}>
-          <MainLogo />
+          <Button variant={'link'} as={Link} to={PATH.PACKS}>
+            <MainLogo />
+          </Button>
         </div>
         <div className={styles.rightItem}>
           {!isAuth ? (
