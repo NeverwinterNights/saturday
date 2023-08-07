@@ -22,7 +22,7 @@ export const LearnPack = ({
   question,
   // onValueChange,
   dataHandler,
-  defaultValue,
+  defaultValue = '1',
   answer,
   numberEfforts,
 }: LearnPackPropsType) => {
@@ -31,11 +31,12 @@ export const LearnPack = ({
   const [radioValue, setRadioValue] = useState('')
 
   const openAnswers = () => {
-    setIsOpen(prev => !prev)
+    setRadioValue(defaultValue)
+    setIsOpen(true)
   }
-
-  console.log('defaultValue', defaultValue)
-  console.log('LearnPack')
+  const closeAnswers = () => {
+    setIsOpen(false)
+  }
 
   return (
     <div className={styles.wrap}>
@@ -64,6 +65,7 @@ export const LearnPack = ({
           </Typography>
           <div className={styles.radio}>
             <RadioGroup
+              value={radioValue}
               onValueChange={setRadioValue}
               options={options}
               defaultValue={defaultValue}
@@ -73,7 +75,14 @@ export const LearnPack = ({
       )}
       <div className={styles.button}>
         <Button
-          onClick={isOpen ? () => dataHandler(radioValue) : openAnswers}
+          onClick={
+            isOpen
+              ? () => {
+                  dataHandler(radioValue)
+                  closeAnswers()
+                }
+              : openAnswers
+          }
           fullWidth
           variant="primary"
         >
