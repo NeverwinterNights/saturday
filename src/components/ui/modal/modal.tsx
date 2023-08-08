@@ -14,6 +14,8 @@ export type ModalType = {
   title?: string
   onOpenChange?: (value: boolean) => void
   isOpen: boolean
+  renderActionButton?: () => JSX.Element
+  renderCancelButton?: () => JSX.Element
 } & ComponentProps<'div'>
 
 export const Modal: FC<ModalType> = ({ children, title, onOpenChange, isOpen }) => {

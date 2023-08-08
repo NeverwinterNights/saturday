@@ -1,12 +1,14 @@
 import { useState } from 'react'
 
+import { I18NProvider } from '@ayub-begimkulov/i18n'
 import { action } from '@storybook/addon-actions'
 import type { Meta } from '@storybook/react'
 
-import { Button } from '../../../components/ui/button'
-import { Input } from '../../../components/ui/input'
-import { Modal, ModalType } from '../../../components/ui/modal/modal.tsx'
-import { Typography } from '../../../components/ui/typography'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Modal, ModalType } from '@/components/ui/modal/modal.tsx'
+import { Typography } from '@/components/ui/typography'
+import { i18n } from '@/i18n.ts'
 
 export default {
   title: 'Components/Modal',
@@ -43,18 +45,20 @@ export const DefaultModal = {
 
     return (
       <>
-        <Button onClick={handleModalOpened}>Open modal</Button>
-        <Modal
-          {...args}
-          isOpen={open}
-          onOpenChange={handleModalClosed}
-          renderActionButton={() => <Button onClick={action('Save')}>Save</Button>}
-        >
-          <Typography variant={'body2'}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
-          </Typography>
-        </Modal>
+        <I18NProvider i18n={i18n}>
+          <Button onClick={handleModalOpened}>Open modal</Button>
+          <Modal
+            {...args}
+            isOpen={open}
+            onOpenChange={handleModalClosed}
+            renderActionButton={() => <Button onClick={action('Save')}>Save</Button>}
+          >
+            <Typography variant={'body2'}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+            </Typography>
+          </Modal>
+        </I18NProvider>
       </>
     )
   },
@@ -76,13 +80,15 @@ export const ModalWithSaveButton = {
 
     return (
       <>
-        <Button onClick={handleModalOpened}>Open modal</Button>
-        <Modal
-          {...args}
-          isOpen={open}
-          renderActionButton={() => <Button onClick={action('Save')}>Save</Button>}
-          onOpenChange={handleModalClosed}
-        ></Modal>
+        <I18NProvider i18n={i18n}>
+          <Button onClick={handleModalOpened}>Open modal</Button>
+          <Modal
+            {...args}
+            isOpen={open}
+            renderActionButton={() => <Button onClick={action('Save')}>Save</Button>}
+            onOpenChange={handleModalClosed}
+          ></Modal>
+        </I18NProvider>
       </>
     )
   },
@@ -104,19 +110,21 @@ export const ModalWithDoubleButton = {
 
     return (
       <>
-        <Button onClick={handleModalOpened}>Open modal</Button>
-        <Modal
-          {...args}
-          isOpen={open}
-          title={'With two Buttons'}
-          renderActionButton={() => <Button onClick={action('Save')}>Save</Button>}
-          renderCancelButton={() => (
-            <Button variant={'secondary'} onClick={action('Cancel')}>
-              Cancel
-            </Button>
-          )}
-          onOpenChange={handleModalClosed}
-        />
+        <I18NProvider i18n={i18n}>
+          <Button onClick={handleModalOpened}>Open modal</Button>
+          <Modal
+            {...args}
+            isOpen={open}
+            title={'With two Buttons'}
+            renderActionButton={() => <Button onClick={action('Save')}>Save</Button>}
+            renderCancelButton={() => (
+              <Button variant={'secondary'} onClick={action('Cancel')}>
+                Cancel
+              </Button>
+            )}
+            onOpenChange={handleModalClosed}
+          />
+        </I18NProvider>
       </>
     )
   },

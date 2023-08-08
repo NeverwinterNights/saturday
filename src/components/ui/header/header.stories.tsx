@@ -23,12 +23,14 @@ type Story = StoryObj<typeof meta>
 export const HeaderWithButton: Story = {
   args: {
     isAuth: false,
+    isLoading: 'succeeded',
   },
 }
 
 export const HeaderWithAvatar: Story = {
   args: {
     isAuth: true,
+    isLoading: 'succeeded',
     // children: 'Primary Button',
     name: 'Planet',
     avatar:
@@ -43,6 +45,7 @@ export const ControlStoryWithDefalt: Story = {
 
     return (
       <Header
+        isLoading="succeeded"
         name="DefaultName"
         email="coolDefault@gmail.com"
         onSignIn={() => setOpen(!open)}
