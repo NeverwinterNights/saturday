@@ -14,8 +14,7 @@ type LearnPackPropsType = {
   numberEfforts: number
   // dataHandler: () => void
   dataHandler: (value: string) => void
-} & RadioGroupType
-// } & Omit<RadioGroupType, 'onValueChange'>
+} & Omit<RadioGroupType, 'onValueChange'>
 
 export const LearnPack = ({
   packName,
