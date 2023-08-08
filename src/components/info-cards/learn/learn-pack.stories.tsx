@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { I18NProvider } from '@ayub-begimkulov/i18n'
 import type { Meta, StoryObj } from '@storybook/react'
 
@@ -42,15 +40,15 @@ const optionsPrimary = [
 
 export const LearnPackComponent: Story = {
   render: () => {
-    const [radioValue, setRadioValue] = useState('Did not know')
+    // const [radioValue, setRadioValue] = useState('Did not know')
 
     return (
       <I18NProvider i18n={i18n}>
         <LearnPack
           dataHandler={() => {}}
           options={optionsPrimary}
-          defaultValue={radioValue}
-          onValueChange={setRadioValue}
+          defaultValue={'Did not know'}
+          // onValueChange={setRadioValue}
           answer={'This is how "This" works in JavaScript'}
           numberEfforts={10}
           question={'How "This" works in JavaScript?'}
