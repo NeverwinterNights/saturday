@@ -75,6 +75,8 @@ export const Packs = () => {
     const form = new FormData()
 
     form.append('name', modalData.name)
+    modalData.cover && form.append('cover', modalData?.cover?.[0])
+
     modalData.isPrivate && form.append('isPrivate', 'true')
 
     createDeck(form)

@@ -81,7 +81,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
 
     form.append('name', data.name)
     if (data?.cover?.[0]) {
-      form.append('cover', data?.cover)
+      form.append('cover', data?.cover?.[0])
     }
     if (data?.isPrivate) {
       form.append('isPrivate', JSON.stringify(data?.isPrivate))
