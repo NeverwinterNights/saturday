@@ -64,6 +64,11 @@ const appSlice = createSlice({
       .addMatcher(
         action => action.type.endsWith('flashCardsAPI/executeQuery/rejected'),
         (state, action) => {
+          if (action.payload.data.statusCode === 401) {
+            state.status = 'failed'
+
+            return
+          }
           if (action.payload.data.path.endsWith('me?')) {
             state.status = 'failed'
 
