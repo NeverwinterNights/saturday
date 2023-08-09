@@ -53,7 +53,7 @@ export const LearnPack = ({
         {question}
       </Typography>
       <Typography className={styles.efforts} color="secondary" variant="body2">
-        {t('Количество попыток ответов на вопрос:')} {numberEfforts}
+        {t('Number of attempts to answer the question:')} {numberEfforts}
       </Typography>
       {isOpen && (
         <div>

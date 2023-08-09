@@ -72,5 +72,12 @@
   "Grade": "Grade",
   "Next Question": "Next Question",
   "End study session": "End study session",
-  "Cover": "Cover"
+  "Cover": "Cover",
+  "There are no cards in the deck.": "There are no cards in the deck.",
+  "Number of attempts to answer the question:": "Number of attempts to answer the question:",
+  "Did not know": "Did not know",
+  "Forgot": "Forgot",
+  "A lot of thought": "A lot of thought",
+  "Confused": "Confused",
+  "Knew the answer": "Knew the answer"
 }

@@ -72,5 +72,12 @@
   "Grade": "Оценка",
   "Next Question": "Следующий вопрос",
   "End study session": "Завершить учебную сессию",
-  "Cover": "Обложка"
+  "Cover": "Обложка",
+  "There are no cards in the deck.":"В колоде нет карт",
+  "Number of attempts to answer the question:": "Количество попыток ответов на вопрос:",
+  "Did not know": "Не знал",
+  "Forgot": "Забыл",
+  "A lot of thought": "Много мыслей",
+  "Confused": "Затрудняюсь ответить",
+  "Knew the answer": "Знал ответ"
 }
