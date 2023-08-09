@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import styles from './learn-pack.module.scss'
 
 import { Button } from '@/components/ui/button'
@@ -37,6 +39,7 @@ export const LearnPack = ({
   const closeAnswers = () => {
     setIsOpen(false)
   }
+  const navigate = useNavigate()
 
   return (
     <div className={styles.wrap}>
@@ -90,6 +93,12 @@ export const LearnPack = ({
           <Typography variant="subtitle2">
             {isOpen ? t('Next Question') : t('Show Answer')}
           </Typography>
+        </Button>
+      </div>
+      <div className={styles.close}>
+        <Button onClick={() => navigate(-1)} fullWidth variant="secondary">
+          {/*<Typography variant="subtitle2">{t('Show Answer')}</Typography>*/}
+          <Typography variant="subtitle2">{t('End study session')}</Typography>
         </Button>
       </div>
     </div>
