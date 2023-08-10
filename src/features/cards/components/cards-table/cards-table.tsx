@@ -8,8 +8,7 @@ import { TableCardIcons } from '@/components/ui/table/icons/tableCardIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
 import { useDeleteCardMutation } from '@/features/cards/service/api/cards.api.ts'
-import { useSaveGradeCardMutation } from '@/features/packs/service/api/packs.api.ts'
-import { CardType, SaveGradeCardType } from '@/features/packs/service/api/packs.types.ts'
+import { CardType } from '@/features/packs/service/api/packs.types.ts'
 import { useTranslate } from '@/i18n.ts'
 
 // import { useSaveGradeCardMutation } from '@/features/packs/service/api/packs.api.ts'
@@ -61,12 +60,12 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
     },
   ]
   const [deleteCard, {}] = useDeleteCardMutation()
-  const [saveGrade] = useSaveGradeCardMutation()
+  // const [saveGrade] = useSaveGradeCardMutation()
 
   // const [updateCard, {}] = useUpdateCardByIdMutation()
-  const gradeHandler = (data: SaveGradeCardType) => {
-    saveGrade(data)
-  }
+  // const gradeHandler = (data: SaveGradeCardType) => {
+  //   saveGrade(data)
+  // }
 
   return (
     <div>
@@ -88,9 +87,9 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
                 <Table.Cell>{item.updated}</Table.Cell>
                 <Table.Cell>
                   <Grade
-                    clickHandler={grade =>
-                      gradeHandler({ decksId: item.deckId, cardId: item.id, grade })
-                    }
+                    // clickHandler={grade =>
+                    //   gradeHandler({ decksId: item.deckId, cardId: item.id, grade })
+                    // }
                     grade={item.grade as GradeType}
                   />
                   {/*<StarRating value={item.rating} />*/}
