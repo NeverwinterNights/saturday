@@ -35,6 +35,7 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         url: `decks/${id}`,
         method: 'GET',
       }),
+      providesTags: ['deck'],
     }),
     getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
       query: ({ decksId, ...params }) => ({
@@ -56,15 +57,8 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         method: 'PATCH',
         body: data,
       }),
-      invalidatesTags: ['decks'],
+      invalidatesTags: ['decks', 'deck'],
     }),
-    // getCards: build.query<GetCardsResponseType, GetCardsRequestType>({
-    //   query: ({ decksId, question, orderBy }) => ({
-    //     url: `decks/${decksId}/cards`,
-    //     params: { question, orderBy },
-    //   }),
-    //   providesTags: ['cards'],
-    // }),
     createCards: build.mutation<CardType, { data: FormData; decksId: string }>({
       query: ({ decksId, data }) => ({
         url: `decks/${decksId}/cards`,
