@@ -41,7 +41,6 @@ export const Learn = () => {
       label: t('Knew the answer'),
     },
   ]
-  // console.log('id', id)
   const { data: deck } = useGetDeckQuery(id as string)
   const [prevID, setPrevID] = useState<string | undefined>(undefined)
   const { data: card } = useGetRandomCardQuery({
@@ -50,38 +49,8 @@ export const Learn = () => {
   })
   const [saveGrade] = useSaveGradeCardMutation()
 
-  // const { data: cards, isLoading } = useGetCardsQuery({ decksId: id ?? '' })
-  // // const [radioValue, setRadioValue] = useState('')
-  // const [currentCardsArray, setCurrentCardsArray] = useState<CardType[] | undefined>(cards?.items)
-  // const [saveGrade] = useSaveGradeCardMutation()
-  //
-  // // useEffect(() => {
-  // //   if (cards?.items) setCurrentCardsArray(cards?.items)
-  // // }, [cards?.items])
-  // const randomCard = useMemo(() => getRandomCard(currentCardsArray), [currentCardsArray])
-  //
-  // const dataHandler = (value: string) => {
-  //   // console.log('value', radioValue ? radioValue : randomCard?.grade)
-  //   // console.log('dataHandler')
-  //   const filteredCards = currentCardsArray?.filter(item => item.id !== randomCard?.id)
-  //
-  //   if (filteredCards) {
-  //     setCurrentCardsArray(filteredCards)
-  //   }
-  //   if (id && randomCard && randomCard.id) {
-  //     saveGrade({
-  //       decksId: id,
-  //       cardId: randomCard.id,
-  //       grade: value ? +value : randomCard?.grade,
-  //     })
-  //   }
-  // }
-
   const dataHandler = (value: string) => {
     setPrevID(card?.id)
-    // saveGrade({ decksId: id as string, cardId: card?.id as string, grade: +value }).then(res => {
-    //   console.log('res', res)
-    // })
     saveGrade({ decksId: id as string, cardId: card?.id as string, grade: +value })
   }
 
@@ -104,5 +73,3 @@ export const Learn = () => {
     </Container>
   )
 }
-// http://localhost:3000/learn/clksraeqa00puyw2pfxug40eq
-// http://localhost:3000/learn/clkmx6au500d8sg2of7o5vcbo

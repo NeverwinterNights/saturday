@@ -73,11 +73,6 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
         <TableHeader headers={headers} onSort={onSort} sort={sort} />
         <Table.Body>
           {cardsData?.map(item => {
-            // console.log('id === item.userId', id === item.userId)
-            // console.log('item.userId', item.userId)
-            // console.log('id', id)
-            // console.log('item', item)
-
             return (
               <Table.Row key={item.id}>
                 <Table.Cell>{item.question}</Table.Cell>
