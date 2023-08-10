@@ -29,9 +29,21 @@ export const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) 
           extraOptions
         )
 
-        if (refreshResult.data) {
-          // retry the initial query
-          await baseQuery(args, api, extraOptions)
+        // if (refreshResult.data) {
+        //   // retry the initial query
+        //   await baseQuery(args, api, extraOptions)
+        // }
+        if (refreshResult.meta?.response?.status === 204) {
+          result = await baseQuery(args, api, extraOptions)
+        } else {
+          await baseQuery(
+            {
+              url: 'auth/logout',
+              method: 'POST',
+            },
+            api,
+            extraOptions
+          )
         }
       } finally {
         // release must be called once the mutex should be released again.
