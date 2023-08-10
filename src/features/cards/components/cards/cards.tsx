@@ -73,7 +73,6 @@ export const Cards = () => {
     }
   }
 
-  console.log('deck?.name', deck?.name)
   const updateDeckHandler = (data: AddPackFormType) => {
     const form = new FormData()
 
@@ -161,7 +160,7 @@ export const Cards = () => {
         {myPack ? (
           <Button onClick={() => setIsModalOpen(!isModalOpen)}>{t('Add New Card')}</Button>
         ) : (
-          <Button>{t('Learn to Pack')}</Button>
+          <Button onClick={() => navigate(`${PATH.LEARN}/${id}`)}>{t('Learn to Pack')}</Button>
         )}
       </div>
 
@@ -193,7 +192,9 @@ export const Cards = () => {
           <Typography variant={'body1'}>
             {t('This pack is empty. Click add new card to fill this pack')}
           </Typography>
-          <Button onClick={() => setIsModalOpen(!isModalOpen)}>{t('Add New Card')}</Button>
+          {myPack && (
+            <Button onClick={() => setIsModalOpen(!isModalOpen)}>{t('Add New Card')}</Button>
+          )}
         </div>
       )}
     </Container>

@@ -65,7 +65,7 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: ['cards'],
+      invalidatesTags: ['cards', 'deck'],
     }),
     getRandomCard: build.query<CardType, { id: string; previousCardId?: string }>({
       query: ({ id, previousCardId }) => ({
