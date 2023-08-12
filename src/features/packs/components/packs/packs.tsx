@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import s from './packs.module.scss'
 
 import { Trash } from '@/assets/icons/Trash.tsx'
+import { MainLoader } from '@/assets/loaders/main-loader/main-loader.tsx'
 import { AddEditPack } from '@/components/info-cards/add-new-pack'
 import { AddPackFormType } from '@/components/info-cards/add-new-pack/use-add-new-pack.ts'
 import { Button } from '@/components/ui/button'
@@ -37,7 +38,7 @@ export const Packs = () => {
   const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : undefined
   const [tabValue, setTabValue] = useState('all')
-  const { data: decks } = useGetDecksQuery({
+  const { data: decks, isLoading } = useGetDecksQuery({
     minCardsCount: range[0].toString(),
     maxCardsCount: range[1].toString(),
     authorId: tabValue === 'my' ? user?.id : undefined,
@@ -47,7 +48,6 @@ export const Packs = () => {
     itemsPerPage: itemsPerPage,
   })
 
-  console.log('decks', decks)
   const [rangeValue, setRangeValue] = useState<[number, number]>([0, 1])
   const [createDeck] = useCreateDeckMutation()
 
@@ -83,6 +83,8 @@ export const Packs = () => {
     createDeck(form)
     setIsOpenModal(false)
   }
+
+  if (isLoading) return <MainLoader />
 
   return (
     <Container className={s.root}>
