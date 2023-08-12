@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import styles from './learn.module.scss'
 
+import { MainLoader } from '@/assets/loaders/main-loader/main-loader.tsx'
 import { ratingValuesType } from '@/common/constants/rating-values.ts'
 import { LearnPack } from '@/components/info-cards/learn'
 import { Container } from '@/components/ui/container'
@@ -41,7 +42,7 @@ export const Learn = () => {
       label: t('Knew the answer'),
     },
   ]
-  const { data: deck } = useGetDeckQuery(id as string)
+  const { isLoading, data: deck } = useGetDeckQuery(id as string)
   const [prevID, setPrevID] = useState<string | undefined>(undefined)
   const { data: card } = useGetRandomCardQuery({
     id: id as string,
@@ -56,8 +57,7 @@ export const Learn = () => {
 
   return (
     <Container className={styles.root}>
-      {!card && <Typography variant="large">{t('There are no cards in the deck.')}</Typography>}
-      {/*{t('Learn')} {id}*/}
+      {isLoading ? <MainLoader /> : ''}
       {deck && card && (
         <LearnPack
           // onValueChange={setRadioValue}
@@ -70,6 +70,7 @@ export const Learn = () => {
           dataHandler={dataHandler}
         />
       )}
+      {!card && <Typography variant="large">{t('There are no cards in the deck.')}</Typography>}
     </Container>
   )
 }

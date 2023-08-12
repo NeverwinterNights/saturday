@@ -6,7 +6,6 @@ import { toast } from 'react-toastify'
 import s from './packs-table.module.scss'
 
 import { Play } from '@/assets/icons/Play.tsx'
-import photo from '@/assets/images/react.png'
 import { PATH } from '@/common'
 import { AddEditPack } from '@/components/info-cards/add-new-pack'
 import { AddPackFormType } from '@/components/info-cards/add-new-pack/use-add-new-pack.ts'
@@ -113,7 +112,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
               <Table.Row key={item.id}>
                 <Table.Cell onClick={() => navigate(`${PATH.PACKS}${PATH.CARDS}/${item.id}`)}>
                   <div className={s.deckCover}>
-                    {item.cover && <img src={photo} alt="" />}
+                    {<img className={s.image} src={item.cover} alt="" />}
                     {item.name}
                   </div>
                 </Table.Cell>
@@ -139,7 +138,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
                         deleteDeck(item.id)
                           .unwrap()
                           .then(() => {
-                            toast.success('Deleted')
+                            toast.success(t('Deleted'))
                           })
                       }
                     />

@@ -69,7 +69,7 @@ export const Packs = () => {
     if (decks) {
       setRangeValue([0, decks.maxCardsCount])
     }
-    toast.warn('Filters reset')
+    toast.warn(t('Filters reset'))
   }
 
   const sendModalHandler = (modalData: AddPackFormType) => {
