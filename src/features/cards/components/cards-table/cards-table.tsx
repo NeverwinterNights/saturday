@@ -75,9 +75,17 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
           {cardsData?.map(item => {
             return (
               <Table.Row key={item.id}>
-                <Table.Cell>{item.question}</Table.Cell>
                 <Table.Cell>
-                  <ReadMore text={item.answer} maxLength={60} />
+                  <div style={{ wordWrap: 'break-word', display: 'flex', flexDirection: 'column' }}>
+                    {<img className={s.image} src={item.questionImg} alt="" />}
+                    <ReadMore text={item.question} maxLength={15} />
+                  </div>
+                </Table.Cell>
+                <Table.Cell>
+                  <div style={{ wordWrap: 'break-word', display: 'flex', flexDirection: 'column' }}>
+                    {<img className={s.image} src={item.answerImg} alt="" />}
+                    <ReadMore text={item.answer} maxLength={15} />
+                  </div>
                 </Table.Cell>
                 <Table.Cell>{item.updated}</Table.Cell>
                 <Table.Cell>
