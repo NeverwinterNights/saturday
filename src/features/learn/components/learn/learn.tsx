@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import styles from './learn.module.scss'
 
@@ -17,6 +17,7 @@ import {
 import { useTranslate } from '@/i18n.ts'
 
 export const Learn = () => {
+  const navigate = useNavigate()
   const t = useTranslate()
   const { id } = useParams<{ id: string }>()
 
@@ -70,7 +71,14 @@ export const Learn = () => {
           dataHandler={dataHandler}
         />
       )}
-      {!card && <Typography variant="large">{t('There are no cards in the deck.')}</Typography>}
+      {!card && (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Typography variant="large">{t('There are no cards in the deck.')}</Typography>
+          <Typography variant={'body2'} onClick={() => navigate(-1)} className={styles.backBtn}>
+            {t('Leave page')}
+          </Typography>
+        </div>
+      )}
     </Container>
   )
 }

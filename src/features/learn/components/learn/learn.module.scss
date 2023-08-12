@@ -3,4 +3,10 @@
   align-items: center;
   justify-content: center;
   height: 600px;
+  .backBtn {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

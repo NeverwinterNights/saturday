@@ -9,6 +9,7 @@ import { ArrowLeft } from '@/assets/icons/ArrowLeft.tsx'
 import { Edit } from '@/assets/icons/Edit.tsx'
 import { Play } from '@/assets/icons/Play.tsx'
 import { Trash } from '@/assets/icons/Trash.tsx'
+import { MainLoader } from '@/assets/loaders/main-loader/main-loader.tsx'
 import { PATH } from '@/common'
 import { AddEditNewCard } from '@/components/info-cards/add-edit-card'
 import { AddEditPack } from '@/components/info-cards/add-new-pack'
@@ -96,7 +97,7 @@ export const Cards = () => {
     navigate(-1)
   }
 
-  if (isLoading) return <div>{t('Loading...')}</div>
+  if (isLoading) return <MainLoader />
 
   return (
     <Container className={s.root}>
@@ -173,13 +174,6 @@ export const Cards = () => {
 
       {data && data.items.length ? (
         <>
-          {/*<Input
-            searchInput
-            placeholder={'Input search'}
-            className={s.input}
-            value={inputValue}
-            onChange={e => setInputValue(e.currentTarget.value)}
-          />*/}
           <DebounceInput
             className={s.input}
             onValueChange={e => setSearchValue(e)}

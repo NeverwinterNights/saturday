@@ -134,18 +134,25 @@ export const Packs = () => {
         </Button>
       </div>
 
-      {decks && <PacksTable id={user?.id} decks={decks.items} sort={sort} onSort={setSort} />}
-
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 30 }}>
-        <Pagination
-          count={decks?.pagination.totalPages ?? 10}
-          onChange={page => setCurrentPage(page)}
-          onPerPageChange={itemsPerPage => setItemsPerPage(itemsPerPage)}
-          page={decks?.pagination.currentPage ?? 1}
-          perPage={decks?.pagination.itemsPerPage}
-          perPageOptions={[4, 7, 10]}
-        />
-      </div>
+      {decks && decks.items.length ? (
+        <>
+          <PacksTable id={user?.id} decks={decks.items} sort={sort} onSort={setSort} />
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 30 }}>
+            <Pagination
+              count={decks?.pagination.totalPages ?? 10}
+              onChange={page => setCurrentPage(page)}
+              onPerPageChange={itemsPerPage => setItemsPerPage(itemsPerPage)}
+              page={decks?.pagination.currentPage ?? 1}
+              perPage={decks?.pagination.itemsPerPage}
+              perPageOptions={[4, 7, 10]}
+            />
+          </div>
+        </>
+      ) : (
+        <Typography style={{ textAlign: 'center' }} variant={'body1'}>
+          {t("Can't find any pack of cards")}
+        </Typography>
+      )}
     </Container>
   )
 }
