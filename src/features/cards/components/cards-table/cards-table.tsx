@@ -1,13 +1,17 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 import s from './cards-table.module.scss'
 
+import { AddEditNewCard } from '@/components/info-cards/add-edit-card'
 import { Grade, GradeType } from '@/components/ui/grade'
 import { ReadMore } from '@/components/ui/read-more'
 import { TableCardIcons } from '@/components/ui/table/icons/tableCardIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
-import { useDeleteCardMutation } from '@/features/cards/service/api/cards.api.ts'
+import {
+  useDeleteCardMutation,
+  useUpdateCardByIdMutation,
+} from '@/features/cards/service/api/cards.api.ts'
 import { CardType } from '@/features/packs/service/api/packs.types.ts'
 import { useTranslate } from '@/i18n.ts'
 
@@ -62,15 +66,46 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
   const [deleteCard, {}] = useDeleteCardMutation()
   // const [saveGrade] = useSaveGradeCardMutation()
 
-  // const [updateCard, {}] = useUpdateCardByIdMutation()
+  const [updateCard, {}] = useUpdateCardByIdMutation()
   // const gradeHandler = (data: SaveGradeCardType) => {
   //   saveGrade(data)
   // }
+  const [editModalOpen, setEditModalOpen] = useState(false)
+  const [currentEditedCard, setCurrentEditedCard] = useState<CardType>({} as CardType)
+  const updateCardHandler = (id: string) => {
+    const card: CardType | undefined = cardsData.find(item => item.id === id)
+
+    if (card) {
+      setCurrentEditedCard(card)
+    }
+    setEditModalOpen(true)
+  }
+
+  const getData = (value: FormData) => {
+    updateCard({ id: currentEditedCard.id, body: value })
+    setCurrentEditedCard({} as CardType)
+    setEditModalOpen(false)
+  }
 
   return (
     <div>
       <Table.Root>
         <TableHeader headers={headers} onSort={onSort} sort={sort} />
+        {currentEditedCard.answer && (
+          <AddEditNewCard
+            defaultQuestion={currentEditedCard.question}
+            defaultAnswer={currentEditedCard.answer}
+            namePack={'Name Card'}
+            isOpen={editModalOpen}
+            title={t('Edit Card')}
+            buttonName={t('Save Changes')}
+            onClickDataHandler={getData}
+            onOpenChange={() => {
+              setCurrentEditedCard({} as CardType)
+              setEditModalOpen(false)
+            }}
+          />
+        )}
         <Table.Body>
           {cardsData?.map(item => {
             return (
@@ -100,7 +135,7 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
                 {id === item.userId ? (
                   <Table.Cell>
                     <TableCardIcons
-                      // updateCard={() => updateCard(item.id)}
+                      updateCard={() => updateCardHandler(item.id)}
                       deleteCard={() => deleteCard(item.id)}
                     />
                   </Table.Cell>

@@ -161,7 +161,9 @@ export const Cards = () => {
         {myPack ? (
           <Button onClick={() => setIsModalOpen(!isModalOpen)}>{t('Add New Card')}</Button>
         ) : (
-          <Button onClick={() => navigate(`${PATH.LEARN}/${id}`)}>{t('Learn to Pack')}</Button>
+          data?.items.length !== 0 && (
+            <Button onClick={() => navigate(`${PATH.LEARN}/${id}`)}>{t('Learn to Pack')}</Button>
+          )
         )}
       </div>
 

@@ -1,39 +1,46 @@
 .pps {
   position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: var(--color-dark-900);
   z-index: 100;
+  inset: 0;
+
+  background-color: var(--color-dark-900);
 }
+
 .loader {
-  width: 150px;
-  height: 150px;
-  background-color: var(--color-accent-500);
-  border-radius: 50%;
   position: absolute;
-  box-shadow: 0 0 30px 4px rgba(0, 0, 0, 0.5) inset, 0 5px 12px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+  z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
-  &:before,
-  &:after {
+
+  overflow: hidden;
+
+  width: 150px;
+  height: 150px;
+
+  background-color: var(--color-accent-500);
+  border-radius: 50%;
+  box-shadow: 0 0 30px 4px rgb(0 0 0 / 50%) inset, 0 5px 12px rgb(0 0 0 / 15%);
+
+  &::before,
+  &::after {
     content: '';
+
     position: absolute;
+    top: -40%;
+
     width: 100%;
     height: 100%;
-    border-radius: 45%;
-    top: -40%;
+
     background-color: var(--color-dark-300);
+    border-radius: 45%;
+
     animation: wave 5s linear infinite;
   }
 
-  &:before {
+  &::before {
+    background: rgb(255 255 255 / 40%);
     border-radius: 30%;
-    background: rgba(255, 255, 255, 0.4);
     animation: wave 5s linear infinite;
   }
 }
@@ -42,6 +49,7 @@
   0% {
     transform: rotate(0);
   }
+
   100% {
     transform: rotate(360deg);
   }

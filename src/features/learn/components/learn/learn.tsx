@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { useNavigate, useParams } from 'react-router-dom'
 
 import styles from './learn.module.scss'
@@ -44,21 +42,18 @@ export const Learn = () => {
     },
   ]
   const { isLoading, data: deck } = useGetDeckQuery(id as string)
-  const [prevID, setPrevID] = useState<string | undefined>(undefined)
-  const { data: card } = useGetRandomCardQuery({
-    id: id as string,
-    previousCardId: prevID ? prevID : undefined,
-  })
-  const [saveGrade] = useSaveGradeCardMutation()
+  const { data: card } = useGetRandomCardQuery({ id: id as string })
+  const [saveGrade, { isLoading: load }] = useSaveGradeCardMutation()
 
   const dataHandler = (value: string) => {
-    setPrevID(card?.id)
+    // setPrevID(card?.id)
     saveGrade({ decksId: id as string, cardId: card?.id as string, grade: +value })
   }
 
   return (
     <Container className={styles.root}>
       {isLoading ? <MainLoader /> : ''}
+      {load ? <MainLoader /> : ''}
       {deck && card && (
         <LearnPack
           // onValueChange={setRadioValue}
@@ -71,8 +66,15 @@ export const Learn = () => {
           dataHandler={dataHandler}
         />
       )}
-      {!card && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      {!card && !load && (
+        <div
+          style={{
+            display: 'flex',
+            backgroundColor: 'red', //убрать потом это для наглядности.
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           <Typography variant="large">{t('There are no cards in the deck.')}</Typography>
           <Typography variant={'body2'} onClick={() => navigate(-1)} className={styles.backBtn}>
             {t('Leave page')}

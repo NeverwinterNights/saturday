@@ -10,7 +10,6 @@ import {
   UpdateDeckRequestType,
 } from '@/features/packs/service/api/packs.types.ts'
 import { flashCardsAPI } from '@/store/api.ts'
-import { RootState } from '@/store/store.ts'
 
 export const decksAPI = flashCardsAPI.injectEndpoints({
   endpoints: build => ({
@@ -67,47 +66,60 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
       }),
       invalidatesTags: ['cards', 'deck'],
     }),
-    getRandomCard: build.query<CardType, { id: string; previousCardId?: string }>({
-      query: ({ id, previousCardId }) => ({
-        url: `decks/${id}/learn${previousCardId ? `?previousCardId=${previousCardId}` : ''}`,
+    // getRandomCard: build.query<CardType, { id: string; previousCardId?: string }>({
+    getRandomCard: build.query<CardType, { id: string }>({
+      // query: ({ id, previousCardId }) => ({
+      query: ({ id }) => ({
+        // url: `decks/${id}/learn${previousCardId ? `?previousCardId=${previousCardId}` : ''}`,
+        url: `decks/${id}/learn`,
         method: 'GET',
       }),
     }),
-    saveGradeCard: build.mutation<CardType, SaveGradeCardType & GetCardsRequestType>({
+    // saveGradeCard: build.mutation<CardType, SaveGradeCardType & GetCardsRequestType>({
+    saveGradeCard: build.mutation<CardType, SaveGradeCardType>({
       query: ({ decksId, ...rest }) => ({
         url: `decks/${decksId}/learn`,
         method: 'POST',
         body: { ...rest },
       }),
-      async onQueryStarted(
-        { decksId, grade, cardId, orderBy, ...params },
-        { getState, dispatch, queryFulfilled }
-      ) {
-        const state = getState() as RootState
-        const patchResult = dispatch(
-          decksAPI.util.updateQueryData(
-            'getCards',
-            {
-              decksId,
-              orderBy: state.appReducer.orderBy || undefined,
-              question: state.appReducer.question || undefined,
-              ...params,
-            },
-            draft => {
-              const card = draft.items.find(card => card.id === cardId)
-
-              if (card) card.grade = grade
-              Object.assign(draft, card)
-            }
-          )
-        )
-
-        try {
-          await queryFulfilled
-        } catch {
-          patchResult.undo()
-        }
-      },
+      // async onQueryStarted({ decksId }, { dispatch, queryFulfilled }) {
+      //   const res = await queryFulfilled
+      //
+      //   dispatch(
+      //     decksAPI.util.updateQueryData('getRandomCard', { id: decksId }, () => {
+      //       return res.data
+      //     })
+      //   )
+      // },
+      // async onQueryStarted(
+      //   { decksId, grade, cardId, orderBy, ...params },
+      //   { getState, dispatch, queryFulfilled }
+      // ) {
+      //   const state = getState() as RootState
+      //   const patchResult = dispatch(
+      //     decksAPI.util.updateQueryData(
+      //       'getCards',
+      //       {
+      //         decksId,
+      //         orderBy: state.appReducer.orderBy || undefined,
+      //         question: state.appReducer.question || undefined,
+      //         ...params,
+      //       },
+      //       draft => {
+      //         const card = draft.items.find(card => card.id === cardId)
+      //
+      //         if (card) card.grade = grade
+      //         Object.assign(draft, card)
+      //       }
+      //     )
+      //   )
+      //
+      //   try {
+      //     await queryFulfilled
+      //   } catch {
+      //     patchResult.undo()
+      //   }
+      // },
     }),
   }),
 })
