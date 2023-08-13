@@ -186,7 +186,9 @@ export const Cards = () => {
       ) : (
         <div className={s.empty}>
           <Typography variant={'body1'}>
-            {t('This pack is empty. Click add new card to fill this pack')}
+            {myPack
+              ? t('This pack is empty. Click add new card to fill this pack')
+              : t('This pack is empty. Go back')}
           </Typography>
           {myPack && (
             <Button onClick={() => setIsModalOpen(!isModalOpen)}>{t('Add New Card')}</Button>
