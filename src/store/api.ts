@@ -1,15 +1,31 @@
-import { BaseQueryFn, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {
+  BaseQueryFn,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery,
+  FetchBaseQueryError,
+} from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 
 const baseUrl = 'https://andri-flashcards-api.onrender.com/v1/'
 
+// type CustomError = {
+//   data: {
+//     statusCode: number
+//     message: string
+//   }
+// }
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrl,
   credentials: 'include',
 })
 
-export const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) => {
+export const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
 
   // wait until the mutex is available without locking it

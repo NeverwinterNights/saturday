@@ -82,15 +82,15 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         method: 'POST',
         body: { ...rest },
       }),
-      // async onQueryStarted({ decksId }, { dispatch, queryFulfilled }) {
-      //   const res = await queryFulfilled
-      //
-      //   dispatch(
-      //     decksAPI.util.updateQueryData('getRandomCard', { id: decksId }, () => {
-      //       return res.data
-      //     })
-      //   )
-      // },
+      async onQueryStarted({ decksId }, { dispatch, queryFulfilled }) {
+        const res = await queryFulfilled
+
+        dispatch(
+          decksAPI.util.updateQueryData('getRandomCard', { id: decksId }, () => {
+            return res.data
+          })
+        )
+      },
       // async onQueryStarted(
       //   { decksId, grade, cardId, orderBy, ...params },
       //   { getState, dispatch, queryFulfilled }

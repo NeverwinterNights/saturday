@@ -41,8 +41,9 @@ export const Learn = () => {
       label: t('Knew the answer'),
     },
   ]
+
   const { isLoading, data: deck } = useGetDeckQuery(id as string)
-  const { data: card } = useGetRandomCardQuery({ id: id as string })
+  const { data: card, error } = useGetRandomCardQuery({ id: id as string })
   const [saveGrade, { isLoading: isLoad }] = useSaveGradeCardMutation()
 
   const dataHandler = (value: string) => {
@@ -50,12 +51,11 @@ export const Learn = () => {
     saveGrade({ decksId: id as string, cardId: card?.id as string, grade: +value })
   }
 
-  console.log('isLoad', isLoad)
-
   return (
     <Container className={styles.root}>
       {isLoading ? <MainLoader /> : ''}
       {isLoad ? <MainLoader /> : ''}
+      {/*{isLoad && !deck ? <MainLoader /> : ''}*/}
       {deck && card && (
         <LearnPack
           // onValueChange={setRadioValue}
@@ -69,11 +69,10 @@ export const Learn = () => {
         />
       )}
       {/*{!card && !isLoad && (*/}
-      {!card && (
+      {error && (
         <div
           style={{
             display: 'flex',
-            backgroundColor: 'red', //убрать потом это для наглядности.
             flexDirection: 'column',
             alignItems: 'center',
           }}
