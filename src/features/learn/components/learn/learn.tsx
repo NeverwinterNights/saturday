@@ -54,7 +54,7 @@ export const Learn = () => {
   return (
     <Container className={styles.root}>
       {isLoading ? <MainLoader /> : ''}
-      {isLoad ? <MainLoader /> : ''}
+      {isLoad ? <MainLoader className={styles.loader} /> : ''}
       {/*{isLoad && !deck ? <MainLoader /> : ''}*/}
       {deck && card && (
         <LearnPack
