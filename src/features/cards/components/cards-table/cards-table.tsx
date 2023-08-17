@@ -1,8 +1,11 @@
 import { FC, useState } from 'react'
 
+import { toast } from 'react-toastify'
+
 import s from './cards-table.module.scss'
 
 import { AddEditNewCard } from '@/components/info-cards/add-edit-card'
+import { DeleteItem } from '@/components/info-cards/delete-item'
 import { Grade, GradeType } from '@/components/ui/grade'
 import { ReadMore } from '@/components/ui/read-more'
 import { TableCardIcons } from '@/components/ui/table/icons/tableCardIcons.tsx'
@@ -12,10 +15,8 @@ import {
   useDeleteCardMutation,
   useUpdateCardByIdMutation,
 } from '@/features/cards/service/api/cards.api.ts'
-import { CardType } from '@/features/packs/service/api/packs.types.ts'
+import { CardData, CardType } from '@/features/packs/service/api/packs.types.ts'
 import { useTranslate } from '@/i18n.ts'
-
-// import { useSaveGradeCardMutation } from '@/features/packs/service/api/packs.api.ts'
 
 type PropsType = {
   cardsData: CardType[]
@@ -64,14 +65,10 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
     },
   ]
   const [deleteCard, {}] = useDeleteCardMutation()
-  // const [saveGrade] = useSaveGradeCardMutation()
-
   const [updateCard, {}] = useUpdateCardByIdMutation()
-  // const gradeHandler = (data: SaveGradeCardType) => {
-  //   saveGrade(data)
-  // }
   const [editModalOpen, setEditModalOpen] = useState(false)
-  const [currentEditedCard, setCurrentEditedCard] = useState<CardType>({} as CardType)
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
+  const [currentEditedCard, setCurrentEditedCard] = useState<CardData>({} as CardData)
   const updateCardHandler = (id: string) => {
     const card: CardType | undefined = cardsData.find(item => item.id === id)
 
@@ -85,6 +82,18 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
     updateCard({ id: currentEditedCard.id, body: value })
     setCurrentEditedCard({} as CardType)
     setEditModalOpen(false)
+  }
+  const deletModalHandler = () => {
+    deleteCard(currentEditedCard.id)
+      .unwrap()
+      .then(() => {
+        toast.success(t('Deleted'))
+      })
+    setIsModalDeleteOpen(false)
+  }
+  const openDeletModalHandler = (question: string, id: string) => {
+    setCurrentEditedCard({ question, id })
+    setIsModalDeleteOpen(true)
   }
 
   return (
@@ -106,37 +115,43 @@ export const CardsTable: FC<PropsType> = ({ cardsData, onSort, sort, id }) => {
             }}
           />
         )}
+        <DeleteItem
+          title={t('Delete card')}
+          isOpen={isModalDeleteOpen}
+          onClickDataHandler={deletModalHandler}
+          buttonName={t('Delete card')}
+          itemName={t('this card')}
+          onOpenChange={() => setIsModalDeleteOpen(false)}
+        />
         <Table.Body>
           {cardsData?.map(item => {
             return (
               <Table.Row key={item.id}>
                 <Table.Cell>
-                  <div style={{ wordWrap: 'break-word', display: 'flex', flexDirection: 'column' }}>
+                  <div
+                    style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
+                  >
                     {<img className={s.image} src={item.questionImg} alt="" />}
                     <ReadMore text={item.question} maxLength={15} />
                   </div>
                 </Table.Cell>
                 <Table.Cell>
-                  <div style={{ wordWrap: 'break-word', display: 'flex', flexDirection: 'column' }}>
+                  <div
+                    style={{ wordBreak: 'break-word', display: 'flex', flexDirection: 'column' }}
+                  >
                     {<img className={s.image} src={item.answerImg} alt="" />}
                     <ReadMore text={item.answer} maxLength={15} />
                   </div>
                 </Table.Cell>
-                <Table.Cell>{item.updated}</Table.Cell>
+                <Table.Cell>{new Date(item.updated).toLocaleString()}</Table.Cell>
                 <Table.Cell>
-                  <Grade
-                    // clickHandler={grade =>
-                    //   gradeHandler({ decksId: item.deckId, cardId: item.id, grade })
-                    // }
-                    grade={item.grade as GradeType}
-                  />
-                  {/*<StarRating value={item.rating} />*/}
+                  <Grade grade={item.grade as GradeType} />
                 </Table.Cell>
                 {id === item.userId ? (
                   <Table.Cell>
                     <TableCardIcons
                       updateCard={() => updateCardHandler(item.id)}
-                      deleteCard={() => deleteCard(item.id)}
+                      deleteCard={() => openDeletModalHandler(item.question, item.id)}
                     />
                   </Table.Cell>
                 ) : (
