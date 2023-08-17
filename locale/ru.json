@@ -89,5 +89,7 @@
   "Filters reset": "Фильтры сброшены",
   "Leave page": "Покинуть страницу",
   "Can't find any pack of cards": "Не могу найти колоду карт",
-  "This pack is empty. Go back": "В этой колоде нет карточке, вернись назад"
+  "This pack is empty. Go back": "В этой колоде нет карточке, вернись назад",
+  "Delete card": "Удалить карточку",
+  "this card": "эту карточку"
 }
