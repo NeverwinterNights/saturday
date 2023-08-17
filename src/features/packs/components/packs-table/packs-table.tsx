@@ -9,6 +9,7 @@ import { Play } from '@/assets/icons/Play.tsx'
 import { PATH } from '@/common'
 import { AddEditPack } from '@/components/info-cards/add-new-pack'
 import { AddPackFormType } from '@/components/info-cards/add-new-pack/use-add-new-pack.ts'
+import { DeleteItem } from '@/components/info-cards/delete-item'
 import { TablePackIcons } from '@/components/ui/table/icons/tableIcons.tsx'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Sort, TableHeader, TableHeaderType } from '@/components/ui/table-header/table-header.tsx'
@@ -74,6 +75,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
   const [deleteDeck] = useDeleteDeckMutation()
   const [updateDeck] = useUpdateDeckMutation()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
   const [deckData, setDeckData] = useState<DeckData>({} as DeckData)
   const modalHandler = (data: AddPackFormType) => {
     const form = new FormData()
@@ -87,10 +89,22 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
     }
     updateDeck({ id: deckData.id, data: form })
   }
+  const deletModalHandler = () => {
+    deleteDeck(deckData.id)
+      .unwrap()
+      .then(() => {
+        toast.success(t('Deleted'))
+      })
+    setIsModalDeleteOpen(false)
+  }
 
   const openModalHandler = (name: string, id: string) => {
     setDeckData({ name, id })
     setIsModalOpen(true)
+  }
+  const openDeletModalHandler = (name: string, id: string) => {
+    setDeckData({ name, id })
+    setIsModalDeleteOpen(true)
   }
 
   return (
@@ -103,6 +117,14 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
         buttonName={'Save Changes'}
         onOpenChange={setIsModalOpen}
         isOpen={isModalOpen}
+      />
+      <DeleteItem
+        title={t('Delete Pack')}
+        isOpen={isModalDeleteOpen}
+        onClickDataHandler={deletModalHandler}
+        buttonName={t('Delete Pack')}
+        itemName={` ${deckData?.name}` as string}
+        onOpenChange={() => setIsModalDeleteOpen(false)}
       />
       <Table.Root>
         <TableHeader headers={headersPacks} onSort={onSort} sort={sort} />
@@ -120,27 +142,16 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
                 <Table.Cell>{new Date(item.updated).toLocaleString()}</Table.Cell>
                 <Table.Cell>{item.author.name}</Table.Cell>
                 <Table.Cell align="center">
-                  {/*если пак не наш, то показываем только 1 иконку*/}
                   {myId !== item.userId ? (
                     <Play
                       style={{ cursor: 'pointer' }}
-                      // onClick={() => navigate(`${PATH.LEARN}/${item.id}`)}
-                      // onClick={() => navigate(`${PATH.LEARN}` + `/${item.id}`)}
-                      // onClick={() => navigate(`${PATH.LEARN}/${item.id}`)}
-                      //onClick={() => navigate(`${PATH.LEARN}/clkdo2w5x0025wc2rkavirgzk`)}
                       onClick={() => navigate(`${PATH.LEARN}` + `/${item.id}`)}
                     />
                   ) : (
                     <TablePackIcons
                       id={item.id}
                       editOpenModals={() => openModalHandler(item.name, item.id)}
-                      deleteDeck={() =>
-                        deleteDeck(item.id)
-                          .unwrap()
-                          .then(() => {
-                            toast.success(t('Deleted'))
-                          })
-                      }
+                      deleteDeck={() => openDeletModalHandler(item.name, item.id)}
                     />
                   )}
                 </Table.Cell>
@@ -151,7 +162,3 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
     </div>
   )
 }
-// id clkdo2w5x0025wc2rkavirgzk
-// learn.tsx?t=1691353063290:57 Learn
-// learn-pack.tsx:40 defaultValue undefined
-// learn-pack.tsx:41 LearnPack
