@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '../button'
 import { Dropdown, DropdownItem, DropdownItemWithIcon } from '../dropdown'
@@ -38,6 +38,7 @@ export const Header = ({
   onProfileClick,
 }: HeaderPropsType) => {
   const t = useTranslate()
+  const navigate = useNavigate()
 
   return (
     <div className={styles.main}>
@@ -67,7 +68,7 @@ export const Header = ({
                   </button>
                 }
               >
-                <DropdownItem onSelect={() => alert(name)}>
+                <DropdownItem onSelect={() => navigate(PATH.PACKS)}>
                   <div className={styles.userInfoContainer}>
                     <Avatar photo={avatar} name={name} />
                     <div className={styles.userDetails}>
