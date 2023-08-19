@@ -22,6 +22,7 @@ type Story = StoryObj<typeof meta>
 export const AddPackComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
+    // @ts-ignore
     const [modalsData, setModalsData] = useState<AddPackFormType>({} as AddPackFormType)
 
     return (
@@ -47,6 +48,7 @@ export const AddPackComponent: Story = {
 export const EditPackComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
+    // @ts-ignore
     const [modalsData, setModalsData] = useState<AddPackFormType>({} as AddPackFormType)
 
     return (
