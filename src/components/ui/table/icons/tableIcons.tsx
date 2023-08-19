@@ -16,13 +16,16 @@ export const TablePackIcons = ({ deleteDeck, editOpenModals, id }: TablePackIcon
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-      <button style={{ cursor: 'pointer' }} onClick={() => navigate(`${PATH.LEARN}` + `/${id}`)}>
+      <button
+        style={{ cursor: 'pointer', height: '16px' }}
+        onClick={() => navigate(`${PATH.LEARN}` + `/${id}`)}
+      >
         <Play />
       </button>
-      <button style={{ cursor: 'pointer' }} onClick={editOpenModals}>
+      <button style={{ cursor: 'pointer', height: '16px' }} onClick={editOpenModals}>
         <Edit />
       </button>
-      <button style={{ cursor: 'pointer' }} onClick={deleteDeck}>
+      <button style={{ cursor: 'pointer', height: '16px' }} onClick={deleteDeck}>
         <Trash />
       </button>
     </div>

@@ -144,7 +144,7 @@ export const PacksTable: FC<PropsType> = ({ decks, id, onSort, sort }) => {
                 <Table.Cell align="center">
                   {myId !== item.userId ? (
                     <Play
-                      style={{ cursor: 'pointer' }}
+                      style={{ display: 'flex', cursor: 'pointer' }}
                       onClick={() => navigate(`${PATH.LEARN}` + `/${item.id}`)}
                     />
                   ) : (
