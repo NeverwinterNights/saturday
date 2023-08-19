@@ -91,5 +91,6 @@
   "Can't find any pack of cards": "Не могу найти колоду карт",
   "This pack is empty. Go back": "В этой колоде нет карточке, вернись назад",
   "Delete card": "Удалить карточку",
-  "this card": "эту карточку"
+  "this card": "эту карточку",
+  "Can't find any pack of cards, but you can create card": "\nНе могу найти ни одной колоды карт, но вы можете создать карту"
 }

@@ -131,17 +131,13 @@ export const Cards = () => {
       />
       <div className={s.title}>
         <div className={s.namePack}>
-          <Typography variant={'large'}>
-            {/*{t('Name Pack')}*/}
-            {`${deck?.name}`}
-          </Typography>
+          <Typography variant={'large'}>{`${deck?.name}`}</Typography>
           {myPack && (
             <Dropdown>
               <Fragment key=".0">
                 <DropdownItemWithIcon
                   icon={<Play />}
                   onSelect={() => navigate(`${PATH.LEARN}/${id}`)}
-                  // onSelect={() => {}}
                   text={t('Learn')}
                 />
                 <DropdownItemWithIcon
@@ -173,22 +169,27 @@ export const Cards = () => {
         width={170}
         className={`${s.cover} ${packsCover ? '' : s.noneCover}`}
       />
-
+      <DebounceInput
+        className={s.input}
+        onValueChange={e => setSearchValue(e)}
+        searchValue={searchValue}
+        onClickClearInput={() => setSearchValue('')}
+      />
       {data && data.items.length ? (
         <>
-          <DebounceInput
-            className={s.input}
-            onValueChange={e => setSearchValue(e)}
-            searchValue={searchValue}
-          />
           <CardsTable id={user?.id} sort={sort} onSort={setSort} cardsData={data.items} />
         </>
       ) : (
         <div className={s.empty}>
-          <Typography variant={'body1'}>
+          {/*<Typography variant={'body1'}>
             {myPack
               ? t('This pack is empty. Click add new card to fill this pack')
               : t('This pack is empty. Go back')}
+          </Typography>*/}
+          <Typography style={{ textAlign: 'center' }} variant={'body1'}>
+            {myPack
+              ? t("Can't find any pack of cards, but you can create card")
+              : t("Can't find any pack of cards")}
           </Typography>
           {myPack && (
             <Button onClick={() => setIsModalOpen(!isModalOpen)}>{t('Add New Card')}</Button>
