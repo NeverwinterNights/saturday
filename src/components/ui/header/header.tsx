@@ -68,7 +68,7 @@ export const Header = ({
                   </button>
                 }
               >
-                <DropdownItem onSelect={() => navigate(PATH.PACKS)}>
+                <DropdownItem onSelect={() => navigate(PATH.PROFILE)}>
                   <div className={styles.userInfoContainer}>
                     <Avatar photo={avatar} name={name} />
                     <div className={styles.userDetails}>
