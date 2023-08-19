@@ -92,11 +92,7 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
             {...restProps}
           />
           {searchInput && value.toString()?.length > 0 && (
-            <span
-              style={{ cursor: 'pointer' }}
-              className={styles.closedImp}
-              onClick={onClickClearInput}
-            >
+            <span className={styles.closedImp} onClick={onClickClearInput}>
               <ClosedInputIcon />
             </span>
           )}
