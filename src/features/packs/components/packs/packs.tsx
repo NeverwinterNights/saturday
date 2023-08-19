@@ -63,6 +63,7 @@ export const Packs = () => {
   }, [decks?.maxCardsCount])
 
   const clearFilter = () => {
+    setSort({ key: 'updated', direction: 'desc' })
     setSearch('')
     setTabValue('all')
     setRange([0, 100])
