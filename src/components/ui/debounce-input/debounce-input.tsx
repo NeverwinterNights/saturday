@@ -9,6 +9,7 @@ type DebounceInputTypes = {
   searchValue: string
   className?: string
   disabled?: boolean
+  onClickClearInput?: () => void
 }
 
 export const DebounceInput = ({
@@ -16,6 +17,7 @@ export const DebounceInput = ({
   searchValue,
   className,
   disabled,
+  onClickClearInput,
 }: DebounceInputTypes) => {
   const t = useTranslate()
   const [value, setValue] = useState<string>(searchValue)
@@ -44,6 +46,7 @@ export const DebounceInput = ({
         onChange={handleChange}
         value={value}
         className={className}
+        onClickClearInput={onClickClearInput}
       />
     </>
   )

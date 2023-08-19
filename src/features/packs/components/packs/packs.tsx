@@ -108,6 +108,7 @@ export const Packs = () => {
           disabled={status === 'loading'}
           onValueChange={e => setSearch(e)}
           searchValue={search}
+          onClickClearInput={() => setSearch('')}
         />
         <Tab
           className={s.tab}
