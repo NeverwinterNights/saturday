@@ -46,8 +46,6 @@ export const AddNewCardComponent: Story = {
       // setAllData({ type: selectValue, ...data })
     }
 
-    console.log('modalsData', modalsData)
-
     return (
       <I18NProvider i18n={i18n}>
         <AddEditNewCard
@@ -75,8 +73,6 @@ export const EditNewCardComponent: Story = {
     const getData = (value: FormData) => {
       setModalsData(value)
     }
-
-    console.log('modalsData', modalsData)
 
     return (
       <I18NProvider i18n={i18n}>

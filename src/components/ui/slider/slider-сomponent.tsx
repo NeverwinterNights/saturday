@@ -31,7 +31,6 @@ export const SliderComponent = ({
 }: SliderPropsType) => {
   const t = useTranslate()
   const onSliderChange = (value: [number, number]) => {
-    console.log(value)
     setValue(value)
   }
 

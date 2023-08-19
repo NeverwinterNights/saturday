@@ -18,10 +18,6 @@ export const NewPasswordPage = () => {
           toast('🦄 Wow so easy!')
           navigate(PATH.LOGIN)
         })
-        .catch(e => {
-          toast.error(e.data.message)
-          console.log(e.data.message)
-        })
     }
   }
 

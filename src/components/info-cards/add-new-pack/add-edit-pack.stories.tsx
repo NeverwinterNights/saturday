@@ -24,8 +24,6 @@ export const AddPackComponent: Story = {
     const [isOpen, setIsOpen] = useState(true)
     const [modalsData, setModalsData] = useState<AddPackFormType>({} as AddPackFormType)
 
-    console.log('modalsData', modalsData)
-
     return (
       <I18NProvider i18n={i18n}>
         <AddEditPack
@@ -50,8 +48,6 @@ export const EditPackComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
     const [modalsData, setModalsData] = useState<AddPackFormType>({} as AddPackFormType)
-
-    console.log('modalsData', modalsData)
 
     return (
       <I18NProvider i18n={i18n}>

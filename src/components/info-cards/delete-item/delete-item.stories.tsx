@@ -21,7 +21,6 @@ export const DeletePackComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
     const onClickDeleteHandler = () => {
-      console.log('Delete')
       setIsOpen(false)
     }
 
@@ -50,7 +49,6 @@ export const DeleteCardComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
     const onClickDeleteHandler = () => {
-      console.log('Delete')
       setIsOpen(false)
     }
 
