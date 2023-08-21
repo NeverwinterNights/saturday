@@ -37,7 +37,6 @@ export const Input = forwardRef<HTMLInputElement, InputPropsType>(
       placeholder,
       disabled,
       onChange,
-      // onValueChange,
       type,
       width,
       label,
