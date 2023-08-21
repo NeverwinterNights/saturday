@@ -23,7 +23,6 @@ export const LoginForm: FC<PropsType> = ({ onSubmitHandler }) => {
   const { handleSubmit, control } = useLoginForm()
   const onSubmit = handleSubmit(data => onSubmitHandler(data))
 
-  // console.log ("value", value)
   return (
     <Card className={s.card}>
       <Typography className={s.title} as="h1" variant="large">
