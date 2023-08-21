@@ -10,7 +10,6 @@ import { useTranslate } from '@/i18n.ts'
 type SliderPropsType = {
   defaultValue?: [number, number]
   value: [number, number]
-  // setValue: Dispatch<SetStateAction<[number, number]>>
   onValueCommit?: (value: [number, number]) => void
   setValue: (value: [number, number]) => void
   min?: number
@@ -30,17 +29,10 @@ export const SliderComponent = ({
   setValue,
 }: SliderPropsType) => {
   const t = useTranslate()
+
   const onSliderChange = (value: [number, number]) => {
     setValue(value)
   }
-
-  // const onValueChange = (event: ChangeEvent<HTMLInputElement>, index: number) => {
-  //   setValue(state => {
-  //     return index === 0
-  //       ? [+event.currentTarget.value, state[1]]
-  //       : [state[0], +event.currentTarget.value]
-  //   })
-  // }
 
   return (
     <form>

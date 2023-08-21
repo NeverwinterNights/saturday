@@ -18,8 +18,18 @@ import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/features/auth/service/api/auth.api.ts'
 import { PacksTable } from '@/features/packs/components/packs-table/packs-table.tsx'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/service/api/packs.api.ts'
+import {
+  selectDeckNameToSearch,
+  selectDecksPage,
+  selectDecksPageSize,
+  selectDecksSort,
+  selectIsMaxCardsCountInit,
+  selectRange,
+  selectTabValue,
+} from '@/features/packs/service/packs.selectors.ts'
+import { decksActions } from '@/features/packs/service/packs.slice.ts'
 import { useTranslate } from '@/i18n.ts'
-import { useAppSelector } from '@/store/store.ts'
+import { useAppDispatch, useAppSelector } from '@/store/store.ts'
 
 export type Sort = {
   key: string
@@ -27,17 +37,33 @@ export type Sort = {
 } | null
 
 export const Packs = () => {
+  const dispatch = useAppDispatch()
   const t = useTranslate()
   const { data: user } = useMeQuery()
   const status = useAppSelector(state => state.appReducer.status)
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const [search, setSearch] = useState('')
+  const search = useAppSelector(selectDeckNameToSearch)
+  const setSearch = (name: string) => {
+    dispatch(decksActions.setNameToSearch({ name }))
+  }
   const [range, setRange] = useState<[number, number]>([0, 100])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState('7')
-  const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
+  const currentPage = useAppSelector(selectDecksPage)
+  const setCurrentPage = (page: number) => {
+    dispatch(decksActions.setPage({ page }))
+  }
+  const itemsPerPage = useAppSelector(selectDecksPageSize)
+  const setItemsPerPage = (pageSize: string) => {
+    dispatch(decksActions.setPageSize({ pageSize }))
+  }
+  const sort = useAppSelector(selectDecksSort)
+  const setSort = (sort: Sort) => {
+    dispatch(decksActions.setSort({ sort }))
+  }
   const sortString = sort ? `${sort.key}-${sort.direction}` : undefined
-  const [tabValue, setTabValue] = useState('all')
+  const tabValue = useAppSelector(selectTabValue)
+  const setTabValue = (value: string) => {
+    dispatch(decksActions.setTabValue({ value }))
+  }
   const { data: decks, isLoading } = useGetDecksQuery({
     minCardsCount: range[0].toString(),
     maxCardsCount: range[1].toString(),
@@ -47,8 +73,11 @@ export const Packs = () => {
     currentPage: currentPage.toString(),
     itemsPerPage: itemsPerPage,
   })
-
-  const [rangeValue, setRangeValue] = useState<[number, number]>([0, 1])
+  const rangeValue = useAppSelector(selectRange)
+  const isMaxCardsCountInit = useAppSelector(selectIsMaxCardsCountInit)
+  const setRangeValue = (value: [number, number]) => {
+    dispatch(decksActions.setRangeValue({ value }))
+  }
   const [createDeck] = useCreateDeckMutation()
 
   const options = [
@@ -57,16 +86,24 @@ export const Packs = () => {
   ]
 
   useEffect(() => {
-    if (rangeValue[1] !== decks?.maxCardsCount) {
-      setRangeValue(prev => [prev[0], decks?.maxCardsCount || 100])
+    if (isMaxCardsCountInit) {
+      if (rangeValue[1] !== decks?.maxCardsCount) {
+        setRangeValue([rangeValue[0], decks?.maxCardsCount || 100])
+      }
+    }
+
+    return () => {
+      dispatch(decksActions.setIsMaxCardsCountInit({ value: false }))
     }
   }, [decks?.maxCardsCount])
 
   const clearFilter = () => {
     setSort({ key: 'updated', direction: 'desc' })
     setSearch('')
-    setTabValue('all')
+    //setTabValue('all')
     setRange([0, 100])
+    setCurrentPage(1)
+    setItemsPerPage('7')
     if (decks) {
       setRangeValue([0, decks.maxCardsCount])
     }
