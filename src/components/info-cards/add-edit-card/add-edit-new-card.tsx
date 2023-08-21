@@ -66,6 +66,9 @@ export const AddEditNewCard = ({
   const onSubmit = handleSubmit(data => {
     const form = new FormData()
 
+    // Object.entries(data).map(([key, value]) => {
+    //   form.append(key, value)
+    // })
     form.append('question', data.question)
     form.append('answer', data.answer)
 
