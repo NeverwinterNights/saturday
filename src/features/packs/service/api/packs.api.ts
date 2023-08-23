@@ -10,7 +10,16 @@ import {
   UpdateDeckRequestType,
 } from '@/features/packs/service/api/packs.types.ts'
 import { flashCardsAPI } from '@/store/api.ts'
+import { RootState } from '@/store/store.ts'
 
+/*console.log({
+  minCardsCount: range[0].toString(),
+  maxCardsCount: range[1].toString(),
+  orderBy: sort ? `${sort['key']}-${sort['direction']}` : '',
+  name: nameToSearch,
+  currentPage: page.toString(),
+  itemsPerPage: pageSize,
+}),*/
 export const decksAPI = flashCardsAPI.injectEndpoints({
   endpoints: build => ({
     getDecks: build.query<GetDecksResponseType, GetDecksRequestType | void>({
@@ -48,6 +57,41 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         url: `decks/${id}`,
         method: 'DELETE',
       }),
+
+      async onQueryStarted(id, { dispatch, getState, queryFulfilled }) {
+        const state = getState() as RootState
+        const { nameToSearch, sort, page, pageSize, range, authorId } = state.decksReducer
+        const patchResult = dispatch(
+          decksAPI.util.updateQueryData(
+            'getDecks',
+            {
+              minCardsCount: range[0].toString(),
+              maxCardsCount: range[1].toString(),
+              orderBy: sort ? `${sort['key']}-${sort['direction']}` : '',
+              name: nameToSearch,
+              currentPage: page.toString(),
+              itemsPerPage: pageSize,
+              authorId,
+            },
+
+            draft => {
+              debugger
+              draft.items = draft.items.filter(deck => deck.id !== id)
+            }
+          )
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
+          /**
+           * Alternatively, on failure you can invalidate the corresponding cache tags
+           * to trigger a re-fetch:
+           * dispatch(api.util.invalidateTags(['Post']))
+           */
+        }
+      },
       invalidatesTags: ['decks'],
     }),
     updateDeck: build.mutation<DecksType, { id: string; data: UpdateDeckRequestType }>({
