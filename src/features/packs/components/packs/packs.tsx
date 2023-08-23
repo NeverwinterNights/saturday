@@ -46,7 +46,6 @@ export const Packs = () => {
   const setSearch = (name: string) => {
     dispatch(decksActions.setNameToSearch({ name }))
   }
-  const [range, setRange] = useState<[number, number]>([0, 100])
   const currentPage = useAppSelector(selectDecksPage)
   const setCurrentPage = (page: number) => {
     dispatch(decksActions.setPage({ page }))
@@ -61,22 +60,29 @@ export const Packs = () => {
   }
   const sortString = sort ? `${sort.key}-${sort.direction}` : undefined
   const tabValue = useAppSelector(selectTabValue)
-  const setTabValue = (value: string) => {
-    dispatch(decksActions.setTabValue({ value }))
+  const rangeValue = useAppSelector(selectRange)
+  const isMaxCardsCountInit = useAppSelector(selectIsMaxCardsCountInit)
+  const setRangeValue = (value: [number, number]) => {
+    dispatch(decksActions.setRangeValue({ value }))
   }
   const { data: decks, isLoading } = useGetDecksQuery({
-    minCardsCount: range[0].toString(),
-    maxCardsCount: range[1].toString(),
+    minCardsCount: rangeValue[0].toString(),
+    maxCardsCount: rangeValue[1].toString(),
     authorId: tabValue === 'my' ? user?.id : undefined,
     orderBy: sortString,
     name: search,
     currentPage: currentPage.toString(),
     itemsPerPage: itemsPerPage,
   })
-  const rangeValue = useAppSelector(selectRange)
-  const isMaxCardsCountInit = useAppSelector(selectIsMaxCardsCountInit)
-  const setRangeValue = (value: [number, number]) => {
-    dispatch(decksActions.setRangeValue({ value }))
+
+  const setTabValue = (value: string) => {
+    dispatch(decksActions.setTabValue({ value }))
+    if (user) {
+      dispatch(decksActions.setAuthorId({ value: user.id }))
+    }
+    if (tabValue === 'my') {
+      dispatch(decksActions.setAuthorId({ value: undefined }))
+    }
   }
   const [createDeck] = useCreateDeckMutation()
 
@@ -100,8 +106,7 @@ export const Packs = () => {
   const clearFilter = () => {
     setSort({ key: 'updated', direction: 'desc' })
     setSearch('')
-    //setTabValue('all')
-    setRange([0, 100])
+    setRangeValue([0, 100])
     setCurrentPage(1)
     setItemsPerPage('7')
     if (decks) {
@@ -160,7 +165,7 @@ export const Packs = () => {
         <div className={s.range}>
           <SliderComponent
             disabled={status === 'loading'}
-            onValueCommit={setRange}
+            onValueCommit={setRangeValue}
             value={rangeValue}
             setValue={setRangeValue}
             max={decks?.maxCardsCount}
