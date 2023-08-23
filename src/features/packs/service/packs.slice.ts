@@ -11,6 +11,7 @@ const initialState = {
   maxSlider: 100,
   tabValue: 'all',
   range: [0, 100] as [number, number],
+  authorId: undefined as string | undefined,
   isMaxCardsCountInit: true,
 }
 
@@ -44,6 +45,9 @@ const slice = createSlice({
     },
     setIsMaxCardsCountInit: (state, action: PayloadAction<{ value: boolean }>) => {
       state.isMaxCardsCountInit = action.payload.value
+    },
+    setAuthorId: (state, action: PayloadAction<{ value: string | undefined }>) => {
+      state.authorId = action.payload.value
     },
   },
 })
