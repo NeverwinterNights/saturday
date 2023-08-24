@@ -36,6 +36,40 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+        const state = getState() as RootState
+        const { nameToSearch, sort, page, pageSize, range, authorId } = state.decksReducer
+
+        try {
+          const res = await queryFulfilled
+
+          dispatch(
+            decksAPI.util.updateQueryData(
+              'getDecks',
+              {
+                minCardsCount: range[0].toString(),
+                maxCardsCount: range[1].toString(),
+                orderBy: sort ? `${sort['key']}-${sort['direction']}` : '',
+                name: nameToSearch,
+                currentPage: page.toString(),
+                itemsPerPage: pageSize,
+                authorId,
+              },
+              draft => {
+                draft.items.pop()
+                draft.items.unshift(res.data)
+              }
+            )
+          )
+        } catch {
+          // patchResult.undo()
+          /**
+           * Alternatively, on failure you can invalidate the corresponding cache tags
+           * to trigger a re-fetch:
+           * dispatch(api.util.invalidateTags(['Post']))
+           */
+        }
+      },
       invalidatesTags: ['decks'],
     }),
     getDeck: build.query<DecksType, string>({
@@ -75,7 +109,6 @@ export const decksAPI = flashCardsAPI.injectEndpoints({
             },
 
             draft => {
-              debugger
               draft.items = draft.items.filter(deck => deck.id !== id)
             }
           )
