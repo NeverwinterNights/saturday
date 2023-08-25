@@ -61,6 +61,8 @@ export const Learn = () => {
           // onValueChange={setRadioValue}
           answer={card.answer}
           question={card.question}
+          answerImg={card.answerImg}
+          questionImg={card.questionImg}
           defaultValue={card?.grade ? ratingValues[card?.grade - 1].value : undefined}
           numberEfforts={card.shots}
           packName={deck.name}
