@@ -75,6 +75,8 @@ export const Packs = () => {
     itemsPerPage: itemsPerPage,
   })
 
+  const [rangeSlider, setRangeSlider] = useState<[number, number]>([0, 0])
+
   const setTabValue = (value: string) => {
     dispatch(decksActions.setTabValue({ value }))
     if (user) {
@@ -97,6 +99,7 @@ export const Packs = () => {
         setRangeValue([rangeValue[0], decks?.maxCardsCount || 100])
       }
     }
+    setRangeSlider([rangeValue[0], decks?.maxCardsCount || 100])
 
     return () => {
       dispatch(decksActions.setIsMaxCardsCountInit({ value: false }))
@@ -166,8 +169,8 @@ export const Packs = () => {
           <SliderComponent
             disabled={status === 'loading'}
             onValueCommit={setRangeValue}
-            value={rangeValue}
-            setValue={setRangeValue}
+            value={rangeSlider}
+            setValue={setRangeSlider}
             max={decks?.maxCardsCount}
           />
         </div>
