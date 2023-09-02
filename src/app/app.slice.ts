@@ -60,25 +60,33 @@ const appSlice = createSlice({
             } else {
               toast.error(`🦕${action.payload.error}`)
               state.status = 'failed'
+
+              return
             }
           } else if (action.type.endsWith('flashCardsAPI/executeQuery/rejected')) {
-            if (action.payload.data.statusCode === 401) {
+            if (action.payload.data) {
+              if (action.payload.data.statusCode === 401) {
+                state.status = 'failed'
+
+                return
+              }
+              if (action.payload.data.path.endsWith('me?')) {
+                state.status = 'failed'
+
+                return
+              }
+              if (action.payload.data.message) {
+                toast.error(action.payload.data.message)
+                state.status = 'failed'
+
+                return
+              }
+            } else {
+              toast.error(`🦕${action?.payload?.error}`)
               state.status = 'failed'
 
               return
             }
-            if (action.payload.data.path.endsWith('me?')) {
-              state.status = 'failed'
-
-              return
-            }
-            if (action.payload.data.message) {
-              toast.error(action.payload.data.message)
-              state.status = 'failed'
-
-              return
-            }
-            toast.error(`🦕${action?.payload?.error}`)
           }
         }
       )
