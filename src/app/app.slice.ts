@@ -52,7 +52,9 @@ const appSlice = createSlice({
                 return
               }
               toast.error(
-                action.payload.data.errorMessages[0].message || action.payload.data.message
+                action.payload.data.errorMessages[0].message ||
+                  action.payload.data.errorMessages[0] ||
+                  action.payload.data.message
               )
               state.status = 'failed'
             } else {
