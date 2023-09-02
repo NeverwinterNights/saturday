@@ -53,15 +53,12 @@ export const LearnPackComponent: Story = {
           numberEfforts={10}
           question={'How "This" works in JavaScript?'}
           packName={'React Language'}
+          answerImg={'s'}
+          questionImg={'sdf'}
         />
       </I18NProvider>
     )
   },
-  args: {
-    options: [],
-    packName: '',
-    question: '',
-    numberEfforts: 0,
-    answer: '',
-  },
+  // @ts-ignore
+  args: {},
 }
