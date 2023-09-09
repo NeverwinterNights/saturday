@@ -65,7 +65,7 @@ export const Packs = () => {
   const setRangeValue = (value: [number, number]) => {
     dispatch(decksActions.setRangeValue({ value }))
   }
-  const { data: decks, isLoading } = useGetDecksQuery({
+  const { currentData: decks, isLoading } = useGetDecksQuery({
     minCardsCount: rangeValue[0].toString(),
     maxCardsCount: rangeValue[1].toString(),
     authorId: tabValue === 'my' ? user?.id : undefined,
