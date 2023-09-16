@@ -1,5 +1,6 @@
 import { I18NProvider } from '@ayub-begimkulov/i18n'
 import type { Meta, StoryObj } from '@storybook/react'
+import { BrowserRouter } from 'react-router-dom'
 
 import { LoginForm } from './'
 
@@ -18,9 +19,11 @@ type Story = StoryObj<typeof meta>
 export const LoginFormMain: Story = {
   render: () => {
     return (
-      <I18NProvider i18n={i18n}>
-        <LoginForm onSubmitHandler={() => {}} />
-      </I18NProvider>
+      <BrowserRouter>
+        <I18NProvider i18n={i18n}>
+          <LoginForm onSubmitHandler={() => {}} />
+        </I18NProvider>
+      </BrowserRouter>
     )
   },
 

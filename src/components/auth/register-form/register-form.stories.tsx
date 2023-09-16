@@ -1,5 +1,6 @@
 import { I18NProvider } from '@ayub-begimkulov/i18n'
 import type { Meta } from '@storybook/react'
+import { BrowserRouter } from 'react-router-dom'
 
 import { RegisterForm } from './'
 
@@ -16,9 +17,11 @@ export default meta
 export const RegisterFormMain = {
   render: () => {
     return (
-      <I18NProvider i18n={i18n}>
-        <RegisterForm onSubmitHandler={() => {}} />
-      </I18NProvider>
+      <BrowserRouter>
+        <I18NProvider i18n={i18n}>
+          <RegisterForm onSubmitHandler={() => {}} />
+        </I18NProvider>
+      </BrowserRouter>
     )
   },
 
