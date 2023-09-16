@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Edit } from '../../../assets/icons/Edit.tsx'
-import { Play } from '../../../assets/icons/Play.tsx'
-import { Trash } from '../../../assets/icons/Trash.tsx'
 import { Button } from '../button'
 
 import { Dropdown, DropdownItemWithIcon } from '.'
+
+import { Edit } from '@/assets/icons/Edit.tsx'
+import { Play } from '@/assets/icons/Play.tsx'
+import { Trash } from '@/assets/icons/Trash.tsx'
 
 const meta = {
   title: 'Components/Dropdown',

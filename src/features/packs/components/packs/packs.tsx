@@ -30,7 +30,9 @@ import {
 import { decksActions } from '@/features/packs/service/packs.slice.ts'
 import { useTranslate } from '@/i18n.ts'
 import { useAppDispatch, useAppSelector } from '@/store/store.ts'
-console.log('вот тебе лог:D')
+
+console.log('value')
+console.log('valuevaluevalue')
 export type Sort = {
   key: string
   direction: 'asc' | 'desc'
