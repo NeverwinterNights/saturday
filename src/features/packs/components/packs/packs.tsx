@@ -32,6 +32,7 @@ import { useTranslate } from '@/i18n.ts'
 import { useAppDispatch, useAppSelector } from '@/store/store.ts'
 
 console.log('value')
+console.log('valuevaluevalue')
 export type Sort = {
   key: string
   direction: 'asc' | 'desc'
