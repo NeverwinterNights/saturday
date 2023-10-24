@@ -16,6 +16,7 @@ type SliderPropsType = {
   max?: number
   label?: string
   disabled?: boolean
+  rangeValue: [number, number]
 }
 
 export const SliderComponent = ({
@@ -25,6 +26,7 @@ export const SliderComponent = ({
   max = 100,
   onValueCommit,
   value,
+  rangeValue,
   label,
   setValue,
 }: SliderPropsType) => {
@@ -45,7 +47,7 @@ export const SliderComponent = ({
             <Input
               inputTextClassName={styles.input}
               className={styles.value}
-              value={value[0]}
+              value={rangeValue[0]}
               // onChange={event => onValueChange(event, 0)}
               onChange={() => {}}
             />
@@ -73,7 +75,7 @@ export const SliderComponent = ({
             <Input
               inputTextClassName={styles.input}
               className={styles.value}
-              value={value[1]}
+              value={rangeValue[1]}
               // onChange={event => onValueChange(event, 1)}
               onChange={() => {}}
             />

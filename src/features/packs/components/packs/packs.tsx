@@ -30,8 +30,7 @@ import {
 import { decksActions } from '@/features/packs/service/packs.slice.ts'
 import { useTranslate } from '@/i18n.ts'
 import { useAppDispatch, useAppSelector } from '@/store/store.ts'
-console.log('вот тебе лог:D')
-console.log('вот тебе лог:D')
+
 export type Sort = {
   key: string
   direction: 'asc' | 'desc'
@@ -66,7 +65,7 @@ export const Packs = () => {
   const setRangeValue = (value: [number, number]) => {
     dispatch(decksActions.setRangeValue({ value }))
   }
-  const { currentData: decks, isLoading } = useGetDecksQuery({
+  const { data: decks, isLoading } = useGetDecksQuery({
     minCardsCount: rangeValue[0].toString(),
     maxCardsCount: rangeValue[1].toString(),
     authorId: tabValue === 'my' ? user?.id : undefined,
@@ -111,6 +110,7 @@ export const Packs = () => {
     setSort({ key: 'updated', direction: 'desc' })
     setSearch('')
     setRangeValue([0, 100])
+    setRangeSlider([0, decks!.maxCardsCount])
     setCurrentPage(1)
     setItemsPerPage('7')
     if (decks) {
@@ -171,6 +171,7 @@ export const Packs = () => {
             disabled={status === 'loading'}
             onValueCommit={setRangeValue}
             value={rangeSlider}
+            rangeValue={rangeValue}
             setValue={setRangeSlider}
             max={decks?.maxCardsCount}
           />
