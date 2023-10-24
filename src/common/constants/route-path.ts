@@ -5,7 +5,7 @@ export const PATH = {
   ERROR: '/404',
   REGISTRATION: '/registration',
   PASSWORD_RECOVERY: '/password-recovery',
-  NEW_PASSWORD: '',
+  NEW_PASSWORD: '/new-password',
   PACKS: '/packs',
   CARDS: '/cards',
   LEARN: '/learn',
