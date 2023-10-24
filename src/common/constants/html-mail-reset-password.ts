@@ -400,7 +400,7 @@ export const htmlCodeResetPassword = `
                                 class="es-button-border"
                                 style="border-style:solid;border-color:#2CB543;background:#5C68E2;border-width:0;display:inline-block;border-radius:6px;width:auto"><a
                                 href="https://saturday-one.vercel.app/confirm-email/##token##" class="es-button" target="_blank"
-                                style="text-decoration:none !important;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;padding:10px 30px 10px 30px;display:inline-block;background:#5C68E2;border-radius:6px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:24px;width:auto;text-align:center;letter-spacing:0;mso-padding-alt:0;mso-border-alt:10px solid #5C68E2;border-left-width:30px;border-right-width:30px">Сбросить свой пароль</a></span>
+                                style="text-decoration:none !important;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;padding:10px 30px 10px 30px;display:inline-block;background:#5C68E2;border-radius:6px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:24px;width:auto;text-align:center;letter-spacing:0;mso-padding-alt:0;mso-border-alt:10px solid #5C68E2;border-left-width:30px;border-right-width:30px">Сбросить пароль</a></span>
                               </td>
                             </tr>
                             <tr>
