@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 
-const baseUrl = 'https://andri-flashcards-api.onrender.com/v1/'
+const baseUrl = 'https://api.flashcards.andrii.es/v1/'
 
 // type CustomError = {
 //   data: {
