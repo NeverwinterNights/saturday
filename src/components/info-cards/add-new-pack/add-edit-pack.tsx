@@ -62,6 +62,39 @@ export const AddEditPack = memo(
       <>
         <Modal onOpenChange={onOpenChange} title={title} isOpen={isOpen}>
           <div className={styles.content}>
+            <div className={styles.item}>
+              <div className={styles.imageWrap}>
+                {!image ? (
+                  <div>{t('No Image')}</div>
+                ) : (
+                  <img style={{ width: '100%', height: '100%' }} src={image} alt={'image'} />
+                )}
+              </div>
+              <div className={styles.infoWrap}>
+                <div>{t('Cover')}</div>
+                <input
+                  style={{ display: 'none' }}
+                  type="file"
+                  {...register('cover')}
+                  ref={inputRef1}
+                  // onChange={e => {
+                  //   uploadHandler((e.target.files as FileList)[0], base64 => {
+                  //     setImage({ ...image, questionImg: base64 })
+                  //   })
+                  //   setValue('questionImg', e.target.files as FileList)
+                  // }}
+                  onChange={addMediaFileHandler}
+                />
+                <Button
+                  type={'button'}
+                  variant="secondary"
+                  onClick={() => inputRef1 && inputRef1.current?.click()}
+                >
+                  <AddMediaIcon />
+                  {t('Change Cover')}
+                </Button>
+              </div>
+            </div>
             <form onSubmit={onSubmit}>
               <div className={styles.input}>
                 <ControlledInput label={namePack} name={'name'} control={control} />
@@ -73,39 +106,6 @@ export const AddEditPack = memo(
                   name={'isPrivate'}
                   control={control}
                 />
-              </div>
-              <div className={styles.item}>
-                <div className={styles.imageWrap}>
-                  {!image ? (
-                    <div>{t('No Image')}</div>
-                  ) : (
-                    <img style={{ width: '100%', height: '100%' }} src={image} alt={'image'} />
-                  )}
-                </div>
-                <div className={styles.infoWrap}>
-                  <div>{t('Cover')}</div>
-                  <input
-                    style={{ display: 'none' }}
-                    type="file"
-                    {...register('cover')}
-                    ref={inputRef1}
-                    // onChange={e => {
-                    //   uploadHandler((e.target.files as FileList)[0], base64 => {
-                    //     setImage({ ...image, questionImg: base64 })
-                    //   })
-                    //   setValue('questionImg', e.target.files as FileList)
-                    // }}
-                    onChange={addMediaFileHandler}
-                  />
-                  <Button
-                    type={'button'}
-                    variant="secondary"
-                    onClick={() => inputRef1 && inputRef1.current?.click()}
-                  >
-                    <AddMediaIcon />
-                    {t('Change Cover')}
-                  </Button>
-                </div>
               </div>
               <ModalControl closedModal={closedModal} onSubmit={onSubmit} title={buttonName} />
             </form>

@@ -56,6 +56,8 @@ option {
   color: inherit;
 }
 
+
+
 button {
   background: none;
   border: none;
@@ -80,4 +82,34 @@ p,
 button {
   margin: 0;
   padding: 0;
+}
+
+/* stylelint-disable no-descending-specificity */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  font-family: Inter, sans-serif;
+
+  border: 0;
+  box-shadow: 0 0 0 1000px transparent inset;
+
+  transition: background-color 5000s ease-in-out 0s;
+
+  -webkit-text-fill-color: var(--color-light-100);
+
+  // -webkit-text-fill-color: var(--light-900);
+
+  &:focus-visible {
+    color: var(--color-light-100) !important;
+  }
+
+  &:active {
+    color: var(--color-light-100) !important;
+  }
 }

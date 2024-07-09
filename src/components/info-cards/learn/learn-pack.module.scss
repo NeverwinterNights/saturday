@@ -1,14 +1,15 @@
 .wrap {
   width: 100%;
   max-width: 420px;
-  margin-top: 100px;
-  padding: 36px 36px 48px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 16px 36px 20px;
 
   background: var(--color-dark-700);
 }
 
 .title {
-  margin-bottom: 45px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -17,7 +18,7 @@
 }
 
 .efforts {
-  margin-bottom: 45px;
+  margin-bottom: 35px;
 }
 
 .button {
@@ -33,6 +34,6 @@
   margin-bottom: 12px;
 }
 
-.close{
+.close {
   margin-top: 25px;
 }

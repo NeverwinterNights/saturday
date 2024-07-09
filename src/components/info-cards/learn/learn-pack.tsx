@@ -14,11 +14,15 @@ type LearnPackPropsType = {
   question: string
   answer: string
   numberEfforts: number
+  answerImg: string
+  questionImg: string
   // dataHandler: () => void
   dataHandler: (value: string) => void
 } & Omit<RadioGroupType, 'onValueChange'>
 
 export const LearnPack = ({
+  answerImg,
+  questionImg,
   packName,
   options,
   question,
@@ -50,10 +54,20 @@ export const LearnPack = ({
         <Typography as="span" variant="subtitle2">
           {t('Question:')}
         </Typography>
-        {question}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          {question}
+          {<img style={{ maxWidth: '350px', maxHeight: '100px' }} src={questionImg} alt="" />}
+        </div>
       </Typography>
       <Typography className={styles.efforts} color="secondary" variant="body2">
-        {t('Количество попыток ответов на вопрос:')} {numberEfforts}
+        {t('Number of attempts to answer the question:')} {numberEfforts}
       </Typography>
       {isOpen && (
         <div>
@@ -61,7 +75,17 @@ export const LearnPack = ({
             <Typography as="span" variant="subtitle2">
               {t('Answer:')}
             </Typography>
-            {answer}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              {answer}
+              {<img style={{ maxWidth: '350px', maxHeight: '100px' }} src={answerImg} alt="" />}
+            </div>
           </Typography>
           <Typography className={styles.mb} variant="subtitle1">
             {t('Rate yourself:')}

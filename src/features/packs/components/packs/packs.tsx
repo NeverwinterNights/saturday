@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import s from './packs.module.scss'
 
 import { Trash } from '@/assets/icons/Trash.tsx'
+import { MainLoader } from '@/assets/loaders/main-loader/main-loader.tsx'
 import { AddEditPack } from '@/components/info-cards/add-new-pack'
 import { AddPackFormType } from '@/components/info-cards/add-new-pack/use-add-new-pack.ts'
 import { Button } from '@/components/ui/button'
@@ -17,8 +18,18 @@ import { Typography } from '@/components/ui/typography'
 import { useMeQuery } from '@/features/auth/service/api/auth.api.ts'
 import { PacksTable } from '@/features/packs/components/packs-table/packs-table.tsx'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/service/api/packs.api.ts'
+import {
+  selectDeckNameToSearch,
+  selectDecksPage,
+  selectDecksPageSize,
+  selectDecksSort,
+  selectIsMaxCardsCountInit,
+  selectRange,
+  selectTabValue,
+} from '@/features/packs/service/packs.selectors.ts'
+import { decksActions } from '@/features/packs/service/packs.slice.ts'
 import { useTranslate } from '@/i18n.ts'
-import { useAppSelector } from '@/store/store.ts'
+import { useAppDispatch, useAppSelector } from '@/store/store.ts'
 
 export type Sort = {
   key: string
@@ -26,20 +37,37 @@ export type Sort = {
 } | null
 
 export const Packs = () => {
+  const dispatch = useAppDispatch()
   const t = useTranslate()
   const { data: user } = useMeQuery()
   const status = useAppSelector(state => state.appReducer.status)
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const [search, setSearch] = useState('')
-  const [range, setRange] = useState<[number, number]>([0, 100])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState('7')
-  const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
+  const search = useAppSelector(selectDeckNameToSearch)
+  const setSearch = (name: string) => {
+    dispatch(decksActions.setNameToSearch({ name }))
+  }
+  const currentPage = useAppSelector(selectDecksPage)
+  const setCurrentPage = (page: number) => {
+    dispatch(decksActions.setPage({ page }))
+  }
+  const itemsPerPage = useAppSelector(selectDecksPageSize)
+  const setItemsPerPage = (pageSize: string) => {
+    dispatch(decksActions.setPageSize({ pageSize }))
+  }
+  const sort = useAppSelector(selectDecksSort)
+  const setSort = (sort: Sort) => {
+    dispatch(decksActions.setSort({ sort }))
+  }
   const sortString = sort ? `${sort.key}-${sort.direction}` : undefined
-  const [tabValue, setTabValue] = useState('all')
-  const { data: decks } = useGetDecksQuery({
-    minCardsCount: range[0].toString(),
-    maxCardsCount: range[1].toString(),
+  const tabValue = useAppSelector(selectTabValue)
+  const rangeValue = useAppSelector(selectRange)
+  const isMaxCardsCountInit = useAppSelector(selectIsMaxCardsCountInit)
+  const setRangeValue = (value: [number, number]) => {
+    dispatch(decksActions.setRangeValue({ value }))
+  }
+  const { data: decks, isLoading } = useGetDecksQuery({
+    minCardsCount: rangeValue[0].toString(),
+    maxCardsCount: rangeValue[1].toString(),
     authorId: tabValue === 'my' ? user?.id : undefined,
     orderBy: sortString,
     name: search,
@@ -47,7 +75,17 @@ export const Packs = () => {
     itemsPerPage: itemsPerPage,
   })
 
-  const [rangeValue, setRangeValue] = useState<[number, number]>([0, 1])
+  const [rangeSlider, setRangeSlider] = useState<[number, number]>([0, 0])
+
+  const setTabValue = (value: string) => {
+    dispatch(decksActions.setTabValue({ value }))
+    if (user) {
+      dispatch(decksActions.setAuthorId({ value: user.id }))
+    }
+    if (tabValue === 'my') {
+      dispatch(decksActions.setAuthorId({ value: undefined }))
+    }
+  }
   const [createDeck] = useCreateDeckMutation()
 
   const options = [
@@ -56,19 +94,29 @@ export const Packs = () => {
   ]
 
   useEffect(() => {
-    if (rangeValue[1] !== decks?.maxCardsCount) {
-      setRangeValue(prev => [prev[0], decks?.maxCardsCount || 100])
+    if (isMaxCardsCountInit) {
+      if (rangeValue[1] !== decks?.maxCardsCount) {
+        setRangeValue([rangeValue[0], decks?.maxCardsCount || 100])
+      }
+    }
+    setRangeSlider([rangeValue[0], decks?.maxCardsCount || 100])
+
+    return () => {
+      dispatch(decksActions.setIsMaxCardsCountInit({ value: false }))
     }
   }, [decks?.maxCardsCount])
 
   const clearFilter = () => {
+    setSort({ key: 'updated', direction: 'desc' })
     setSearch('')
-    setTabValue('all')
-    setRange([0, 100])
+    setRangeValue([0, 100])
+    setRangeSlider([0, decks!.maxCardsCount])
+    setCurrentPage(1)
+    setItemsPerPage('7')
     if (decks) {
       setRangeValue([0, decks.maxCardsCount])
     }
-    toast.warn('Filters reset')
+    toast.warn(t('Filters reset'))
   }
 
   const sendModalHandler = (modalData: AddPackFormType) => {
@@ -82,6 +130,8 @@ export const Packs = () => {
     createDeck(form)
     setIsOpenModal(false)
   }
+
+  if (isLoading) return <MainLoader />
 
   return (
     <Container className={s.root}>
@@ -105,6 +155,7 @@ export const Packs = () => {
           disabled={status === 'loading'}
           onValueChange={e => setSearch(e)}
           searchValue={search}
+          onClickClearInput={() => setSearch('')}
         />
         <Tab
           className={s.tab}
@@ -118,9 +169,10 @@ export const Packs = () => {
         <div className={s.range}>
           <SliderComponent
             disabled={status === 'loading'}
-            onValueCommit={setRange}
-            value={rangeValue}
-            setValue={setRangeValue}
+            onValueCommit={setRangeValue}
+            value={rangeSlider}
+            rangeValue={rangeValue}
+            setValue={setRangeSlider}
             max={decks?.maxCardsCount}
           />
         </div>
@@ -133,18 +185,25 @@ export const Packs = () => {
         </Button>
       </div>
 
-      {decks && <PacksTable id={user?.id} decks={decks.items} sort={sort} onSort={setSort} />}
-
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 30 }}>
-        <Pagination
-          count={decks?.pagination.totalPages ?? 10}
-          onChange={page => setCurrentPage(page)}
-          onPerPageChange={itemsPerPage => setItemsPerPage(itemsPerPage)}
-          page={decks?.pagination.currentPage ?? 1}
-          perPage={decks?.pagination.itemsPerPage}
-          perPageOptions={[4, 7, 10]}
-        />
-      </div>
+      {decks && decks.items.length ? (
+        <>
+          <PacksTable id={user?.id} decks={decks.items} sort={sort} onSort={setSort} />
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 30 }}>
+            <Pagination
+              count={decks?.pagination.totalPages ?? 10}
+              onChange={page => setCurrentPage(page)}
+              onPerPageChange={itemsPerPage => setItemsPerPage(itemsPerPage)}
+              page={decks?.pagination.currentPage ?? 1}
+              perPage={decks?.pagination.itemsPerPage}
+              perPageOptions={[4, 7, 10]}
+            />
+          </div>
+        </>
+      ) : (
+        <Typography style={{ textAlign: 'center' }} variant={'body1'}>
+          {t("Can't find any pack of cards")}
+        </Typography>
+      )}
     </Container>
   )
 }

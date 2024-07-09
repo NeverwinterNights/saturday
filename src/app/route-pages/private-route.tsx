@@ -2,14 +2,13 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 import { PATH } from '../../common'
 
+import { MainLoader } from '@/assets/loaders/main-loader/main-loader.tsx'
 import { useMeQuery } from '@/features/auth/service/api/auth.api.ts'
-import { useTranslate } from '@/i18n.ts'
 
 export const PrivateRoute = () => {
-  const t = useTranslate()
   const { data, isLoading } = useMeQuery()
 
-  if (isLoading) return <div>{t('Loading...')}</div>
+  if (isLoading) return <MainLoader />
 
   return data ? <Outlet /> : <Navigate to={PATH.LOGIN} />
 }

@@ -9,10 +9,10 @@ export const Toast = () => {
         hideProgressBar={false}
         newestOnTop
         closeOnClick
+        limit={1}
         rtl={false}
         pauseOnFocusLoss
         draggable
-        pauseOnHover
         theme="colored"
       />
     </div>

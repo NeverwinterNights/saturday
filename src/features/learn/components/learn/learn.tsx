@@ -1,10 +1,9 @@
-import { useState } from 'react'
-
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import styles from './learn.module.scss'
 
-import { ratingValues } from '@/common/constants/rating-values.ts'
+import { MainLoader } from '@/assets/loaders/main-loader/main-loader.tsx'
+import { ratingValuesType } from '@/common/constants/rating-values.ts'
 import { LearnPack } from '@/components/info-cards/learn'
 import { Container } from '@/components/ui/container'
 import { Typography } from '@/components/ui/typography'
@@ -13,67 +12,57 @@ import {
   useGetRandomCardQuery,
   useSaveGradeCardMutation,
 } from '@/features/packs/service/api/packs.api.ts'
-// import { useTranslate } from '@/i18n.ts'
+import { useTranslate } from '@/i18n.ts'
 
 export const Learn = () => {
-  // const t = useTranslate()
+  const navigate = useNavigate()
+  const t = useTranslate()
   const { id } = useParams<{ id: string }>()
 
-  // console.log('id', id)
-  const { data: deck } = useGetDeckQuery(id as string)
-  const [prevID, setPrevID] = useState<string | undefined>(undefined)
-  const { data: card, isLoading } = useGetRandomCardQuery({
-    id: id as string,
-    previousCardId: prevID ? prevID : undefined,
-  })
-  const [saveGrade] = useSaveGradeCardMutation()
+  const ratingValues: ratingValuesType[] = [
+    {
+      value: '1',
+      label: t('Did not know'),
+    },
+    {
+      value: '2',
+      label: t('Forgot'),
+    },
+    {
+      value: '3',
+      label: t('A lot of thought'),
+    },
+    {
+      value: '4',
+      label: t('Confused'),
+    },
+    {
+      value: '5',
+      label: t('Knew the answer'),
+    },
+  ]
 
-  // const { data: cards, isLoading } = useGetCardsQuery({ decksId: id ?? '' })
-  // // const [radioValue, setRadioValue] = useState('')
-  // const [currentCardsArray, setCurrentCardsArray] = useState<CardType[] | undefined>(cards?.items)
-  // const [saveGrade] = useSaveGradeCardMutation()
-  //
-  // // useEffect(() => {
-  // //   if (cards?.items) setCurrentCardsArray(cards?.items)
-  // // }, [cards?.items])
-  // const randomCard = useMemo(() => getRandomCard(currentCardsArray), [currentCardsArray])
-  //
-  // const dataHandler = (value: string) => {
-  //   // console.log('value', radioValue ? radioValue : randomCard?.grade)
-  //   // console.log('dataHandler')
-  //   const filteredCards = currentCardsArray?.filter(item => item.id !== randomCard?.id)
-  //
-  //   if (filteredCards) {
-  //     setCurrentCardsArray(filteredCards)
-  //   }
-  //   if (id && randomCard && randomCard.id) {
-  //     saveGrade({
-  //       decksId: id,
-  //       cardId: randomCard.id,
-  //       grade: value ? +value : randomCard?.grade,
-  //     })
-  //   }
-  // }
+  const { isLoading, data: deck } = useGetDeckQuery(id as string)
+  const { data: card, error } = useGetRandomCardQuery({ id: id as string })
+  const [saveGrade, { isLoading: isLoad }] = useSaveGradeCardMutation()
 
   const dataHandler = (value: string) => {
-    setPrevID(card?.id)
-    // saveGrade({ decksId: id as string, cardId: card?.id as string, grade: +value }).then(res => {
-    //   console.log('res', res)
-    // })
+    // setPrevID(card?.id)
     saveGrade({ decksId: id as string, cardId: card?.id as string, grade: +value })
   }
 
   return (
     <Container className={styles.root}>
-      {!card && !isLoading && (
-        <Typography variant="large">There are no cards in the deck.</Typography>
-      )}
-      {/*{t('Learn')} {id}*/}
+      {isLoading ? <MainLoader /> : ''}
+      {isLoad ? <MainLoader className={styles.loader} /> : ''}
+      {/*{isLoad && !deck ? <MainLoader /> : ''}*/}
       {deck && card && (
         <LearnPack
           // onValueChange={setRadioValue}
           answer={card.answer}
           question={card.question}
+          answerImg={card.answerImg}
+          questionImg={card.questionImg}
           defaultValue={card?.grade ? ratingValues[card?.grade - 1].value : undefined}
           numberEfforts={card.shots}
           packName={deck.name}
@@ -81,8 +70,21 @@ export const Learn = () => {
           dataHandler={dataHandler}
         />
       )}
+      {/*{!card && !isLoad && (*/}
+      {error && (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant="large">{t('There are no cards in the deck.')}</Typography>
+          <Typography variant={'body2'} onClick={() => navigate(-1)} className={styles.backBtn}>
+            {t('Leave page')}
+          </Typography>
+        </div>
+      )}
     </Container>
   )
 }
-// http://localhost:3000/learn/clksraeqa00puyw2pfxug40eq
-// http://localhost:3000/learn/clkmx6au500d8sg2of7o5vcbo

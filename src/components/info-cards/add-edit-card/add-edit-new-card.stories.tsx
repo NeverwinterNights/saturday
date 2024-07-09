@@ -7,10 +7,6 @@ import { AddEditNewCard } from './'
 
 import { i18n } from '@/i18n.ts'
 
-// type AllDataType = {
-//   type: string
-// } & FormType
-
 const meta = {
   title: 'Modals/AddEditNewCard',
   component: AddEditNewCard,
@@ -21,32 +17,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-// const dataSelect = [
-//   {
-//     value: 'Text',
-//     label: 'Text',
-//   },
-//   {
-//     value: 'Image',
-//     label: 'Image',
-//   },
-//   {
-//     value: 'Video',
-//     label: 'Video',
-//   },
-// ]
-
 export const AddNewCardComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
+    // @ts-ignore
     const [modalsData, setModalsData] = useState<FormData>({} as FormData)
 
     const getData = (value: FormData) => {
       setModalsData({ ...value })
       // setAllData({ type: selectValue, ...data })
     }
-
-    console.log('modalsData', modalsData)
 
     return (
       <I18NProvider i18n={i18n}>
@@ -70,13 +50,12 @@ export const AddNewCardComponent: Story = {
 export const EditNewCardComponent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true)
+    // @ts-ignore
     const [modalsData, setModalsData] = useState<FormData>({} as FormData)
 
     const getData = (value: FormData) => {
       setModalsData(value)
     }
-
-    console.log('modalsData', modalsData)
 
     return (
       <I18NProvider i18n={i18n}>

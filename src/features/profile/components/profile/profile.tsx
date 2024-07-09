@@ -26,8 +26,6 @@ export const Profile = () => {
     updatedData.name && form.append('name', updatedData.name)
     updatedData.file && form.append('avatar', updatedData.file)
 
-    console.log(form.has('avatar'), 'если проверить на has')
-    console.log(form, 'form')
     updateMe(form)
       .unwrap()
       .then(data => setData(data))

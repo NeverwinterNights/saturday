@@ -13,8 +13,6 @@ export const RegisterPage = () => {
     const transformData = { password: data.password, email: data.email, name: data.email }
 
     register(transformData)
-      .unwrap()
-      .catch(error => console.log(error, 'Error Register'))
   }
 
   if (data) {

@@ -1,4 +1,4 @@
-@import "../../../components/ui/typography/typography.module";
+@import '../../../components/ui/typography/typography.module';
 
 .card {
   width: 100%;
@@ -15,8 +15,10 @@
 
   .form {
     div {
-      margin-bottom: 4px;
       text-align: left;
+    }
+    div + div {
+      margin-top: 10px;
     }
   }
 
@@ -30,10 +32,10 @@
   }
 
   .link {
-    @include typography-mixin(var(--font-size-m), var(--line-height-m),var(--font-weight-bold))
-  ;
+    @include typography-mixin(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
 
     margin: auto;
     color: var(--color-accent-500);
-    text-decoration: underline;}
+    text-decoration: underline;
+  }
 }

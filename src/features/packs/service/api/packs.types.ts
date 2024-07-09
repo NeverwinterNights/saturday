@@ -60,6 +60,11 @@ export type CardType = {
   updated: string
   grade: number
 }
+export type CardData = {
+  id: string
+  question?: string
+  answer?: string
+}
 
 export type CreateCardType = {
   decksId: string

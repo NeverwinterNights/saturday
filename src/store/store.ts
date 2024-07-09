@@ -6,11 +6,13 @@ import { appReducer } from '@/app/app.slice.ts'
 import { authAPI } from '@/features/auth/service/api/auth.api.ts'
 import { cardAPI } from '@/features/cards/service/api/cards.api.ts'
 import { decksAPI } from '@/features/packs/service/api/packs.api.ts'
+import { decksReducer } from '@/features/packs/service/packs.slice.ts'
 import { profileAPI } from '@/features/profile/service/api/profile.api.ts'
 import { flashCardsAPI } from '@/store/api.ts'
 
 export const store = configureStore({
   reducer: {
+    decksReducer,
     appReducer,
     [authAPI.reducerPath]: authAPI.reducer,
     [profileAPI.reducerPath]: profileAPI.reducer,

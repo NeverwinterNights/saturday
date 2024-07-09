@@ -1,15 +1,31 @@
-import { BaseQueryFn, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {
+  BaseQueryFn,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery,
+  FetchBaseQueryError,
+} from '@reduxjs/toolkit/query/react'
 import { Mutex } from 'async-mutex'
 
-const baseUrl = 'https://andri-flashcards-api.onrender.com/v1/'
+const baseUrl = 'https://api.flashcards.andrii.es/v1/'
 
+// type CustomError = {
+//   data: {
+//     statusCode: number
+//     message: string
+//   }
+// }
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrl,
   credentials: 'include',
 })
 
-export const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) => {
+export const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
 
   // wait until the mutex is available without locking it
@@ -29,9 +45,21 @@ export const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) 
           extraOptions
         )
 
-        if (refreshResult.data) {
-          // retry the initial query
-          await baseQuery(args, api, extraOptions)
+        // if (refreshResult.data) {
+        //   // retry the initial query
+        //   await baseQuery(args, api, extraOptions)
+        // }
+        if (refreshResult.meta?.response?.status === 204) {
+          result = await baseQuery(args, api, extraOptions)
+        } else {
+          await baseQuery(
+            {
+              url: 'auth/logout',
+              method: 'POST',
+            },
+            api,
+            extraOptions
+          )
         }
       } finally {
         // release must be called once the mutex should be released again.
@@ -51,5 +79,5 @@ export const flashCardsAPI = createApi({
   reducerPath: 'flashCardsAPI',
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  tagTypes: ['me', 'decks', 'cards', 'card'],
+  tagTypes: ['me', 'decks', 'cards', 'card', 'deck'],
 })

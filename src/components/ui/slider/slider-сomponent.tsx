@@ -10,13 +10,13 @@ import { useTranslate } from '@/i18n.ts'
 type SliderPropsType = {
   defaultValue?: [number, number]
   value: [number, number]
-  // setValue: Dispatch<SetStateAction<[number, number]>>
   onValueCommit?: (value: [number, number]) => void
   setValue: (value: [number, number]) => void
   min?: number
   max?: number
   label?: string
   disabled?: boolean
+  rangeValue?: [number, number]
 }
 
 export const SliderComponent = ({
@@ -26,22 +26,15 @@ export const SliderComponent = ({
   max = 100,
   onValueCommit,
   value,
+  rangeValue,
   label,
   setValue,
 }: SliderPropsType) => {
   const t = useTranslate()
+
   const onSliderChange = (value: [number, number]) => {
-    console.log(value)
     setValue(value)
   }
-
-  // const onValueChange = (event: ChangeEvent<HTMLInputElement>, index: number) => {
-  //   setValue(state => {
-  //     return index === 0
-  //       ? [+event.currentTarget.value, state[1]]
-  //       : [state[0], +event.currentTarget.value]
-  //   })
-  // }
 
   return (
     <form>
@@ -54,7 +47,7 @@ export const SliderComponent = ({
             <Input
               inputTextClassName={styles.input}
               className={styles.value}
-              value={value[0]}
+              value={rangeValue![0]}
               // onChange={event => onValueChange(event, 0)}
               onChange={() => {}}
             />
@@ -82,7 +75,7 @@ export const SliderComponent = ({
             <Input
               inputTextClassName={styles.input}
               className={styles.value}
-              value={value[1]}
+              value={rangeValue![1]}
               // onChange={event => onValueChange(event, 1)}
               onChange={() => {}}
             />
