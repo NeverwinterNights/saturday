@@ -3,17 +3,39 @@ on:
   push:
     branches:
       - "main" # Ignore if pushed to a specific branch
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+#jobs:
+#  build-and-deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout 🛎️
+#        uses: actions/checkout@v2.3.1
+#
+#      - name: Merge main -> storybook-deploy 🚀
+#        uses: devmasx/merge-branch@1.4.0
+#        with:
+#          type: now
+#          from_branch: main
+#          target_branch: storybook-deploy
+#          github_token: ${{ github.token }}
 
-      - name: Merge main -> storybook-deploy 🚀
-        uses: devmasx/merge-branch@1.4.0
+# List of jobs
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Job steps
+    steps:
+      # Manual Checkout
+      - uses: actions/checkout@v4
+
+      # Set up Node
+      - uses: actions/setup-node@v4
         with:
-          type: now
-          from_branch: main
-          target_branch: storybook-deploy
-          github_token: ${{ github.token }}
+          node-version: '16.x'
+
+      #👇 Add Storybook build and deploy to GitHub Pages as a step in the workflow
+      - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        with:
+          install_command: pnpm i # default: npm ci
+          build_command: storybook build # default: npm run build-storybook
+          path: storybook-static # default: dist/storybook
+          checkout: false # default: true
