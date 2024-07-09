@@ -18,6 +18,11 @@ on:
 #          target_branch: storybook-deploy
 #          github_token: ${{ github.token }}
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 # List of jobs
 jobs:
   deploy:
