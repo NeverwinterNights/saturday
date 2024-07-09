@@ -38,4 +38,4 @@ jobs:
           install_command: pnpm i # default: npm ci
           build_command: storybook build # default: npm run build-storybook
           path: storybook-static # default: dist/storybook
-          checkout: false # default: true
+          checkout: false
